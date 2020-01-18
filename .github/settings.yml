@@ -1,0 +1,35 @@
+# https://github.com/probot/settings
+
+labels:
+    - name: bug
+      color: ee0701
+
+    - name: dependencies
+      color: 0366d6
+
+    - name: enhancement
+      color: 0e8a16
+
+    - name: question
+      color: cc317c
+
+    - name: security
+      color: ee0701
+
+    - name: stale
+      color: eeeeee
+
+repository:
+    allow_merge_commit: true
+    allow_rebase_merge: false
+    allow_squash_merge: false
+    default_branch: master
+    description: "A curated list of combinators"
+    topics: combinator,combinatory-logic,functional-programming
+    has_downloads: true
+    has_issues: true
+    has_pages: false
+    has_projects: false
+    has_wiki: false
+    name: combinator
+    private: false

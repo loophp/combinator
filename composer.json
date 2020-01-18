@@ -1,0 +1,45 @@
+{
+    "name": "loophp/combinator",
+    "type": "library",
+    "description": "A curated list of combinators",
+    "keywords": [
+        "combinator",
+        "combinatory logic",
+        "functional programming"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pol Dellaiera",
+            "email": "pol.dellaiera@protonmail.com"
+        }
+    ],
+    "require": {
+        "php": ">= 7.1.3"
+    },
+    "require-dev": {
+        "drupol/php-conventions": "^1.6.12",
+        "friends-of-phpspec/phpspec-code-coverage": "^4.3.2",
+        "infection/infection": "^0.13.6",
+        "phpspec/phpspec": "^5.1.2 || ^6.1.1",
+        "phpstan/phpstan": "^0.12.5",
+        "phpstan/phpstan-strict-rules": "^0.12",
+        "scrutinizer/ocular": "^1.6"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "loophp\\combinator\\": "./src/"
+        }
+    },
+    "scripts": {
+        "bench": "./vendor/bin/phpbench run --report='generator: \"table\", cols: [ \"suite\", \"subject\", \"mean\", \"diff\", \"mem_peak\", \"mem_real\"], break: [\"benchmark\"]'",
+        "grumphp": "./vendor/bin/grumphp run",
+        "infection": "./vendor/bin/infection run -j 10",
+        "phpcbf": "./vendor/bin/phpcbf --ignore=vendor .",
+        "phpcs": "./vendor/bin/phpcs --ignore=vendor .",
+        "phpspec": "./vendor/bin/phpspec run"
+    }
+}
