@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace spec\loophp\combinator\Combinator;
 
-use Closure;
 use PhpSpec\ObjectBehavior;
 
 class ESpec extends ObjectBehavior
@@ -31,11 +30,7 @@ class ESpec extends ObjectBehavior
             ->shouldReturn((float) 10);
 
         $this
-            ->closure()
-            ->shouldReturnAnInstanceOf(Closure::class);
-
-        $this
-            ->closure()(...$arguments)
+            ->__invoke()
             ->shouldReturn((float) 10);
     }
 }

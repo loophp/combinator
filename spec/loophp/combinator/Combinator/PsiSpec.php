@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace spec\loophp\combinator\Combinator;
 
-use Closure;
 use PhpSpec\ObjectBehavior;
 
 class PsiSpec extends ObjectBehavior
@@ -27,11 +26,7 @@ class PsiSpec extends ObjectBehavior
             ->shouldReturn(68);
 
         $this
-            ->closure()
-            ->shouldReturnAnInstanceOf(Closure::class);
-
-        $this
-            ->closure()(...$arguments)
+            ->__invoke()
             ->shouldReturn(68);
     }
 }

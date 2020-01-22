@@ -38,16 +38,6 @@ final class L extends Combinator
      */
     public function __invoke()
     {
-        return ($this->f)((($this->g)($this->g)));
-    }
-
-    /**
-     * @return callable
-     */
-    public static function closure(): callable
-    {
-        return static function (callable $f, callable $g) {
-            return (new self($f, $g))();
-        };
+        return ($this->f)(($this->g)($this->g));
     }
 }

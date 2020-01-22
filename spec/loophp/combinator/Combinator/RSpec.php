@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace spec\loophp\combinator\Combinator;
 
-use Closure;
 use PhpSpec\ObjectBehavior;
 
 class RSpec extends ObjectBehavior
@@ -25,11 +24,7 @@ class RSpec extends ObjectBehavior
             ->shouldReturn('f(y)(x)');
 
         $this
-            ->closure()
-            ->shouldReturnAnInstanceOf(Closure::class);
-
-        $this
-            ->closure()(...$arguments)
+            ->__invoke()
             ->shouldReturn('f(y)(x)');
     }
 }

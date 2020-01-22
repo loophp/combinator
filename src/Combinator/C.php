@@ -47,14 +47,4 @@ final class C extends Combinator
     {
         return ($this->f)($this->y)($this->x);
     }
-
-    /**
-     * @return callable
-     */
-    public static function closure(): callable
-    {
-        return static function (callable $f, $x, $y) {
-            return (new self($f, $x, $y))();
-        };
-    }
 }

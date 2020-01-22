@@ -47,14 +47,4 @@ final class R extends Combinator
     {
         return (($this->f)($this->y))($this->x);
     }
-
-    /**
-     * @return callable
-     */
-    public static function closure(): callable
-    {
-        return static function ($x, callable $f, $y) {
-            return (new self($x, $f, $y))();
-        };
-    }
 }

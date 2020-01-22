@@ -54,14 +54,4 @@ final class J extends Combinator
     {
         return (($this->f)($this->x))((($this->f)($this->z))($this->y));
     }
-
-    /**
-     * @return callable
-     */
-    public static function closure(): callable
-    {
-        return static function (callable $f, $x, $y, $z) {
-            return (new self($f, $x, $y, $z))();
-        };
-    }
 }

@@ -54,14 +54,4 @@ final class Psi extends Combinator
     {
         return ($this->f)(($this->g)($this->x), ($this->g)($this->y));
     }
-
-    /**
-     * @return callable
-     */
-    public static function closure(): callable
-    {
-        return static function (callable $f, callable $g, $x, $y) {
-            return (new self($f, $g, $x, $y))();
-        };
-    }
 }
