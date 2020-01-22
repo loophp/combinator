@@ -43,14 +43,4 @@ final class Y extends Combinator
 
         return $f($f);
     }
-
-    /**
-     * @return callable
-     */
-    public static function closure(): callable
-    {
-        return static function (callable $f) {
-            return (new self($f))();
-        };
-    }
 }

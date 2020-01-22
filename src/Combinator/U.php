@@ -43,14 +43,4 @@ final class U extends Combinator
 
         return $g(($f($f()))($g));
     }
-
-    /**
-     * @return callable
-     */
-    public static function closure(): callable
-    {
-        return static function (callable $f, callable $g) {
-            return (new self($f, $g))();
-        };
-    }
 }

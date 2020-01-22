@@ -40,14 +40,4 @@ final class A extends Combinator
     {
         return ($this->f)($this->x);
     }
-
-    /**
-     * @return callable
-     */
-    public static function closure(): callable
-    {
-        return static function (callable $f, $x) {
-            return (new self($f, $x))();
-        };
-    }
 }

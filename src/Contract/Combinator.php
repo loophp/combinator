@@ -7,6 +7,6 @@ namespace loophp\combinator\Contract;
 /**
  * Interface Combinator.
  */
-interface Combinator extends Closureable
+interface Combinator
 {
 }
