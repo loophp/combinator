@@ -45,14 +45,4 @@ final class Ki extends Combinator
     {
         return $this->y;
     }
-
-    /**
-     * @return callable
-     */
-    public static function closure(): callable
-    {
-        return static function ($x, $y) {
-            return (new self($x, $y))();
-        };
-    }
 }

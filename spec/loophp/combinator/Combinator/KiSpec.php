@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace spec\loophp\combinator\Combinator;
 
-use Closure;
 use PhpSpec\ObjectBehavior;
 
 class KiSpec extends ObjectBehavior
@@ -19,11 +18,7 @@ class KiSpec extends ObjectBehavior
             ->shouldReturn('foo');
 
         $this
-            ->closure()
-            ->shouldReturnAnInstanceOf(Closure::class);
-
-        $this
-            ->closure()(...$arguments)
+            ->__invoke()
             ->shouldReturn('foo');
     }
 }
