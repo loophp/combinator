@@ -10,25 +10,25 @@ class SSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $g = static function ($a) {
-            return $a * 2;
-        };
-
         $f = static function ($x) {
-            return static function ($a) use ($x) {
-                return sqrt($x) + $a;
+            return static function ($y) use ($x) {
+                return $x + $y;
             };
         };
 
-        $arguments = [$f, $g, 9];
+        $g = static function ($a) {
+            return $a;
+        };
+
+        $arguments = [$f, $g, 2];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn((float) 21);
+            ->shouldReturn(4);
 
         $this
             ->__invoke()
-            ->shouldReturn((float) 21);
+            ->shouldReturn(4);
     }
 }
