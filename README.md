@@ -7,7 +7,7 @@
  [![Mutation testing badge](https://badge.stryker-mutator.io/github.com/loophp/combinator/master)](https://stryker-mutator.github.io)
  [![License](https://img.shields.io/packagist/l/loophp/combinator.svg?style=flat-square)](https://packagist.org/packages/loophp/combinator)
  [![Donate!](https://img.shields.io/badge/Donate-Paypal-brightgreen.svg?style=flat-square)](https://paypal.me/drupol)
- 
+
 # Combinator
 
 This package provides a list of well known Combinators.
@@ -32,31 +32,32 @@ composer require loophp/combinator
 
 ## Available combinators
 
-| Combinator | Definition                               | # Arguments |
-|------------|------------------------------------------|-------------|
-| A          | `a => b => a(b)`                         | 2           |
-| B          | `a => b => c => a(b(c))`                 | 3           |
-| C          | `a => b => c => a(c)(b)`                 | 3           |
-| D          | `a => b => c => d => a(b)(c(d))`         | 4           |
-| E          | `a => b => c => d => e => a(b)(c(d)(e))` | 5           |
-| F          | `a => b => c => c(b)(a)`                 | 3           |
-| G          | `a => b => c => d => a(d)(b(c))`         | 4           |
-| H          | `a => b => c => a(b)(c)(b)`              | 3           |
-| I          | `a => a`                                 | 1           |
-| J          | `a => b => c => d => a(b)(a(d)(c))`      | 4           |
-| K          | `a => b => a`                            | 2           |
-| L          | `a => b => a(b(b))`                      | 2           |
-| M          | `a => a(a)`                              | 1           |
-| O          | `a => b => b(a(b))`                      | 2           |
-| Psi        | `a => b => c => d => a((b(c))(b(d)))`    | 4           |
-| Q          | `a => b => c => b(a(c))`                 | 3           |
-| R          | `a => b => c => b(c)(a)`                 | 3           |
-| S          | `a => b => c => a(c)(b(c))`              | 3           |
-| T          | `a => b => b(a)`                         | 2           |
-| U          | `a => b => b(a(a)(b))`                   | 2           |
-| V          | `a => b => c => c(a)(b)`                 | 3           |
-| W          | `a => b => a(b)(b)`                      | 2           |
-| Y          | `a => (b => b(b))(b => a(c => b(b)(c)))` | 1           |
+| Combinator | Alias | Haskel | Definition                                    | # Arguments |
+|------------|-------|--------|-----------------------------------------------|-------------|
+| A          | Apply       | $     | `a => b => a(b)`                         | 2           |
+| B          | Bluebird    | .     | `a => b => c => a(b(c))`                 | 3           |
+| C          | Cardinal    | flip  | `a => b => c => a(c)(b)`                 | 3           |
+| D          | Dove        |       | `a => b => c => d => a(b)(c(d))`         | 4           |
+| E          | Eagle       |       | `a => b => c => d => e => a(b)(c(d)(e))` | 5           |
+| F          | Finch       |       | `a => b => c => c(b)(a)`                 | 3           |
+| G          | Goldfinch   |       | `a => b => c => d => a(d)(b(c))`         | 4           |
+| H          | Hummingbird |       | `a => b => c => a(b)(c)(b)`              | 3           |
+| I          | Idiot       | id    | `a => a`                                 | 1           |
+| J          | Jay         |       | `a => b => c => d => a(b)(a(d)(c))`      | 4           |
+| K          | Kestrel     | const | `a => b => a`                            | 2           |
+| Ki         | Kite        |       | `a => b => b`                            | 2           |
+| L          |             |       | `a => b => a(b(b))`                      | 2           |
+| M          |             |       | `a => a(a)`                              | 1           |
+| O          | Owl         |       | `a => b => b(a(b))`                      | 2           |
+| Psi        |             | on    | `a => b => c => d => a((b(c))(b(d)))`    | 4           |
+| Q          | Queer       | (##)  | `a => b => c => b(a(c))`                 | 3           |
+| R          | Robin       |       | `a => b => c => b(c)(a)`                 | 3           |
+| S          | Starling    | <*>   | `a => b => c => a(c)(b(c))`              | 3           |
+| T          | Trush       | (#)   | `a => b => b(a)`                         | 2           |
+| U          |             |       | `a => b => b(a(a)(b))`                   | 2           |
+| V          | Vireo       |       | `a => b => c => c(a)(b)`                 | 3           |
+| W          | Warbler     |       | `a => b => a(b)(b)`                      | 2           |
+| Y          |             |       | `a => (b => b(b))(b => a(c => b(b)(c)))` | 1           |
 
 Example with the B combinator:
 
@@ -97,6 +98,7 @@ $result = $fibonacci()(10);
 - https://en.wikipedia.org/wiki/Combinatory_logic
 - https://github.com/sanctuary-js/sanctuary
 - https://en.wikipedia.org/wiki/Lambda_calculus
+- https://hackage.haskell.org/package/data-aviary-0.4.0/docs/src/Data-Aviary-BirdsInter.html
 
 ## Authors
 
