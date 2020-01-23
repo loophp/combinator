@@ -46,15 +46,16 @@ composer require loophp/combinator
 | J          | Jay         |        | `a => b => c => d => a(b)(a(d)(c))`      | `(a -> b -> b) -> a -> b -> a -> b`                  | 4           |
 | K          | Kestrel     | const  | `a => b => a`                            | `(a -> b -> a)`                                      | 2           |
 | Ki         | Kite        |        | `a => b => b`                            | `(a -> b -> b)`                                      | 2           |
-| L          |             |        | `a => b => a(b(b))`                      |                                                      | 2           |
-| M          |             |        | `a => a(a)`                              |                                                      | 1           |
+| L          | Lark        |        | `a => b => a(b(b))`                      |                                                      | 2           |
+| M          | Mockingbird |        | `a => a(a)`                              |                                                      | 1           |
 | O          | Owl         |        | `a => b => b(a(b))`                      | `((a -> b) -> a) -> (a -> b) -> b`                   | 2           |
+| Phoenix    |             |        | `a => b => c => d => a(b(d))(c(d))`      | `(b -> c -> d) -> (a -> b) -> (a -> c) -> a -> d`    | 4           |
 | Psi        |             | on     | `a => b => c => d => a(b(c))(b(d))`      | `(b -> b -> c) -> (a -> b) -> a -> a -> c`           | 4           |
 | Q          | Queer       | (##)   | `a => b => c => b(a(c))`                 | `(a -> b) -> (b -> c) -> a -> c`                     | 3           |
 | R          | Robin       |        | `a => b => c => b(c)(a)`                 | `a -> (b -> a -> c) -> b -> c`                       | 3           |
 | S          | Starling    | <*>    | `a => b => c => a(c)(b(c))`              | `(a -> b -> c) -> (a -> b) -> a -> c`                | 3           |
 | T          | Trush       | (#)    | `a => b => b(a)`                         | `a -> (a -> b) -> b`                                 | 2           |
-| U          |             |        | `a => b => b(a(a)(b))`                   |                                                      | 2           |
+| U          | Turing bird |        | `a => b => b(a(a)(b))`                   |                                                      | 2           |
 | V          | Vireo       |        | `a => b => c => c(a)(b)`                 | `a -> b -> (a -> b -> b) -> b`                       | 3           |
 | W          | Warbler     |        | `a => b => a(b)(b)`                      | `(a -> a -> b) -> a -> b`                            | 2           |
 | Y          |             |        | `a => (b => b(b))(b => a(c => b(b)(c)))` |                                                      | 1           |
