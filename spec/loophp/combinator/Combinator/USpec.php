@@ -18,11 +18,11 @@ class USpec extends ObjectBehavior
             }
 
             return static function ($x) use ($g) {
-                if (null === $g) {
+                if (null === $g()) {
                     return 'f()';
                 }
 
-                return 'f(f)(' . $g() . ')';
+                return 'f(f)(' . $g()() . ')';
             };
         };
 

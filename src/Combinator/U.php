@@ -41,6 +41,6 @@ final class U extends Combinator
         $f = $this->f;
         $g = $this->g;
 
-        return $g(($f($f()))($g));
+        return $g(($f($f))($g));
     }
 }
