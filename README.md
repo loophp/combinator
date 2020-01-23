@@ -49,7 +49,7 @@ composer require loophp/combinator
 | L          |             |        | `a => b => a(b(b))`                      |                                                      | 2           |
 | M          |             |        | `a => a(a)`                              |                                                      | 1           |
 | O          | Owl         |        | `a => b => b(a(b))`                      | `((a -> b) -> a) -> (a -> b) -> b`                   | 2           |
-| Psi        |             | on     | `a => b => c => d => a(b(c))(b(d))`      | `(a -> a -> b) -> (c -> a) -> c -> c -> b`           | 4           |
+| Psi        |             | on     | `a => b => c => d => a(b(c))(b(d))`      | `(b -> b -> c) -> (a -> b) -> a -> a -> c`           | 4           |
 | Q          | Queer       | (##)   | `a => b => c => b(a(c))`                 | `(a -> b) -> (b -> c) -> a -> c`                     | 3           |
 | R          | Robin       |        | `a => b => c => b(c)(a)`                 | `a -> (b -> a -> c) -> b -> c`                       | 3           |
 | S          | Starling    | <*>    | `a => b => c => a(c)(b(c))`              | `(a -> b -> c) -> (a -> b) -> a -> c`                | 3           |
@@ -100,9 +100,11 @@ $result = $fibonacci()(10);
 - https://en.wikipedia.org/wiki/Lambda_calculus
 - https://hackage.haskell.org/package/data-aviary-0.4.0/docs/src/Data-Aviary-BirdsInter.html
 - https://github.com/fantasyland/fantasy-birds/blob/master/README.md
+- https://www.cis.upenn.edu/~bcpierce/tapl/
 
 ## Thanks
 
+* [Marco Pivetta](https://github.com/ocramius)
 * [Danny Willems](https://github.com/dannywillems)
 
 ## Authors
