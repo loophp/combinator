@@ -10,17 +10,17 @@ class LSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function (callable $g) {
-            return $g() ** 2;
+        $f = static function (callable $x) {
+            return sprintf('%s(%s)', 'a', $x());
         };
 
         $g = static function (?callable $x = null) {
             if (null === $x) {
-                return 3;
+                return 'b';
             }
 
             return static function () use ($x) {
-                return $x() * 2;
+                return sprintf('%s(%s)', 'b', $x());
             };
         };
 
@@ -29,10 +29,10 @@ class LSpec extends ObjectBehavior
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn(36);
+            ->shouldReturn('a(b(b))');
 
         $this
             ->__invoke()
-            ->shouldReturn(36);
+            ->shouldReturn('a(b(b))');
     }
 }

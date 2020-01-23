@@ -10,21 +10,21 @@ class FSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function ($x) {
-            return static function ($a) use ($x) {
-                return sqrt($x) + $a;
+        $f2 = static function (string $x) {
+            return static function (string $a) use ($x): string {
+                return sprintf('%s(%s)(%s)', 'c', $x, $a);
             };
         };
 
-        $arguments = [5, 16, $f];
+        $arguments = ['a', 'b', $f2];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn((float) 9);
+            ->shouldReturn('c(b)(a)');
 
         $this
             ->__invoke()
-            ->shouldReturn((float) 9);
+            ->shouldReturn('c(b)(a)');
     }
 }

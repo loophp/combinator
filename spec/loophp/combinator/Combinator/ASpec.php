@@ -10,15 +10,19 @@ class ASpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $arguments = ['strtoupper', 'foo'];
+        $a = static function (string $x): string {
+            return sprintf('%s(%s)', 'a', $x);
+        };
+
+        $arguments = [$a, 'b'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('FOO');
+            ->shouldReturn('a(b)');
 
         $this
             ->__invoke()
-            ->shouldReturn('FOO');
+            ->shouldReturn('a(b)');
     }
 }

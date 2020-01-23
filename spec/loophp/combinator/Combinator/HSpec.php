@@ -10,23 +10,23 @@ class HSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function ($x) {
+        $f3 = static function ($x) {
             return static function ($y) use ($x) {
-                return static function ($a) use ($y, $x) {
-                    return $x + $a + $y;
+                return static function ($z) use ($x, $y): string {
+                    return sprintf('%s(%s)(%s)(%s)', 'a', $x, $y, $z);
                 };
             };
         };
 
-        $arguments = [$f, 4, 9];
+        $arguments = [$f3, 'b', 'c'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn(17);
+            ->shouldReturn('a(b)(c)(b)');
 
         $this
             ->__invoke()
-            ->shouldReturn(17);
+            ->shouldReturn('a(b)(c)(b)');
     }
 }

@@ -10,35 +10,37 @@ class USpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function (?callable $g = null) {
-            if (null === $g) {
+        // `a => b => b(a(a)(b))`
+
+        $f2 = static function (?callable $x = null) {
+            if (null === $x) {
                 return static function () {
-                    return 'g';
+                    return 'b';
                 };
             }
 
-            return static function ($x) use ($g) {
-                if (null === $g()) {
-                    return 'f()';
+            return static function ($y) use ($x) {
+                if (null === $x()) {
+                    return 'a()';
                 }
 
-                return 'f(f)(' . $g()() . ')';
+                return sprintf('%s(%s)(%s)', 'a', 'a', $x()());
             };
         };
 
-        $g = static function (?string $g = null) {
-            return 'g(' . $g . ')';
+        $g = static function (string $x): string {
+            return sprintf('%s(%s)', 'b', $x);
         };
 
-        $arguments = [$f, $g];
+        $arguments = [$f2, $g];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('g(f(f)(g))');
+            ->shouldReturn('b(a(a)(b))');
 
         $this
             ->__invoke()
-            ->shouldReturn('g(f(f)(g))');
+            ->shouldReturn('b(a(a)(b))');
     }
 }

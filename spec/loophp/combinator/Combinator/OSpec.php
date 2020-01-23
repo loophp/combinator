@@ -12,14 +12,14 @@ class OSpec extends ObjectBehavior
     {
         $f = static function (?callable $x = null) {
             if (null === $x) {
-                return 'f()';
+                return 'a';
             }
 
-            return 'f(' . $x() . ')';
+            return sprintf('%s(%s)', 'a', $x());
         };
 
-        $g = static function (?string $v = null) {
-            return 'g(' . $v . ')';
+        $g = static function (?string $x = null) {
+            return sprintf('%s(%s)', 'b', $x);
         };
 
         $arguments = [$f, $g];
@@ -27,10 +27,10 @@ class OSpec extends ObjectBehavior
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('g(f(g()))');
+            ->shouldReturn('b(a(b()))');
 
         $this
             ->__invoke()
-            ->shouldReturn('g(f(g()))');
+            ->shouldReturn('b(a(b()))');
     }
 }

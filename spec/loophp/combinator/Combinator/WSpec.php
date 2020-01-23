@@ -10,21 +10,21 @@ class WSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function ($x) {
-            return static function () use ($x) {
-                return $x + 1;
+        $f = static function (string $x) {
+            return static function (string $y) use ($x): string {
+                return sprintf('%s(%s)(%s)', 'a', $x, $y);
             };
         };
 
-        $arguments = [$f, 10];
+        $arguments = [$f, 'b'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn(11);
+            ->shouldReturn('a(b)(b)');
 
         $this
             ->__invoke()
-            ->shouldReturn(11);
+            ->shouldReturn('a(b)(b)');
     }
 }

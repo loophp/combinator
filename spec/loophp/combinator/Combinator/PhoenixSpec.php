@@ -10,29 +10,29 @@ class PhoenixSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function ($a) {
-            return static function ($b) use ($a) {
-                return 'f(' . $a . ')(' . $b . ')';
+        $f2 = static function (string $x) {
+            return static function (string $y) use ($x): string {
+                return sprintf('%s(%s)(%s)', 'a', $x, $y);
             };
         };
 
-        $g = static function ($a) {
-            return 'g(' . $a . ')';
+        $g = static function (string $x): string {
+            return sprintf('%s(%s)', 'b', $x);
         };
 
-        $h = static function ($a) {
-            return 'h(' . $a . ')';
+        $h = static function (string $x): string {
+            return sprintf('%s(%s)', 'c', $x);
         };
 
-        $arguments = [$f, $g, $h, 'x'];
+        $arguments = [$f2, $g, $h, 'd'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('f(g(x))(h(x))');
+            ->shouldReturn('a(b(d))(c(d))');
 
         $this
             ->__invoke()
-            ->shouldReturn('f(g(x))(h(x))');
+            ->shouldReturn('a(b(d))(c(d))');
     }
 }

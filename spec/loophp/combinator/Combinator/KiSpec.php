@@ -10,15 +10,15 @@ class KiSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $arguments = ['bar', 'foo'];
+        $arguments = ['a', 'b'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('foo');
+            ->shouldReturn('b');
 
         $this
             ->__invoke()
-            ->shouldReturn('foo');
+            ->shouldReturn('b');
     }
 }

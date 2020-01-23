@@ -10,25 +10,25 @@ class GSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function ($x) {
-            return static function ($a) use ($x) {
-                return sqrt($x) + $a;
+        $f2 = static function (string $x) {
+            return static function (string $a) use ($x): string {
+                return sprintf('%s(%s)(%s)', 'a', $x, $a);
             };
         };
 
-        $g = static function ($x) {
-            return sqrt($x) + $x;
+        $g = static function (string $x) {
+            return sprintf('%s(%s)', 'b', $x);
         };
 
-        $arguments = [$f, $g, 4, 9];
+        $arguments = [$f2, $g, 'c', 'd'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn((float) 9);
+            ->shouldReturn('a(d)(b(c))');
 
         $this
             ->__invoke()
-            ->shouldReturn((float) 9);
+            ->shouldReturn('a(d)(b(c))');
     }
 }

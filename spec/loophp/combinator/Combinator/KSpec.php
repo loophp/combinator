@@ -10,15 +10,15 @@ class KSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $arguments = ['bar', 'foo'];
+        $arguments = ['a', 'b'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('bar');
+            ->shouldReturn('a');
 
         $this
             ->__invoke()
-            ->shouldReturn('bar');
+            ->shouldReturn('a');
     }
 }

@@ -10,23 +10,23 @@ class BSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $add7 = static function ($a) {
-            return $a + 7;
+        $a = static function (string $x): string {
+            return sprintf('%s(%s)', 'a', $x);
         };
 
-        $multiplyBy2 = static function ($a) {
-            return $a * 2;
+        $b = static function (string $x): string {
+            return sprintf('%s(%s)', 'b', $x);
         };
 
-        $arguments = [$add7, $multiplyBy2, 5];
+        $arguments = [$a, $b, 'c'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn(17);
+            ->shouldReturn('a(b(c))');
 
         $this
             ->__invoke()
-            ->shouldReturn(17);
+            ->shouldReturn('a(b(c))');
     }
 }

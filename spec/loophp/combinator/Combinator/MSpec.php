@@ -12,10 +12,10 @@ class MSpec extends ObjectBehavior
     {
         $f = static function (?callable $x = null) {
             if (null === $x) {
-                return 'null';
+                return 'a';
             }
 
-            return 'arg' . $x();
+            return sprintf('%s(%s)', 'a', $x());
         };
 
         $arguments = [$f];
@@ -23,10 +23,10 @@ class MSpec extends ObjectBehavior
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('argnull');
+            ->shouldReturn('a(a)');
 
         $this
             ->__invoke()
-            ->shouldReturn('argnull');
+            ->shouldReturn('a(a)');
     }
 }

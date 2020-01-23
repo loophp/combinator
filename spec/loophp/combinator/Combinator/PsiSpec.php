@@ -10,25 +10,25 @@ class PsiSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function ($a) {
-            return static function ($b) use ($a) {
-                return $a * $b;
+        $f2 = static function (string $x) {
+            return static function (string $y) use ($x): string {
+                return sprintf('%s(%s)(%s)', 'a', $x, $y);
             };
         };
 
-        $g = static function ($a) {
-            return $a - 1;
+        $g = static function (string $x): string {
+            return sprintf('%s(%s)', 'b', $x);
         };
 
-        $arguments = [$f, $g, 22, 3];
+        $arguments = [$f2, $g, 'c', 'd'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn(42);
+            ->shouldReturn('a(b(c))(b(d))');
 
         $this
             ->__invoke()
-            ->shouldReturn(42);
+            ->shouldReturn('a(b(c))(b(d))');
     }
 }

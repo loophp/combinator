@@ -10,27 +10,23 @@ class QSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function ($x = null) {
-            if (null === $x) {
-                return 'f()';
-            }
-
-            return 'f(' . $x . ')';
+        $f = static function (string $x) {
+            return sprintf('%s(%s)', 'a', $x);
         };
 
-        $g = static function (?string $v = null) {
-            return 'g(' . $v . ')';
+        $g = static function (string $x): string {
+            return sprintf('%s(%s)', 'b', $x);
         };
 
-        $arguments = [$f, $g, 'a'];
+        $arguments = [$f, $g, 'c'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('g(f(a))');
+            ->shouldReturn('b(a(c))');
 
         $this
             ->__invoke()
-            ->shouldReturn('g(f(a))');
+            ->shouldReturn('b(a(c))');
     }
 }

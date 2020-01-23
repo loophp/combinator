@@ -10,27 +10,27 @@ class ESpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function ($x) {
-            return static function ($a) use ($x) {
-                return sqrt($x) + $a;
+        $f2 = static function (string $x) {
+            return static function (string $a) use ($x): string {
+                return sprintf('%s(%s)(%s)', 'a', $x, $a);
             };
         };
 
-        $g = static function ($x) {
-            return static function ($a) use ($x) {
-                return $x + $a;
+        $g2 = static function (string $x) {
+            return static function (string $a) use ($x): string {
+                return sprintf('%s(%s)(%s)', 'c', $x, $a);
             };
         };
 
-        $arguments = [$f, 9, $g, 4, 3];
+        $arguments = [$f2, 'b', $g2, 'd', 'e'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn((float) 10);
+            ->shouldReturn('a(b)(c(d)(e))');
 
         $this
             ->__invoke()
-            ->shouldReturn((float) 10);
+            ->shouldReturn('a(b)(c(d)(e))');
     }
 }

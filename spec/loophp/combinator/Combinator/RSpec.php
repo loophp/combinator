@@ -10,21 +10,21 @@ class RSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function ($x = null) {
-            return static function ($y) use ($x) {
-                return 'f(' . $x . ')(' . $y . ')';
+        $f = static function (string $x) {
+            return static function (string $y) use ($x): string {
+                return sprintf('%s(%s)(%s)', 'b', $x, $y);
             };
         };
 
-        $arguments = ['x', $f, 'y'];
+        $arguments = ['a', $f, 'c'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('f(y)(x)');
+            ->shouldReturn('b(c)(a)');
 
         $this
             ->__invoke()
-            ->shouldReturn('f(y)(x)');
+            ->shouldReturn('b(c)(a)');
     }
 }

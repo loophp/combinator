@@ -10,15 +10,15 @@ class ISpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $arguments = ['foo'];
+        $arguments = ['a'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('foo');
+            ->shouldReturn('a');
 
         $this
             ->__invoke()
-            ->shouldReturn('foo');
+            ->shouldReturn('a');
     }
 }

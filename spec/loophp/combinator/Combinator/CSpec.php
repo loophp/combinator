@@ -10,21 +10,21 @@ class CSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $concat = static function (...$x) {
-            return static function (...$y) use ($x) {
-                return implode('', array_merge($x, $y));
+        $f = static function ($x) {
+            return static function ($y) use ($x) {
+                return sprintf('%s(%s)(%s)', 'a', $x, $y);
             };
         };
 
-        $arguments = [$concat, 'a', 'b'];
+        $arguments = [$f, 'b', 'c'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('ba');
+            ->shouldReturn('a(c)(b)');
 
         $this
             ->__invoke()
-            ->shouldReturn('ba');
+            ->shouldReturn('a(c)(b)');
     }
 }

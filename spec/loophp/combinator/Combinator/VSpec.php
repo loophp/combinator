@@ -10,21 +10,21 @@ class VSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function ($x) {
-            return static function ($y) use ($x) {
-                return 'f(' . $x . ')(' . $y . ')';
+        $f = static function (string $x) {
+            return static function (string $y) use ($x): string {
+                return sprintf('%s(%s)(%s)', 'c', $x, $y);
             };
         };
 
-        $arguments = ['x', 'y', $f];
+        $arguments = ['a', 'b', $f];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('f(x)(y)');
+            ->shouldReturn('c(a)(b)');
 
         $this
             ->__invoke()
-            ->shouldReturn('f(x)(y)');
+            ->shouldReturn('c(a)(b)');
     }
 }

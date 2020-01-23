@@ -10,21 +10,21 @@ class JSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function ($x) {
-            return static function ($a) use ($x) {
-                return $x + $a;
+        $f2 = static function (string $x) {
+            return static function (string $y) use ($x): string {
+                return 'a(' . $x . ')(' . $y . ')';
             };
         };
 
-        $arguments = [$f, 1, 2, 3];
+        $arguments = [$f2, 'b', 'c', 'd'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn(6);
+            ->shouldReturn('a(b)(a(d)(c))');
 
         $this
             ->__invoke()
-            ->shouldReturn(6);
+            ->shouldReturn('a(b)(a(d)(c))');
     }
 }

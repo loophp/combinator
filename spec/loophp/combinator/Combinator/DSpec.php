@@ -10,27 +10,27 @@ class DSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $f = static function ($x) {
+        $f2 = static function (string $x) {
             return static function (callable $a) use ($x) {
-                return 'f(' . $x . ')(' . $a('y') . ')';
+                return 'a(' . $x . ')(' . $a('d') . ')';
             };
         };
 
-        $g = static function ($x) {
-            return static function ($a) use ($x) {
-                return 'g(' . $x . ')';
+        $g2 = static function (string $x) {
+            return static function ($a) use ($x): string {
+                return 'c(' . $x . ')';
             };
         };
 
-        $arguments = [$f, 'x', $g, 'y'];
+        $arguments = [$f2, 'b', $g2, 'd'];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('f(x)(g(y))');
+            ->shouldReturn('a(b)(c(d))');
 
         $this
             ->__invoke()
-            ->shouldReturn('f(x)(g(y))');
+            ->shouldReturn('a(b)(c(d))');
     }
 }

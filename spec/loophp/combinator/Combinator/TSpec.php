@@ -10,15 +10,19 @@ class TSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $arguments = ['foo', 'strtoupper'];
+        $f = static function (string $x): string {
+            return sprintf('%s(%s)', 'b', $x);
+        };
+
+        $arguments = ['a', $f];
 
         $this->beConstructedWith(...$arguments);
 
         $this()
-            ->shouldReturn('FOO');
+            ->shouldReturn('b(a)');
 
         $this
             ->__invoke()
-            ->shouldReturn('FOO');
+            ->shouldReturn('b(a)');
     }
 }
