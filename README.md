@@ -57,7 +57,7 @@ composer require loophp/combinator
 | U          | Turing bird |        | `a => b => b(a(a)(b))`                   |                                                      | 2           |
 | V          | Vireo       |        | `a => b => c => c(a)(b)`                 | `a -> b -> (a -> b -> b) -> b`                       | 3           |
 | W          | Warbler     |        | `a => b => a(b)(b)`                      | `(a -> a -> b) -> a -> b`                            | 2           |
-| Y          |             |        | `a => (b => b(b))(b => a(c => b(b)(c)))` |                                                      | 1           |
+| Y          | Fixed point |        | `a => (b => b(b))(b => a(c => b(b)(c)))` |                                                      | 1           |
 
 Example with the B combinator:
 
