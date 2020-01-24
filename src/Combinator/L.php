@@ -8,6 +8,8 @@ use loophp\combinator\Combinator;
 
 /**
  * Class L.
+ *
+ * @psalm-template ResultType
  */
 final class L extends Combinator
 {
@@ -34,6 +36,8 @@ final class L extends Combinator
     }
 
     /**
+     * @psalm-return ResultType
+     *
      * @return mixed
      */
     public function __invoke()
