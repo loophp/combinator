@@ -10,8 +10,6 @@ class USpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        // `a => b => b(a(a)(b))`
-
         $f2 = static function (?callable $x = null) {
             if (null === $x) {
                 return static function () {
