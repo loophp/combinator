@@ -41,10 +41,10 @@ composer require loophp/combinator
 | F          | Finch       |        | `a => b => c => c(b)(a)`                 | `a -> b -> (b -> a -> c) -> c`                       | 3           |
 | G          | Goldfinch   |        | `a => b => c => d => a(d)(b(c))`         | `(b -> c -> d) -> (a -> c) -> a -> b -> d`           | 4           |
 | H          | Hummingbird |        | `a => b => c => a(b)(c)(b)`              | `(a -> b -> a -> c) -> a -> b -> c `                 | 3           |
-| I          | Idiot       | id     | `a => a`                                 | `(a -> a)`                                           | 1           |
+| I          | Idiot       | id     | `a => a`                                 | `a -> a`                                             | 1           |
 | J          | Jay         |        | `a => b => c => d => a(b)(a(d)(c))`      | `(a -> b -> b) -> a -> b -> a -> b`                  | 4           |
-| K          | Kestrel     | const  | `a => b => a`                            | `(a -> b -> a)`                                      | 2           |
-| Ki         | Kite        |        | `a => b => b`                            | `(a -> b -> b)`                                      | 2           |
+| K          | Kestrel     | const  | `a => b => a`                            | `a -> b -> a`                                        | 2           |
+| Ki         | Kite        |        | `a => b => b`                            | `a -> b -> b`                                        | 2           |
 | L          | Lark        |        | `a => b => a(b(b))`                      |                                                      | 2           |
 | M          | Mockingbird |        | `a => a(a)`                              |                                                      | 1           |
 | O          | Owl         |        | `a => b => b(a(b))`                      | `((a -> b) -> a) -> (a -> b) -> b`                   | 2           |
