@@ -37,12 +37,12 @@ final class Phoenix extends Combinator
     private $x;
 
     /**
-     * Psi constructor.
+     * Phoenix constructor.
      *
-     * @psalm-param callable(BType) : callable(CType) : DType $f
-     * @psalm-param callable(AType) : BType $g
-     * @psalm-param callable(AType) : CType $h
-     * @psalm-param AType $x
+     * @psalm-param callable(AType): callable(BType): CType $f
+     * @psalm-param callable(DType): AType $g
+     * @psalm-param callable(DType): BType $h
+     * @psalm-param DType $x
      *
      * @param callable $f
      * @param callable $g
@@ -58,7 +58,7 @@ final class Phoenix extends Combinator
     }
 
     /**
-     * @psalm-return DType
+     * @psalm-return CType
      */
     public function __invoke()
     {
