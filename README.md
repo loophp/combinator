@@ -34,12 +34,12 @@ composer require loophp/combinator
 | Combinator | Alias       | Haskel | Definition (Term)                        | Type                                                 | # Arguments |
 |------------|-------------|--------|------------------------------------------|------------------------------------------------------|-------------|
 | A          | Apply       | $      | `a => b => a(b)`                         | `(a -> b) -> a -> b`                                 | 2           |
-| B          | Bluebird    | .      | `a => b => c => a(b(c))`                 | `(b -> c) -> (a -> b) -> a -> c`                     | 3           |
+| B          | Bluebird    | .      | `a => b => c => a(b(c))`                 | `(a -> b) -> (c -> a) -> c -> b`                     | 3           |
 | C          | Cardinal    | flip   | `a => b => c => a(c)(b)`                 | `(a -> b -> c) -> b -> a -> c`                       | 3           |
 | D          | Dove        |        | `a => b => c => d => a(b)(c(d))`         | `(a -> c -> d) -> a -> (b -> c) -> b -> d`           | 4           |
 | E          | Eagle       |        | `a => b => c => d => e => a(b)(c(d)(e))` | `(a -> d -> e) -> a -> (b -> c -> d) -> b -> c -> e` | 5           |
 | F          | Finch       |        | `a => b => c => c(b)(a)`                 | `a -> b -> (b -> a -> c) -> c`                       | 3           |
-| G          | Goldfinch   |        | `a => b => c => d => a(d)(b(c))`         | `(b -> c -> d) -> (a -> c) -> a -> b -> d`           | 4           |
+| G          | Goldfinch   |        | `a => b => c => d => a(d)(b(c))`         | `(a -> b -> c) -> (d -> b) -> d -> a -> c`           | 4           |
 | H          | Hummingbird |        | `a => b => c => a(b)(c)(b)`              | `(a -> b -> a -> c) -> a -> b -> c `                 | 3           |
 | I          | Idiot       | id     | `a => a`                                 | `a -> a`                                             | 1           |
 | J          | Jay         |        | `a => b => c => d => a(b)(a(d)(c))`      | `(a -> b -> b) -> a -> b -> a -> b`                  | 4           |
@@ -55,7 +55,7 @@ composer require loophp/combinator
 | S          | Starling    | <*>    | `a => b => c => a(c)(b(c))`              | `(a -> b -> c) -> (a -> b) -> a -> c`                | 3           |
 | T          | Trush       | (#)    | `a => b => b(a)`                         | `a -> (a -> b) -> b`                                 | 2           |
 | U          | Turing bird |        | `a => b => b(a(a)(b))`                   |                                                      | 2           |
-| V          | Vireo       |        | `a => b => c => c(a)(b)`                 | `a -> b -> (a -> b -> b) -> b`                       | 3           |
+| V          | Vireo       |        | `a => b => c => c(a)(b)`                 | `a -> b -> (a -> b -> c) -> c`                       | 3           |
 | W          | Warbler     |        | `a => b => a(b)(b)`                      | `(a -> a -> b) -> a -> b`                            | 2           |
 | Y          | Fixed point |        | `a => (b => b(b))(b => a(c => b(b)(c)))` |                                                      | 1           |
 
