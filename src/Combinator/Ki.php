@@ -10,6 +10,7 @@ use loophp\combinator\Combinator;
  * Class Ki.
  *
  * @psalm-template XType
+ * @psalm-template YType
  */
 final class Ki extends Combinator
 {
@@ -27,7 +28,7 @@ final class Ki extends Combinator
      * Ki constructor.
      *
      * @psalm-param XType $x
-     * @psalm-param XType $y
+     * @psalm-param YType $y
      *
      * @param mixed $x
      * @param mixed $y
@@ -39,7 +40,7 @@ final class Ki extends Combinator
     }
 
     /**
-     * @psalm-return XType
+     * @psalm-return YType
      */
     public function __invoke()
     {
