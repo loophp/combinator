@@ -26,5 +26,8 @@ class JSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(b)(a(d)(c))');
+
+        $this::on($f2)('b')('c')('d')
+            ->shouldReturn('a(b)(a(d)(c))');
     }
 }

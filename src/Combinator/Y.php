@@ -45,7 +45,7 @@ final class Y extends Combinator
          *
          * @return mixed
          */
-        $f = static function (callable $f) use ($callable) {
+        $f = static function (callable $f) use ($callable): Closure {
             return $callable(
                 /**
                  * @psalm-suppress MissingClosureParamType
@@ -59,5 +59,15 @@ final class Y extends Combinator
         };
 
         return $f($f);
+    }
+
+    /**
+     * @param callable $a
+     *
+     * @return Closure
+     */
+    public static function on(callable $a): Closure
+    {
+        return (new self($a))();
     }
 }

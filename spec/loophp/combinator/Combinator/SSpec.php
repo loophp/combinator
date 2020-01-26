@@ -30,5 +30,8 @@ class SSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(c)(b(c))');
+
+        $this::on($f2)($g)('c')
+            ->shouldReturn('a(c)(b(c))');
     }
 }

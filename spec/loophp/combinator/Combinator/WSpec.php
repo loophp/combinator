@@ -26,5 +26,8 @@ class WSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(b)(b)');
+
+        $this::on($f)('b')
+            ->shouldReturn('a(b)(b)');
     }
 }

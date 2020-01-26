@@ -24,5 +24,8 @@ class TSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('b(a)');
+
+        $this::on('a')($f)
+            ->shouldReturn('b(a)');
     }
 }

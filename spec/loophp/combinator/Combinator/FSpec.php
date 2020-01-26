@@ -26,5 +26,8 @@ class FSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('c(b)(a)');
+
+        $this::on('a')('b')($f2)
+            ->shouldReturn('c(b)(a)');
     }
 }

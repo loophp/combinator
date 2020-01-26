@@ -28,5 +28,8 @@ class QSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('b(a(c))');
+
+        $this::on($f)($g)('c')
+            ->shouldReturn('b(a(c))');
     }
 }

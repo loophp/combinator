@@ -34,5 +34,8 @@ class LSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(b(b))');
+
+        $this::on($f)($g)
+            ->shouldReturn('a(b(b))');
     }
 }

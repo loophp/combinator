@@ -28,5 +28,8 @@ class BSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(b(c))');
+
+        $this::on($a)($b)('c')
+            ->shouldReturn('a(b(c))');
     }
 }

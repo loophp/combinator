@@ -30,5 +30,8 @@ class PsiSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(b(c))(b(d))');
+
+        $this::on($f2)($g)('c')('d')
+            ->shouldReturn('a(b(c))(b(d))');
     }
 }

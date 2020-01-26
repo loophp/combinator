@@ -34,5 +34,8 @@ class PhoenixSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(b(d))(c(d))');
+
+        $this::on($f2)($g)($h)('d')
+            ->shouldReturn('a(b(d))(c(d))');
     }
 }

@@ -26,5 +26,8 @@ class CSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(c)(b)');
+
+        $this::on($f)('b')('c')
+            ->shouldReturn('a(c)(b)');
     }
 }

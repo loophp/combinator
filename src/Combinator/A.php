@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace loophp\combinator\Combinator;
 
+use Closure;
 use loophp\combinator\Combinator;
 
 /**
@@ -45,5 +46,17 @@ final class A extends Combinator
     public function __invoke()
     {
         return ($this->f)($this->x);
+    }
+
+    /**
+     * @param callable $f
+     *
+     * @return Closure
+     */
+    public static function on(callable $f): Closure
+    {
+        return static function ($x) use ($f) {
+            return (new self($f, $x))();
+        };
     }
 }

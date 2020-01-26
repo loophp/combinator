@@ -37,4 +37,14 @@ final class I extends Combinator
     {
         return $this->x;
     }
+
+    /**
+     * @param callable $a
+     *
+     * @return mixed
+     */
+    public static function on($a)
+    {
+        return (new self($a))();
+    }
 }

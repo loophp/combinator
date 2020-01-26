@@ -20,5 +20,8 @@ class KSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a');
+
+        $this::on('a')('b')
+            ->shouldReturn('a');
     }
 }

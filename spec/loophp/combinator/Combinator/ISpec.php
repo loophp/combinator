@@ -20,5 +20,8 @@ class ISpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a');
+
+        $this::on('a')
+            ->shouldReturn('a');
     }
 }

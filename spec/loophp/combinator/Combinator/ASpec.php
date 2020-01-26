@@ -24,5 +24,8 @@ class ASpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(b)');
+
+        $this::on($a)('b')
+            ->shouldReturn('a(b)');
     }
 }

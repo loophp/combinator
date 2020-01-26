@@ -32,5 +32,8 @@ class OSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('b(a(b()))');
+
+        $this::on($f)($g)
+            ->shouldReturn('b(a(b()))');
     }
 }

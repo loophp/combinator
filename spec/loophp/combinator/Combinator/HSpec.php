@@ -28,5 +28,8 @@ class HSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(b)(c)(b)');
+
+        $this::on($f3)('b')('c')
+            ->shouldReturn('a(b)(c)(b)');
     }
 }

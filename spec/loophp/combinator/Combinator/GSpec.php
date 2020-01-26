@@ -30,5 +30,8 @@ class GSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(d)(b(c))');
+
+        $this::on($f2)($g)('c')('d')
+            ->shouldReturn('a(d)(b(c))');
     }
 }

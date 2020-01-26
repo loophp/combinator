@@ -32,5 +32,8 @@ class ESpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(b)(c(d)(e))');
+
+        $this::on($f2)('b')($g2)('d')('e')
+            ->shouldReturn('a(b)(c(d)(e))');
     }
 }

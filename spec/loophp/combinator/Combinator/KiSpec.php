@@ -20,5 +20,8 @@ class KiSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('b');
+
+        $this::on('a')('b')
+            ->shouldReturn('b');
     }
 }

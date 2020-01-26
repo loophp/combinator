@@ -32,5 +32,8 @@ class DSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(b)(c(d))');
+
+        $this::on($f2)('b')($g2)('d')
+            ->shouldReturn('a(b)(c(d))');
     }
 }

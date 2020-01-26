@@ -26,5 +26,8 @@ class YSpec extends ObjectBehavior
         $this
             ->__invoke()(6)
             ->shouldReturn(720);
+
+        $this::on($f)(6)
+            ->shouldReturn(720);
     }
 }

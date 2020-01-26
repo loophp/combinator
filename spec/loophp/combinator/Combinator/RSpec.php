@@ -26,5 +26,8 @@ class RSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('b(c)(a)');
+
+        $this::on('a')($f)('c')
+            ->shouldReturn('b(c)(a)');
     }
 }

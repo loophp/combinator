@@ -40,5 +40,8 @@ class USpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('b(a(a)(b))');
+
+        $this::on($f2)($g)
+            ->shouldReturn('b(a(a)(b))');
     }
 }

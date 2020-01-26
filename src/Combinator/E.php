@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace loophp\combinator\Combinator;
 
+use Closure;
 use loophp\combinator\Combinator;
 
 /**
@@ -74,5 +75,23 @@ final class E extends Combinator
         // Demander à Danny :-)
         // const E = a => b => c => d => e => a(b)(c(d)(e))
         return (($this->f)($this->x))((($this->g)($this->y))($this->z));
+    }
+
+    /**
+     * @param callable $a
+     *
+     * @return Closure
+     */
+    public static function on(callable $a): Closure
+    {
+        return static function ($b) use ($a): Closure {
+            return static function (callable $c) use ($a, $b): Closure {
+                return static function ($d) use ($a, $b, $c): Closure {
+                    return static function ($e) use ($a, $b, $c, $d) {
+                        return (new self($a, $b, $c, $d, $e))();
+                    };
+                };
+            };
+        };
     }
 }

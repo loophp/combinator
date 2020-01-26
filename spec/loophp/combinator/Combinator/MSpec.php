@@ -28,5 +28,8 @@ class MSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('a(a)');
+
+        $this::on($f)
+            ->shouldReturn('a(a)');
     }
 }

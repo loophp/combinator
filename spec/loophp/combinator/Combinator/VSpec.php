@@ -26,5 +26,8 @@ class VSpec extends ObjectBehavior
         $this
             ->__invoke()
             ->shouldReturn('c(a)(b)');
+
+        $this::on('a')('b')($f)
+            ->shouldReturn('c(a)(b)');
     }
 }
