@@ -8,6 +8,10 @@ use loophp\combinator\Combinator;
 
 /**
  * Class Q.
+ *
+ * @psalm-template AType
+ * @psalm-template BType
+ * @psalm-template CType
  */
 final class Q extends Combinator
 {
@@ -29,6 +33,10 @@ final class Q extends Combinator
     /**
      * Q constructor.
      *
+     * @psalm-param callable(AType): BType $f
+     * @psalm-param callable(BType): CType $g
+     * @psalm-param AType $x
+     *
      * @param callable $f
      * @param callable $g
      * @param mixed $x
@@ -41,7 +49,7 @@ final class Q extends Combinator
     }
 
     /**
-     * @return mixed
+     * @psalm-return CType
      */
     public function __invoke()
     {

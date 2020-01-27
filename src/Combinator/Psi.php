@@ -38,8 +38,8 @@ final class Psi extends Combinator
     /**
      * Psi constructor.
      *
-     * @psalm-param callable(AType) : callable(AType) : BType $f
-     * @psalm-param callable(CType) : AType $g
+     * @psalm-param callable(AType): callable(AType): BType $f
+     * @psalm-param callable(CType): AType $g
      * @psalm-param CType $x
      * @psalm-param CType $y
      *

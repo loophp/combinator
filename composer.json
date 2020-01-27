@@ -24,7 +24,8 @@
         "phpspec/phpspec": "^5.1.2 || ^6.1.1",
         "phpstan/phpstan": "^0.12.5",
         "phpstan/phpstan-strict-rules": "^0.12",
-        "scrutinizer/ocular": "^1.6"
+        "scrutinizer/ocular": "^1.6",
+        "vimeo/psalm": "^3.8"
     },
     "config": {
         "sort-packages": true

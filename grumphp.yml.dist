@@ -4,6 +4,7 @@ imports:
 parameters:
     process_timeout: 600
     extra_tasks:
+        psalm: ~
         phpspec:
             verbose: true
             metadata:
