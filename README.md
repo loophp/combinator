@@ -31,44 +31,38 @@ composer require loophp/combinator
 
 ## Available combinators
 
-| Combinator | Alias       | Haskel | Definition (Term)                        | Type                                                 | # Arguments |
-|------------|-------------|--------|------------------------------------------|------------------------------------------------------|-------------|
-| A          | Apply       | $      | `a => b => a(b)`                         | `(a -> b) -> a -> b`                                 | 2           |
-| B          | Bluebird    | .      | `a => b => c => a(b(c))`                 | `(a -> b) -> (c -> a) -> c -> b`                     | 3           |
-| C          | Cardinal    | flip   | `a => b => c => a(c)(b)`                 | `(a -> b -> c) -> b -> a -> c`                       | 3           |
-| D          | Dove        |        | `a => b => c => d => a(b)(c(d))`         | `(a -> c -> d) -> a -> (b -> c) -> b -> d`           | 4           |
-| E          | Eagle       |        | `a => b => c => d => e => a(b)(c(d)(e))` | `(a -> d -> e) -> a -> (b -> c -> d) -> b -> c -> e` | 5           |
-| F          | Finch       |        | `a => b => c => c(b)(a)`                 | `a -> b -> (b -> a -> c) -> c`                       | 3           |
-| G          | Goldfinch   |        | `a => b => c => d => a(d)(b(c))`         | `(a -> b -> c) -> (d -> b) -> d -> a -> c`           | 4           |
-| H          | Hummingbird |        | `a => b => c => a(b)(c)(b)`              | `(a -> b -> a -> c) -> a -> b -> c `                 | 3           |
-| I          | Idiot       | id     | `a => a`                                 | `a -> a`                                             | 1           |
-| J          | Jay         |        | `a => b => c => d => a(b)(a(d)(c))`      | `(a -> b -> b) -> a -> b -> a -> b`                  | 4           |
-| K          | Kestrel     | const  | `a => b => a`                            | `a -> b -> a`                                        | 2           |
-| Ki         | Kite        |        | `a => b => b`                            | `a -> b -> b`                                        | 2           |
-| L          | Lark        |        | `a => b => a(b(b))`                      |                                                      | 2           |
-| M          | Mockingbird |        | `a => a(a)`                              |                                                      | 1           |
-| O          | Owl         |        | `a => b => b(a(b))`                      | `((a -> b) -> a) -> (a -> b) -> b`                   | 2           |
-| Phoenix    |             |        | `a => b => c => d => a(b(d))(c(d))`      | `(a -> b -> c) -> (d -> a) -> (d -> b) -> d -> c`    | 4           |
-| Psi        |             | on     | `a => b => c => d => a(b(c))(b(d))`      | `(a -> a -> b) -> (c -> a) -> c -> c -> b`           | 4           |
-| Q          | Queer       | (##)   | `a => b => c => b(a(c))`                 | `(a -> b) -> (b -> c) -> a -> c`                     | 3           |
-| R          | Robin       |        | `a => b => c => b(c)(a)`                 | `a -> (b -> a -> c) -> b -> c`                       | 3           |
-| S          | Starling    | <*>    | `a => b => c => a(c)(b(c))`              | `(a -> b -> c) -> (a -> b) -> a -> c`                | 3           |
-| T          | Trush       | (#)    | `a => b => b(a)`                         | `a -> (a -> b) -> b`                                 | 2           |
-| U          | Turing bird |        | `a => b => b(a(a)(b))`                   |                                                      | 2           |
-| V          | Vireo       |        | `a => b => c => c(a)(b)`                 | `a -> b -> (a -> b -> c) -> c`                       | 3           |
-| W          | Warbler     |        | `a => b => a(b)(b)`                      | `(a -> a -> b) -> a -> b`                            | 2           |
-| Y          | Fixed point |        | `a => (b => b(b))(b => a(c => b(b)(c)))` |                                                      | 1           |
-
-Example with the B combinator:
-
-The definition means that the combinator needs 3 arguments: `a`, `b` and `c`.
-The return of this combinator is the result of the function `a` applied to the result of the function `b` applied to `c`.
-
-PHP will first evaluate `b(c)` and will then pass the result to the function `a`, this is what the definition means: `a(b(c))`
+| Combinator | Alias         | Haskel  | Lambda calculus             | Term definition (JS like)                | Type                                                 | # Arguments |
+|------------|-------------  |---------|-----------------------------|------------------------------------------|------------------------------------------------------|-------------|
+| A          | Apply         | `$`     | `λab.ab`                    | `a => b => a(b)`                         | `(a -> b) -> a -> b`                                 | 2           |
+| B          | Bluebird      | `.`     | `λabc.a(bc)`                | `a => b => c => a(b(c))`                 | `(a -> b) -> (c -> a) -> c -> b`                     | 3           |
+| C          | Cardinal      | `flip`  | `λabc.acb`                  | `a => b => c => a(c)(b)`                 | `(a -> b -> c) -> b -> a -> c`                       | 3           |
+| D          | Dove          |         | `λabcd.ab(cd)`              | `a => b => c => d => a(b)(c(d))`         | `(a -> c -> d) -> a -> (b -> c) -> b -> d`           | 4           |
+| E          | Eagle         |         | `λabcde.ab(cde)`            | `a => b => c => d => e => a(b)(c(d)(e))` | `(a -> d -> e) -> a -> (b -> c -> d) -> b -> c -> e` | 5           |
+| F          | Finch         |         | `λabc.cba`                  | `a => b => c => c(b)(a)`                 | `a -> b -> (b -> a -> c) -> c`                       | 3           |
+| G          | Goldfinch     |         | `λabcd.ad(bc)`              | `a => b => c => d => a(d)(b(c))`         | `(a -> b -> c) -> (d -> b) -> d -> a -> c`           | 4           |
+| H          | Hummingbird   |         | `λabc.abcb`                 | `a => b => c => a(b)(c)(b)`              | `(a -> b -> a -> c) -> a -> b -> c `                 | 3           |
+| I          | Idiot         | `id`    | `λa.a`                      | `a => a`                                 | `a -> a`                                             | 1           |
+| J          | Jay           |         | `λabcd.ab(adc)`             | `a => b => c => d => a(b)(a(d)(c))`      | `(a -> b -> b) -> a -> b -> a -> b`                  | 4           |
+| K          | Kestrel       | `const` | `λab.a`                     | `a => b => a`                            | `a -> b -> a`                                        | 2           |
+| Ki         | Kite          |         | `λab.b`                     | `a => b => b`                            | `a -> b -> b`                                        | 2           |
+| L          | Lark          |         | `λab.a(bb)`                 | `a => b => a(b(b))`                      |                                                      | 2           |
+| M          | Mockingbird   |         | `λa.aa`                     | `a => a(a)`                              |                                                      | 1           |
+| O          | Owl           |         | `λab.b(ab)`                 | `a => b => b(a(b))`                      | `((a -> b) -> a) -> (a -> b) -> b`                   | 2           |
+| Phoenix    |               |         | `λabcd.a(bd)(cd)`           | `a => b => c => d => a(b(d))(c(d))`      | `(a -> b -> c) -> (d -> a) -> (d -> b) -> d -> c`    | 4           |
+| Psi        |               | `on`    | `λabcd.a(bc)(bd)`           | `a => b => c => d => a(b(c))(b(d))`      | `(a -> a -> b) -> (c -> a) -> c -> c -> b`           | 4           |
+| Q          | Queer         | `(##)`  | `λabc.b(ac)`                | `a => b => c => b(a(c))`                 | `(a -> b) -> (b -> c) -> a -> c`                     | 3           |
+| R          | Robin         |         | `λabc.bca`                  | `a => b => c => b(c)(a)`                 | `a -> (b -> a -> c) -> b -> c`                       | 3           |
+| S          | Starling      | `<*>`   | `λabc.ac(bc)`               | `a => b => c => a(c)(b(c))`              | `(a -> b -> c) -> (a -> b) -> a -> c`                | 3           |
+| T          | Trush         | `(#)`   | `λab.ba`                    | `a => b => b(a)`                         | `a -> (a -> b) -> b`                                 | 2           |
+| U          | Turing bird   |         | `λab.b(aab)`                | `a => b => b(a(a)(b))`                   |                                                      | 2           |
+| V          | Vireo         |         | `λabc.cab`                  | `a => b => c => c(a)(b)`                 | `a -> b -> (a -> b -> c) -> c`                       | 3           |
+| W          | Warbler       |         | `λab.abb`                   | `a => b => a(b)(b)`                      | `(a -> a -> b) -> a -> b`                            | 2           |
+| Y          | Y-Fixed point |         | `λa.(λb(a(bb))(λb(a(bb))))` | `a => (b => b(b))(b => a(c => b(b)(c)))` |                                                      | 1           |
+| Z          | Z-Fixed point |         | `λa.M(λb(a(Mb)))`           |                                          |                                                      | 1           |
 
 ## Usage
 
-Example with [the Y combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator).
+### Simple combinators
 
 ```php
 <?php
@@ -77,9 +71,34 @@ declare(strict_types=1);
 
 include 'vendor/autoload.php';
 
-use loophp\combinator\Y;
+use loophp\combinator\Combinators;
 
-$fibonacci = new Y(
+// Lambda calculus: I combinator correspond to λa.a
+Combinators::I()('a'); // a
+
+// Lambda calculus: K combinator correspond to λa.λb.a (or λab.a)
+Combinators::K()('a')('b'); // a
+
+// Lambda calculus: C combinator correspond to λf(λa(λb(fba)))
+// and thus: C K a b = b
+Combinators::C()(Combinators::K())('a')('b'); // b
+
+// Lambda calculus: Ki combinator correspond to λa.λb.b (or λab.b)
+Combinators::Ki()('a')('b'); // b
+```
+
+### Y combinator
+
+```php
+<?php
+
+declare(strict_types=1);
+
+include 'vendor/autoload.php';
+
+use loophp\combinator\Combinators;
+
+$fibonacci = Combinators::Y()(
     static function ($f) {
         return static function ($n) use ($f) {
             return (1 >= $n) ? $n : ($f($n - 1) + $f($n - 2));
@@ -87,10 +106,12 @@ $fibonacci = new Y(
     }
 );
 
-$result = $fibonacci()(10);
+$result = $fibonacci(10); // 55
 ```
 
-## Further reading
+More on [the wikipedia page](https://en.wikipedia.org/wiki/Fixed-point_combinator).
+
+## Suggested reading and resources
 
 - [To Mock a Mockingbird](https://en.wikipedia.org/wiki/To_Mock_a_Mockingbird)
 - [http://dkeenan.com/Lambda/](http://dkeenan.com/Lambda/)
@@ -101,6 +122,8 @@ $result = $fibonacci()(10);
 - https://hackage.haskell.org/package/data-aviary-0.4.0/docs/src/Data-Aviary-BirdsInter.html
 - https://github.com/fantasyland/fantasy-birds/blob/master/README.md
 - https://www.cis.upenn.edu/~bcpierce/tapl/
+- https://plato.stanford.edu/entries/lambda-calculus/
+- https://github.com/glebec/lambda-talk
 
 ## Thanks
 
