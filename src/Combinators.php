@@ -39,10 +39,6 @@ use loophp\combinator\Combinator\Z;
  */
 final class Combinators
 {
-    private function __construct()
-    {
-    }
-
     /**
      * @return Closure
      */
