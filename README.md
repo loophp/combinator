@@ -3,6 +3,7 @@
  [![Total Downloads](https://img.shields.io/packagist/dt/loophp/combinator.svg?style=flat-square)](https://packagist.org/packages/loophp/combinator)
  [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/loophp/combinator/Continuous%20Integration?style=flat-square)](https://github.com/loophp/combinator/actions)
  [![Scrutinizer code quality](https://img.shields.io/scrutinizer/quality/g/loophp/combinator/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/loophp/combinator/?branch=master)
+ [![Type Coverage](https://shepherd.dev/github/loophp/combinator/coverage.svg)](https://shepherd.dev/github/loophp/combinator)
  [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/loophp/combinator/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/loophp/combinator/?branch=master)
  [![License](https://img.shields.io/packagist/l/loophp/combinator.svg?style=flat-square)](https://packagist.org/packages/loophp/combinator)
  [![Donate!](https://img.shields.io/badge/Donate-Paypal-brightgreen.svg?style=flat-square)](https://paypal.me/drupol)
