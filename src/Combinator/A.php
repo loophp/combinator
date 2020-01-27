@@ -49,6 +49,8 @@ final class A extends Combinator
     }
 
     /**
+     * @psalm-param callable(AType): BType $f
+     *
      * @param callable $f
      *
      * @return Closure
