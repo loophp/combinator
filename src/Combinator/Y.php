@@ -38,27 +38,15 @@ final class Y extends Combinator
     {
         $callable = $this->f;
 
-        /**
-         * @psalm-suppress MissingClosureReturnType
-         *
-         * @param callable $f
-         *
-         * @return mixed
-         */
         $f = static function (callable $f) use ($callable): Closure {
             return $callable(
-                /**
-                 * @psalm-suppress MissingClosureParamType
-                 *
-                 * @param array $arguments
-                 */
                 static function (...$arguments) use ($f) {
-                    return $f($f)(...$arguments);
+                    return M::with()($f)(...$arguments);
                 }
             );
         };
 
-        return $f($f);
+        return M::with()($f);
     }
 
     /**
