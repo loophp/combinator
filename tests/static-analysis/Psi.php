@@ -7,12 +7,12 @@ namespace loophp\combinator\Tests\StaticAnalysis;
 use loophp\combinator\Combinator\Psi as Combinator;
 
 /**
- * @param callable(int) : callable(int) $f
- * @param callable(int) : int $g
- * @param int $x
- * @param int $y
+ * @param callable(array): callable(array): string $f
+ * @param callable(bool): array $g
+ * @param bool $x
+ * @param bool $y
  *
- * @return int
+ * @return string
  */
 function test(callable $f, callable $g, $x, $y)
 {
