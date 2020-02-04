@@ -151,14 +151,6 @@ class CombinatorsSpec extends ObjectBehavior
 
     public function it_can_test_the_I_combinator()
     {
-        $f3 = static function ($x) {
-            return static function ($y) use ($x) {
-                return static function ($z) use ($x, $y): string {
-                    return sprintf('%s(%s)(%s)(%s)', 'a', $x, $y, $z);
-                };
-            };
-        };
-
         $this::I()('a')
             ->shouldBeEqualTo(I::with()('a'));
     }
