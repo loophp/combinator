@@ -49,6 +49,7 @@ composer require loophp/combinator
 | L          | Lark          |         | `λab.a(bb)`                 | `a => b => a(b(b))`                      |                                                      | 2           |
 | M          | Mockingbird   |         | `λa.aa`                     | `a => a(a)`                              |                                                      | 1           |
 | O          | Owl           |         | `λab.b(ab)`                 | `a => b => b(a(b))`                      | `((a -> b) -> a) -> (a -> b) -> b`                   | 2           |
+| Omega      | Ω             | `MM`    | `λa.(aa)(aa)`               | `a => (a(a))(a(a))`                      |                                                      | 1           |
 | Phoenix    |               |         | `λabcd.a(bd)(cd)`           | `a => b => c => d => a(b(d))(c(d))`      | `(a -> b -> c) -> (d -> a) -> (d -> b) -> d -> c`    | 4           |
 | Psi        |               | `on`    | `λabcd.a(bc)(bd)`           | `a => b => c => d => a(b(c))(b(d))`      | `(a -> a -> b) -> (c -> a) -> c -> c -> b`           | 4           |
 | Q          | Queer         | `(##)`  | `λabc.b(ac)`                | `a => b => c => b(a(c))`                 | `(a -> b) -> (b -> c) -> a -> c`                     | 3           |

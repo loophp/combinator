@@ -239,6 +239,22 @@ class CombinatorsSpec extends ObjectBehavior
             ->shouldBeEqualTo(O::with()($f)($g));
     }
 
+    public function it_can_test_the_Omega_combinator()
+    {
+        $f = static function ($x = null) {
+            $out = 'a(';
+
+            return static function () use ($out) {
+                $out .= 'a)(a(a))';
+
+                return $out;
+            };
+        };
+
+        $this::Omega()($f)
+            ->shouldReturn('a(a)(a(a))');
+    }
+
     public function it_can_test_the_Phoenix_combinator()
     {
         $f2 = static function (string $x) {

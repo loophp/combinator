@@ -20,6 +20,7 @@ use loophp\combinator\Combinator\Ki;
 use loophp\combinator\Combinator\L;
 use loophp\combinator\Combinator\M;
 use loophp\combinator\Combinator\O;
+use loophp\combinator\Combinator\Omega;
 use loophp\combinator\Combinator\Phoenix;
 use loophp\combinator\Combinator\Psi;
 use loophp\combinator\Combinator\Q;
@@ -157,6 +158,14 @@ final class Combinators
     public static function O(): Closure
     {
         return O::with();
+    }
+
+    /**
+     * @return Closure
+     */
+    public static function Omega(): Closure
+    {
+        return Omega::with();
     }
 
     /**
