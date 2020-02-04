@@ -31,6 +31,7 @@ use loophp\combinator\Combinator\V;
 use loophp\combinator\Combinator\W;
 use loophp\combinator\Combinator\Y;
 use loophp\combinator\Combinator\Z;
+use loophp\combinator\Combinators;
 use PhpSpec\ObjectBehavior;
 
 class CombinatorsSpec extends ObjectBehavior
@@ -43,6 +44,9 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::A()($a)('b')
             ->shouldBeEqualTo(A::with()($a)('b'));
+
+        $this::A()($a)('b')
+            ->shouldReturn(Combinators::S()(Combinators::K())((Combinators::S())(Combinators::K()))($a)('b'));
     }
 
     public function it_can_test_the_B_combinator()
@@ -57,6 +61,17 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::B()($a)($b)('c')
             ->shouldBeEqualTo(B::with()($a)($b)('c'));
+
+        $this::B()($a)($b)('c')
+            ->shouldReturn(
+                Combinators::S() // S
+                (
+                    Combinators::K() // K
+                    (Combinators::S()) // S
+                )(
+                    Combinators::K() // K
+                )($a)($b)('c')
+            );
     }
 
     public function it_can_test_the_C_combinator()
@@ -69,6 +84,19 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::C()($f)('b')('c')
             ->shouldBeEqualTo(C::with()($f)('b')('c'));
+
+        $this::C()($f)('b')('c')
+            ->shouldReturn(
+                Combinators::S() // S
+                (
+                    Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()) // B
+                    (Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())) // B
+                    (Combinators::S()) // S
+                )(
+                    Combinators::K() // K
+                    (Combinators::K()) // K
+                )($f)('b')('c')
+            );
     }
 
     public function it_can_test_the_D_combinator()
@@ -87,6 +115,13 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::D()($f2)('b')($g2)('d')
             ->shouldBeEqualTo(D::with()($f2)('b')($g2)('d'));
+
+        $this::D()($f2)('b')($g2)('d')
+            ->shouldReturn(
+                Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()) // B
+                (Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())) // B
+                ($f2)('b')($g2)('d')
+            );
     }
 
     public function it_can_test_the_E_combinator()
@@ -105,6 +140,16 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::E()($f2)('b')($g2)('d')('e')
             ->shouldBeEqualTo(E::with()($f2)('b')($g2)('d')('e'));
+
+        $this::E()($f2)('b')($g2)('d')('e')
+            ->shouldReturn(
+                Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()) // B
+                (
+                    Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()) // B
+                    (Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())) // B
+                    (Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())) // B
+                )($f2)('b')($g2)('d')('e')
+            );
     }
 
     public function it_can_test_the_F_combinator()
@@ -117,6 +162,16 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::F()('a')('b')($f2)
             ->shouldBeEqualTo(F::with()('a')('b')($f2));
+
+        $this::F()('a')('b')($f2)
+            ->shouldReturn(
+                Combinators::S()(Combinators::K()((Combinators::S()(Combinators::K()((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())))))(Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())))) // E
+                (Combinators::S()((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())))(Combinators::S()))(Combinators::K()(Combinators::K()))(Combinators::I())) // T
+                (Combinators::S()((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())))(Combinators::S()))(Combinators::K()(Combinators::K()))(Combinators::I())) // T
+                (Combinators::S()(Combinators::K()((Combinators::S()(Combinators::K()((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())))))(Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))))) // E
+                (Combinators::S()((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())))(Combinators::S()))(Combinators::K()(Combinators::K()))(Combinators::I())) // T
+                ('a')('b')($f2)
+            );
     }
 
     public function it_can_test_the_G_combinator()
@@ -133,6 +188,14 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::G()($f2)($g)('c')('d')
             ->shouldBeEqualTo(G::with()($f2)($g)('c')('d'));
+
+        $this::G()($f2)($g)('c')('d')
+            ->shouldReturn(
+                Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()) // B
+                (Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())) // B
+                (Combinators::S()((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())))(Combinators::S()))(Combinators::K()(Combinators::K()))) // C
+                ($f2)($g)('c')('d')
+            );
     }
 
     public function it_can_test_the_H_combinator()
@@ -153,6 +216,9 @@ class CombinatorsSpec extends ObjectBehavior
     {
         $this::I()('a')
             ->shouldBeEqualTo(I::with()('a'));
+
+        $this::I()('a')
+            ->shouldReturn((Combinators::S()(Combinators::K())(Combinators::K()))('a'));
     }
 
     public function it_can_test_the_J_combinator()
@@ -197,6 +263,14 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::L()($f)($g)
             ->shouldBeEqualTo(L::with()($f)($g));
+
+        $this::L()($f)($g)
+            ->shouldReturn(
+                Combinators::S()((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())))(Combinators::S()))(Combinators::K()(Combinators::K())) // C
+                (Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())) // B
+                (Combinators::S()(Combinators::S()(Combinators::K())(Combinators::K()))(Combinators::S()(Combinators::K())(Combinators::K()))) // M
+                ($f)($g)
+            );
     }
 
     public function it_can_test_the_M_combinator()
@@ -211,6 +285,14 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::M()($f)
             ->shouldBeEqualTo(M::with()($f));
+
+        $this::M()($f)
+            ->shouldReturn(
+                Combinators::S() // S
+                (Combinators::S()(Combinators::K())(Combinators::K())) // I
+                (Combinators::S()(Combinators::K())(Combinators::K())) // I
+                ($f)
+            );
     }
 
     public function it_can_test_the_O_combinator()
@@ -229,6 +311,13 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::O()($f)($g)
             ->shouldBeEqualTo(O::with()($f)($g));
+
+        $this::O()($f)($g)
+            ->shouldReturn(
+                Combinators::S() // S
+                (Combinators::I()) // I
+                ($f)($g)
+            );
     }
 
     public function it_can_test_the_Omega_combinator()
@@ -283,6 +372,7 @@ class CombinatorsSpec extends ObjectBehavior
             ->shouldBeEqualTo(Psi::with()($f2)($g)('c')('d'));
     }
 
+    // CB
     public function it_can_test_the_Q_combinator()
     {
         $f = static function (string $x) {
@@ -295,6 +385,13 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::Q()($f)($g)('c')
             ->shouldBeEqualTo(Q::with()($f)($g)('c'));
+
+        $this::Q()($f)($g)('c')
+            ->shouldReturn(
+                Combinators::S()(Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())(Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))(Combinators::S()))(Combinators::K()(Combinators::K())) // C
+                (Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())) // B
+                ($f)($g)('c')
+            );
     }
 
     public function it_can_test_the_R_combinator()
@@ -307,6 +404,14 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::R()('a')($f)('c')
             ->shouldBeEqualTo(R::with()('a')($f)('c'));
+
+        $this::R()('a')($f)('c')
+            ->shouldReturn(
+                Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()) // B
+                (Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())) // B
+                (Combinators::S()(Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())(Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))(Combinators::S()))(Combinators::K()(Combinators::K()))(Combinators::I())) // T
+                ('a')($f)('c')
+            );
     }
 
     public function it_can_test_the_S_combinator()
@@ -333,6 +438,13 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::T()('a')($f)
             ->shouldBeEqualTo(T::with()('a')($f));
+
+        $this::T()('a')($f)
+            ->shouldReturn(
+                (Combinators::S()(Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())(Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))(Combinators::S()))(Combinators::K()(Combinators::K()))) // C
+                (Combinators::I()) // I
+                ('a')($f)
+            );
     }
 
     public function it_can_test_the_U_combinator()
@@ -359,6 +471,13 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::U()($f2)($g)
             ->shouldBeEqualTo(U::with()($f2)($g));
+
+        $this::U()($f2)($g)
+            ->shouldReturn(
+                Combinators::S()((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())))(Combinators::S()))(Combinators::K()(Combinators::K()))(Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))(Combinators::S()(Combinators::S()(Combinators::K())(Combinators::K()))(Combinators::S()(Combinators::K())(Combinators::K()))) // L
+                (Combinators::S()(Combinators::I())) // O
+                ($f2)($g)
+            );
     }
 
     public function it_can_test_the_V_combinator()
@@ -371,6 +490,14 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::V()('a')('b')($f)
             ->shouldBeEqualTo(V::with()('a')('b')($f));
+
+        $this::V()('a')('b')($f)
+            ->shouldReturn(
+                Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()) // B
+                (Combinators::S()((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())))(Combinators::S()))(Combinators::K()(Combinators::K()))) // C
+                (Combinators::S()((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())))(Combinators::S()))(Combinators::K()(Combinators::K()))(Combinators::I())) // T
+                ('a')('b')($f)
+            );
     }
 
     public function it_can_test_the_W_combinator()
@@ -383,6 +510,16 @@ class CombinatorsSpec extends ObjectBehavior
 
         $this::W()($f)('b')
             ->shouldBeEqualTo(W::with()($f)('b'));
+
+        $this::W()($f)('b')
+            ->shouldReturn(
+                Combinators::S()((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))((Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())))(Combinators::S()))(Combinators::K()(Combinators::K())) // C
+                (
+                    (Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())) // B
+                    (Combinators::S()(Combinators::S()(Combinators::K())(Combinators::K()))(Combinators::S()(Combinators::K())(Combinators::K()))) // M
+                    (Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())(Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))(Combinators::S()(Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K())(Combinators::S()(Combinators::K()(Combinators::S()))(Combinators::K()))(Combinators::S()))(Combinators::K()(Combinators::K()))(Combinators::I()))) // R
+                )($f)('b')
+            );
     }
 
     public function it_can_test_the_Y_combinator()
