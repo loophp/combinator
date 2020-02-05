@@ -10,10 +10,14 @@ use loophp\combinator\Combinator;
  * Class I.
  *
  * @psalm-template AType
+ *
+ * @psalm-immutable
  */
 final class I extends Combinator
 {
     /**
+     * @psalm-var AType
+     *
      * @var mixed
      */
     private $x;
@@ -39,12 +43,16 @@ final class I extends Combinator
     }
 
     /**
-     * @param callable $a
+     * @template NewAType
      *
-     * @return mixed
+     * @psalm-param NewAType $x
+     *
+     * @param mixed $x
+     *
+     * @return NewAType
      */
-    public static function on($a)
+    public static function on($x)
     {
-        return (new self($a))();
+        return (new self($x))();
     }
 }
