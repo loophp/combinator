@@ -10,7 +10,7 @@ use loophp\combinator\Combinator;
 /**
  * Class Z.
  *
- * @psalm-template ResultType
+ * @psalm-immutable
  */
 final class Z extends Combinator
 {
@@ -32,26 +32,40 @@ final class Z extends Combinator
     }
 
     /**
-     * @psalm-return Closure(Closure(callable): mixed): mixed
+     * @psalm-suppress MixedInferredReturnType
+     *
+     * @return Closure
      */
     public function __invoke()
     {
         $callable = $this->f;
 
-        $f = static function (callable $f) use ($callable): Closure {
-            return $callable(
-                static function () use ($f) {
-                    return static function (...$arguments) use ($f) {
-                        return M::with()($f)(...$arguments);
-                    };
-                }
-            );
-        };
-
-        return M::with()($f);
+        /**
+         * @psalm-suppress MissingClosureReturnType
+         * @psalm-suppress MissingClosureParamType
+         * @psalm-suppress MixedArgumentTypeCoercion
+         * @psalm-suppress ImpureMethodCall
+         * @psalm-suppress MixedFunctionCall
+         * @psalm-suppress MixedReturnStatement
+         */
+        return M::with()(
+            static function (callable $f) use ($callable): Closure {
+                return $callable(
+                    static function () use ($f) {
+                        return static function (...$arguments) use ($f) {
+                            return M::with()($f)(...$arguments);
+                        };
+                    }
+                );
+            }
+        );
     }
 
     /**
+     * @psalm-suppress MissingClosureReturnType
+     * @psalm-suppress MissingClosureParamType
+     * @psalm-suppress MixedArgumentTypeCoercion
+     *
      * @param callable $a
      *
      * @return Closure
