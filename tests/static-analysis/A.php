@@ -8,7 +8,7 @@ use loophp\combinator\Combinator\A as Combinator;
 
 /**
  * @param callable(int): string $f
- * @param string $x
+ * @param int $x
  *
  * @return string
  */

@@ -10,7 +10,7 @@ use loophp\combinator\Combinator\K as Combinator;
  * @param string $x
  * @param int $y
  *
- * @return int
+ * @return string
  */
 function test($x, $y)
 {

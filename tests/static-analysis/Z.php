@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace loophp\combinator\Tests\StaticAnalysis;
 
+use Closure;
 use loophp\combinator\Combinator\Z as Combinator;
 
 /**
- * @param callable(int): callable $f
+ * @param callable(callable): Closure $f
  *
- * @return callable
+ * @return Closure
  */
-function test(callable $f)
+function test(callable $f): Closure
 {
     return (new Combinator($f))();
 }
