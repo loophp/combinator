@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace loophp\combinator\Combinator;
 
-use Closure;
 use loophp\combinator\Combinator;
 
 /**
  * Class M.
  *
- * @psalm-template ResultType
+ * @psalm-immutable
  */
 final class M extends Combinator
 {
@@ -32,7 +31,7 @@ final class M extends Combinator
     }
 
     /**
-     * @psalm-return ResultType
+     * @return mixed
      */
     public function __invoke()
     {
@@ -42,7 +41,7 @@ final class M extends Combinator
     /**
      * @param callable $a
      *
-     * @return Closure
+     * @return mixed
      */
     public static function on(callable $a)
     {
