@@ -10,7 +10,7 @@ use loophp\combinator\Combinator;
 /**
  * Class Omega.
  *
- * @psalm-template ResultType
+ * @psalm-immutable
  */
 final class Omega extends Combinator
 {
@@ -22,8 +22,6 @@ final class Omega extends Combinator
     /**
      * Omega constructor.
      *
-     * @psalm-param callable $f
-     *
      * @param callable $f
      */
     public function __construct(callable $f)
@@ -32,7 +30,11 @@ final class Omega extends Combinator
     }
 
     /**
-     * @psalm-return ResultType
+     * @psalm-return mixed
+     *
+     * @return mixed
+     *
+     * @psalm-suppress MixedFunctionCall
      */
     public function __invoke()
     {
@@ -40,12 +42,12 @@ final class Omega extends Combinator
     }
 
     /**
-     * @param callable $a
+     * @param callable $f
      *
-     * @return Closure
+     * @return mixed
      */
-    public static function on(callable $a)
+    public static function on(callable $f)
     {
-        return (new self($a))();
+        return (new self($f))();
     }
 }
