@@ -13,25 +13,35 @@ use loophp\combinator\Combinator;
  * @psalm-template AType
  * @psalm-template BType
  * @psalm-template CType
+ *
+ * @psalm-immutable
  */
 final class Psi extends Combinator
 {
     /**
+     * @psalm-var callable(AType): callable(AType): BType
+     *
      * @var callable
      */
     private $f;
 
     /**
+     * @psalm-var callable(CType): AType
+     *
      * @var callable
      */
     private $g;
 
     /**
+     * @psalm-var CType
+     *
      * @var mixed
      */
     private $x;
 
     /**
+     * @psalm-var CType
+     *
      * @var mixed
      */
     private $y;
@@ -66,18 +76,32 @@ final class Psi extends Combinator
     }
 
     /**
-     * @param callable $a
+     * @template NewAType
+     * @template NewBType
+     * @template NewCType
+     *
+     * @psalm-param callable(NewAType): callable(NewAType): NewBType $f
+     *
+     * @param callable $f
+     *
+     * @psalm-return Closure(callable(NewCType): NewAType): Closure(NewCType): Closure(NewCType): NewBType
      *
      * @return Closure
      */
-    public static function on(callable $a): Closure
+    public static function on(callable $f): Closure
     {
-        return static function (callable $b) use ($a): Closure {
-            return static function ($c) use ($a, $b): Closure {
-                return static function ($d) use ($a, $b, $c) {
-                    return (new self($a, $b, $c, $d))();
-                };
+        return
+            /** @psalm-param callable(NewCType): NewAType $g */
+            static function (callable $g) use ($f): Closure {
+                return
+                    /** @psalm-param NewCType $x */
+                    static function ($x) use ($f, $g): Closure {
+                        return
+                            /** @psalm-param NewCType $y */
+                            static function ($y) use ($f, $g, $x) {
+                                return (new self($f, $g, $x, $y))();
+                            };
+                    };
             };
-        };
     }
 }
