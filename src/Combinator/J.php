@@ -12,25 +12,35 @@ use loophp\combinator\Combinator;
  *
  * @psalm-template AType
  * @psalm-template BType
+ *
+ * @psalm-immutable
  */
 final class J extends Combinator
 {
     /**
+     * @psalm-var callable(AType): callable(BType): BType
+     *
      * @var callable
      */
     private $f;
 
     /**
+     * @psalm-var AType
+     *
      * @var mixed
      */
     private $x;
 
     /**
+     * @psalm-var BType
+     *
      * @var mixed
      */
     private $y;
 
     /**
+     * @psalm-var AType
+     *
      * @var mixed
      */
     private $z;
@@ -65,18 +75,31 @@ final class J extends Combinator
     }
 
     /**
-     * @param callable $a
+     * @template NewAType
+     * @template NewBType
      *
-     * @return Closure
+     * @psalm-param callable(NewAType): callable(NewBType): NewBType $f
+     *
+     * @param callable $f
+     *
+     * @psalm-return Closure(NewAType): Closure(NewBType): Closure(NewAType): NewBType
+     *
+     * @return NewBType
      */
-    public static function on(callable $a): Closure
+    public static function on(callable $f): Closure
     {
-        return static function ($b) use ($a): Closure {
-            return static function ($c) use ($a, $b): Closure {
-                return static function ($d) use ($a, $b, $c) {
-                    return (new self($a, $b, $c, $d))();
-                };
+        return
+            /** @param NewAType $x */
+            static function ($x) use ($f): Closure {
+                return
+                    /** @param NewBType $y */
+                    static function ($y) use ($f, $x): Closure {
+                        return
+                            /** @param NewAType $z */
+                            static function ($z) use ($f, $x, $y) {
+                                return (new self($f, $x, $y, $z))();
+                            };
+                    };
             };
-        };
     }
 }

@@ -15,30 +15,44 @@ use loophp\combinator\Combinator;
  * @psalm-template CType
  * @psalm-template DType
  * @psalm-template EType
+ *
+ * @psalm-immutable
+ *
+ * phpcs:disable Generic.Files.LineLength.TooLong
  */
 final class E extends Combinator
 {
     /**
+     * @psalm-var callable(AType): callable(DType): EType
+     *
      * @var callable
      */
     private $f;
 
     /**
+     * @psalm-var callable(BType): callable(CType): DType
+     *
      * @var callable
      */
     private $g;
 
     /**
+     * @psalm-var AType
+     *
      * @var mixed
      */
     private $x;
 
     /**
+     * @psalm-var BType
+     *
      * @var mixed
      */
     private $y;
 
     /**
+     * @psalm-var CType
+     *
      * @var mixed
      */
     private $z;
@@ -72,26 +86,42 @@ final class E extends Combinator
      */
     public function __invoke()
     {
-        // Demander à Danny :-)
-        // const E = a => b => c => d => e => a(b)(c(d)(e))
         return (($this->f)($this->x))((($this->g)($this->y))($this->z));
     }
 
     /**
-     * @param callable $a
+     * @template NewAType
+     * @template NewBType
+     * @template NewCType
+     * @template NewDType
+     * @template NewEType
+     *
+     * @psalm-param callable(NewAType): callable(NewDType): NewEType $f
+     *
+     * @param callable $f
+     *
+     * @psalm-return Closure(NewAType): Closure(callable(NewBType): callable(NewCType): NewDType): Closure(NewBType): Closure(NewCType)
      *
      * @return Closure
      */
-    public static function on(callable $a): Closure
+    public static function on(callable $f): Closure
     {
-        return static function ($b) use ($a): Closure {
-            return static function (callable $c) use ($a, $b): Closure {
-                return static function ($d) use ($a, $b, $c): Closure {
-                    return static function ($e) use ($a, $b, $c, $d) {
-                        return (new self($a, $b, $c, $d, $e))();
+        return
+            /** @param NewAType $x */
+            static function ($x) use ($f): Closure {
+                return
+                    /** @psalm-param callable(NewBType): callable(NewCType): NewDType $g */
+                    static function (callable $g) use ($f, $x): Closure {
+                        return
+                            /** @param NewBType $y */
+                            static function ($y) use ($f, $x, $g): Closure {
+                                return
+                                    /** @param NewCType $z */
+                                    static function ($z) use ($f, $x, $g, $y) {
+                                        return (new self($f, $x, $g, $y, $z))();
+                                    };
+                            };
                     };
-                };
             };
-        };
     }
 }

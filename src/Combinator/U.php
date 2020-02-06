@@ -10,11 +10,13 @@ use loophp\combinator\Combinator;
 /**
  * Class U.
  *
- * @psalm-template ResultType
+ * @psalm-immutable
  */
 final class U extends Combinator
 {
     /**
+     * @psalm-var callable(callable): callable
+     *
      * @var callable
      */
     private $f;
@@ -27,8 +29,7 @@ final class U extends Combinator
     /**
      * U constructor.
      *
-     * @psalm-param callable $f
-     * @psalm-param callable $g
+     * @psalm-param callable(callable): callable $f
      *
      * @param callable $f
      * @param callable $g
@@ -40,7 +41,7 @@ final class U extends Combinator
     }
 
     /**
-     * @psalm-return ResultType
+     * @return mixed
      */
     public function __invoke()
     {
@@ -51,6 +52,10 @@ final class U extends Combinator
     }
 
     /**
+     * @psalm-suppress MissingClosureReturnType
+     * @psalm-suppress MissingClosureParamType
+     * @psalm-suppress MixedArgumentTypeCoercion
+     *
      * @param callable $a
      *
      * @return Closure

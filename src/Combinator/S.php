@@ -13,20 +13,28 @@ use loophp\combinator\Combinator;
  * @psalm-template AType
  * @psalm-template BType
  * @psalm-template CType
+ *
+ * @psalm-immutable
  */
 final class S extends Combinator
 {
     /**
+     * @psalm-var callable(AType): callable(BType): CType
+     *
      * @var callable
      */
     private $f;
 
     /**
+     * @psalm-var callable(AType): BType
+     *
      * @var callable
      */
     private $g;
 
     /**
+     * @psalm-var AType
+     *
      * @var mixed
      */
     private $x;
@@ -58,16 +66,28 @@ final class S extends Combinator
     }
 
     /**
-     * @param callable $a
+     * @template NewAType
+     * @template NewBType
+     * @template NewCType
+     *
+     * @psalm-param callable(NewAType): callable(NewBType): NewCType $f
+     *
+     * @param callable $f
+     *
+     * @psalm-return Closure(callable(NewAType): NewBType): Closure(NewAType): NewCType
      *
      * @return Closure
      */
-    public static function on(callable $a): Closure
+    public static function on(callable $f): Closure
     {
-        return static function (callable $b) use ($a): Closure {
-            return static function ($c) use ($a, $b) {
-                return (new self($a, $b, $c))();
+        return
+            /** @psalm-param callable(NewAType): NewBType $g */
+            static function (callable $g) use ($f): Closure {
+                return
+                    /** @psalm-param NewAType $x */
+                    static function ($x) use ($f, $g) {
+                        return (new self($f, $g, $x))();
+                    };
             };
-        };
     }
 }

@@ -6,14 +6,16 @@ namespace loophp\combinator;
 
 use Closure;
 use InvalidArgumentException;
+use loophp\combinator\Contract\Combinator as CombinatorInterface;
 
-use function get_called_class;
 use function is_callable;
 
 /**
  * Class Combinator.
+ *
+ * @psalm-immutable
  */
-abstract class Combinator implements \loophp\combinator\Contract\Combinator
+abstract class Combinator implements CombinatorInterface
 {
     /**
      * @return Closure
@@ -26,6 +28,6 @@ abstract class Combinator implements \loophp\combinator\Contract\Combinator
             return Closure::fromCallable($possibleCallable);
         }
 
-        throw new InvalidArgumentException('Implement on() method in ' . get_called_class() . '.');
+        throw new InvalidArgumentException('Implement on() method in ' . static::class . '.');
     }
 }
