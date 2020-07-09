@@ -6,13 +6,7 @@ namespace loophp\combinator\Contract;
 
 use Closure;
 
-/**
- * Interface Combinator.
- */
 interface Combinator
 {
-    /**
-     * @return Closure
-     */
     public static function with(): Closure;
 }

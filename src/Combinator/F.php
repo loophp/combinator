@@ -10,45 +10,33 @@ use loophp\combinator\Combinator;
 /**
  * Class F.
  *
- * @psalm-template AType
- * @psalm-template BType
- * @psalm-template CType
- *
- * @psalm-immutable
+ * @template AType
+ * @template BType
+ * @template CType
  */
 final class F extends Combinator
 {
     /**
-     * @psalm-var callable(BType): callable(AType): CType
-     *
-     * @var callable
+     * @var callable(BType): (Closure(AType): (CType))
      */
     private $f;
 
     /**
-     * @psalm-var AType
-     *
-     * @var mixed
+     * @var AType
      */
     private $x;
 
     /**
-     * @psalm-var BType
-     *
-     * @var mixed
+     * @var BType
      */
     private $y;
 
     /**
      * F constructor.
      *
-     * @psalm-param AType $x
-     * @psalm-param BType $y
-     * @psalm-param callable(BType): callable(AType): CType $f
-     *
-     * @param mixed $x
-     * @param mixed $y
-     * @param callable $f
+     * @param AType $x
+     * @param BType $y
+     * @param callable(BType): (Closure(AType): (CType)) $f
      */
     public function __construct($x, $y, callable $f)
     {
@@ -58,7 +46,7 @@ final class F extends Combinator
     }
 
     /**
-     * @psalm-return CType
+     * @return CType
      */
     public function __invoke()
     {
@@ -70,19 +58,25 @@ final class F extends Combinator
      * @template NewBType
      * @template NewCType
      *
-     * @psalm-param NewAType $a
+     * @param NewAType $a
      *
-     * @param mixed $a
-     *
-     * @return Closure(NewBType): Closure(callable(NewBType): callable(NewAType): NewCType): NewCType
+     * @return Closure(NewBType):(Closure(callable(NewBType): (Closure(NewAType): (NewCType))):(NewCType))
      */
     public static function on($a): Closure
     {
         return
-            /** @param NewBType $b */
+            /**
+             * @param NewBType $b
+             *
+             * @return Closure(callable(NewBType): (Closure(NewAType): (NewCType))):(NewCType)
+             */
             static function ($b) use ($a): Closure {
                 return
-                    /** @psalm-param callable(NewBType): callable(NewAType): NewCType $c */
+                    /**
+                     * @param callable(NewBType): (Closure(NewAType): (NewCType)) $c
+                     *
+                     * @return NewCType
+                     */
                     static function (callable $c) use ($a, $b) {
                         return (new self($a, $b, $c))();
                     };

@@ -9,8 +9,6 @@ use loophp\combinator\Combinator\Y as Combinator;
 
 /**
  * @param callable(callable): Closure $f
- *
- * @return Closure
  */
 function test(callable $f): Closure
 {

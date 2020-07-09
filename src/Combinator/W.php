@@ -10,35 +10,26 @@ use loophp\combinator\Combinator;
 /**
  * Class W.
  *
- * @psalm-template AType
- * @psalm-template BType
- *
- * @psalm-immutable
+ * @template AType
+ * @template BType
  */
 final class W extends Combinator
 {
     /**
-     * @psalm-var callable(AType): callable(AType): BType
-     *
-     * @var callable
+     * @var callable(AType): callable(AType): BType
      */
     private $f;
 
     /**
-     * @psalm-var AType
-     *
-     * @var mixed
+     * @var AType
      */
     private $x;
 
     /**
      * W constructor.
      *
-     * @psalm-param callable(AType): callable(AType): BType $f
-     * @psalm-param AType $x
-     *
-     * @param callable $f
-     * @param mixed $x
+     * @param callable(AType): (callable(AType): (BType)) $f
+     * @param AType $x
      */
     public function __construct(callable $f, $x)
     {
@@ -47,7 +38,7 @@ final class W extends Combinator
     }
 
     /**
-     * @psalm-return BType
+     * @return BType
      */
     public function __invoke()
     {
@@ -58,18 +49,16 @@ final class W extends Combinator
      * @template NewAType
      * @template NewBType
      *
-     * @psalm-param callable(NewAType): callable(NewAType): NewBType $f
-     *
-     * @param callable $f
-     *
-     * @psalm-return Closure(NewAType): NewBType
-     *
-     * @return Closure
+     * @param callable(NewAType):(callable(NewAType):(NewBType)) $f
      */
     public static function on(callable $f): Closure
     {
         return
-            /** @psalm-param NewAType $x */
+            /**
+             * @param NewAType $x
+             *
+             * @return NewBType
+             */
             static function ($x) use ($f) {
                 return (new self($f, $x))();
             };

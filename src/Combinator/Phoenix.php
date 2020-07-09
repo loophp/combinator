@@ -10,57 +10,42 @@ use loophp\combinator\Combinator;
 /**
  * Class Phoenix.
  *
- * @psalm-template AType
- * @psalm-template BType
- * @psalm-template CType
- * @psalm-template DType
- *
- * @psalm-immutable
+ * @template AType
+ * @template BType
+ * @template CType
+ * @template DType
  *
  * phpcs:disable Generic.Files.LineLength.TooLong
  */
 final class Phoenix extends Combinator
 {
     /**
-     * @psalm-var callable(AType): callable(BType): CType
-     *
-     * @var callable
+     * @var callable(AType): (callable(BType): (CType))
      */
     private $f;
 
     /**
-     * @psalm-var callable(DType): AType
-     *
-     * @var callable
+     * @var callable(DType): AType
      */
     private $g;
 
     /**
-     * @psalm-var callable(DType): BType
-     *
-     * @var callable
+     * @var callable(DType): BType
      */
     private $h;
 
     /**
-     * @psalm-var DType
-     *
-     * @var mixed
+     * @var DType
      */
     private $x;
 
     /**
      * Phoenix constructor.
      *
-     * @psalm-param callable(AType): callable(BType): CType $f
-     * @psalm-param callable(DType): AType $g
-     * @psalm-param callable(DType): BType $h
-     * @psalm-param DType $x
-     *
-     * @param callable $f
-     * @param callable $g
-     * @param callable $h
-     * @param mixed $x
+     * @param callable(AType): (callable(BType): (CType)) $f
+     * @param callable(DType): (AType) $g
+     * @param callable(DType): (BType) $h
+     * @param DType $x
      */
     public function __construct(callable $f, callable $g, callable $h, $x)
     {
@@ -71,7 +56,7 @@ final class Phoenix extends Combinator
     }
 
     /**
-     * @psalm-return CType
+     * @return CType
      */
     public function __invoke()
     {
@@ -84,24 +69,30 @@ final class Phoenix extends Combinator
      * @template NewCType
      * @template NewDType
      *
-     * @psalm-param callable(NewAType): callable(NewBType): NewCType $f
-     *
-     * @param callable $f
-     *
-     * @psalm-return Closure(callable(NewDType): NewAType): Closure(callable(NewDType): NewBType): Closure(NewDType): NewCType
-     *
-     * @return Closure
+     * @param callable(NewAType): (callable(NewBType): (NewCType)) $f
      */
     public static function on(callable $f): Closure
     {
         return
-            /** @psalm-param callable(NewDType): NewAType $g */
+            /**
+             * @param callable(NewDType): (NewAType) $g
+             *
+             * @return Closure(callable(NewDType): (NewBType)):(Closure(NewDType):(NewCType))
+             */
             static function (callable $g) use ($f): Closure {
                 return
-                    /** @psalm-param callable(NewDType): NewBType $h */
+                    /**
+                     * @param callable(NewDType): (NewBType) $h
+                     *
+                     * @return Closure(NewDType):(NewCType)
+                     */
                     static function (callable $h) use ($f, $g): Closure {
                         return
-                            /** @psalm-param NewDType $x  */
+                            /**
+                             * @param NewDType $x
+                             *
+                             * @return NewCType
+                             */
                             static function ($x) use ($f, $g, $h) {
                                 return (new self($f, $g, $h, $x))();
                             };

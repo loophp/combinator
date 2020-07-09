@@ -10,67 +10,49 @@ use loophp\combinator\Combinator;
 /**
  * Class E.
  *
- * @psalm-template AType
- * @psalm-template BType
- * @psalm-template CType
- * @psalm-template DType
- * @psalm-template EType
- *
- * @psalm-immutable
+ * @template AType
+ * @template BType
+ * @template CType
+ * @template DType
+ * @template EType
  *
  * phpcs:disable Generic.Files.LineLength.TooLong
  */
 final class E extends Combinator
 {
     /**
-     * @psalm-var callable(AType): callable(DType): EType
-     *
-     * @var callable
+     * @var callable(AType): callable(DType): EType
      */
     private $f;
 
     /**
-     * @psalm-var callable(BType): callable(CType): DType
-     *
-     * @var callable
+     * @var callable(BType): callable(CType): DType
      */
     private $g;
 
     /**
-     * @psalm-var AType
-     *
-     * @var mixed
+     * @var AType
      */
     private $x;
 
     /**
-     * @psalm-var BType
-     *
-     * @var mixed
+     * @var BType
      */
     private $y;
 
     /**
-     * @psalm-var CType
-     *
-     * @var mixed
+     * @var CType
      */
     private $z;
 
     /**
      * E constructor.
      *
-     * @psalm-param callable(AType): callable(DType): EType $f
-     * @psalm-param AType $x
-     * @psalm-param callable(BType): callable(CType): DType $g
-     * @psalm-param BType $y
-     * @psalm-param CType $z
-     *
-     * @param callable $f
-     * @param mixed $x
-     * @param callable $g
-     * @param mixed $y
-     * @param mixed $z
+     * @param callable(AType): (callable(DType): (EType)) $f
+     * @param AType $x
+     * @param callable(BType): (callable(CType): (DType)) $g
+     * @param BType $y
+     * @param CType $z
      */
     public function __construct(callable $f, $x, callable $g, $y, $z)
     {
@@ -82,7 +64,7 @@ final class E extends Combinator
     }
 
     /**
-     * @psalm-return EType
+     * @return EType
      */
     public function __invoke()
     {
@@ -96,27 +78,39 @@ final class E extends Combinator
      * @template NewDType
      * @template NewEType
      *
-     * @psalm-param callable(NewAType): callable(NewDType): NewEType $f
+     * @param callable(NewAType): (callable(NewDType): (NewEType)) $f
      *
-     * @param callable $f
-     *
-     * @psalm-return Closure(NewAType): Closure(callable(NewBType): callable(NewCType): NewDType): Closure(NewBType): Closure(NewCType)
-     *
-     * @return Closure
+     * @return Closure(NewAType):(Closure(callable(NewBType): (callable(NewCType): (NewDType))):(Closure(NewBType):(Closure(NewCType):(NewEType))))
      */
     public static function on(callable $f): Closure
     {
         return
-            /** @param NewAType $x */
+            /**
+             * @param NewAType $x
+             *
+             * @return Closure(callable(NewBType): callable(NewCType): NewDType):(Closure(NewBType):(Closure(NewCType):(NewEType)))
+             */
             static function ($x) use ($f): Closure {
                 return
-                    /** @psalm-param callable(NewBType): callable(NewCType): NewDType $g */
+                    /**
+                     * @param callable(NewBType): (callable(NewCType): (NewDType)) $g
+                     *
+                     * @return Closure(NewBType): (Closure(NewCType):(NewEType))
+                     */
                     static function (callable $g) use ($f, $x): Closure {
                         return
-                            /** @param NewBType $y */
+                            /**
+                             * @param NewBType $y
+                             *
+                             * @return Closure(NewCType):(NewEType)
+                             */
                             static function ($y) use ($f, $x, $g): Closure {
                                 return
-                                    /** @param NewCType $z */
+                                    /**
+                                     * @param NewCType $z
+                                     *
+                                     * @return NewEType
+                                     */
                                     static function ($z) use ($f, $x, $g, $y) {
                                         return (new self($f, $x, $g, $y, $z))();
                                     };

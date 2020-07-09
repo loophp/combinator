@@ -9,8 +9,6 @@ use loophp\combinator\Combinator;
 
 /**
  * Class Y.
- *
- * @psalm-immutable
  */
 final class Y extends Combinator
 {
@@ -25,8 +23,6 @@ final class Y extends Combinator
      * Y constructor.
      *
      * @psalm-param callable(callable): Closure $f
-     *
-     * @param callable $f
      */
     public function __construct(callable $f)
     {
@@ -65,10 +61,6 @@ final class Y extends Combinator
      * @psalm-suppress MissingClosureReturnType
      * @psalm-suppress MissingClosureParamType
      * @psalm-suppress MixedArgumentTypeCoercion
-     *
-     * @param callable $a
-     *
-     * @return Closure
      */
     public static function on(callable $a): Closure
     {

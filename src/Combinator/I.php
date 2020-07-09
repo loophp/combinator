@@ -9,25 +9,19 @@ use loophp\combinator\Combinator;
 /**
  * Class I.
  *
- * @psalm-template AType
- *
- * @psalm-immutable
+ * @template AType
  */
 final class I extends Combinator
 {
     /**
-     * @psalm-var AType
-     *
-     * @var mixed
+     * @var AType
      */
     private $x;
 
     /**
      * I constructor.
      *
-     * @psalm-param AType $x
-     *
-     * @param mixed $x
+     * @param AType $x
      */
     public function __construct($x)
     {
@@ -35,7 +29,7 @@ final class I extends Combinator
     }
 
     /**
-     * @psalm-return AType
+     * @return AType
      */
     public function __invoke()
     {
@@ -45,9 +39,7 @@ final class I extends Combinator
     /**
      * @template NewAType
      *
-     * @psalm-param NewAType $x
-     *
-     * @param mixed $x
+     * @param NewAType $x
      *
      * @return NewAType
      */
