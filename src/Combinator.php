@@ -12,13 +12,11 @@ use function is_callable;
 
 /**
  * Class Combinator.
- *
- * @psalm-immutable
  */
 abstract class Combinator implements CombinatorInterface
 {
     /**
-     * @return Closure
+     * @psalm-pure
      */
     public static function with(): Closure
     {
