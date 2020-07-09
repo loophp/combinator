@@ -10,35 +10,26 @@ use loophp\combinator\Combinator;
 /**
  * Class Ki.
  *
- * @psalm-template AType
- * @psalm-template BType
- *
- * @psalm-immutable
+ * @template AType
+ * @template BType
  */
 final class Ki extends Combinator
 {
     /**
-     * @psalm-var AType
-     *
-     * @var mixed
+     * @var AType
      */
     private $x;
 
     /**
-     * @psalm-var BType
-     *
-     * @var mixed
+     * @var BType
      */
     private $y;
 
     /**
      * Ki constructor.
      *
-     * @psalm-param AType $x
-     * @psalm-param BType $y
-     *
-     * @param mixed $x
-     * @param mixed $y
+     * @param AType $x
+     * @param BType $y
      */
     public function __construct($x, $y)
     {
@@ -47,7 +38,7 @@ final class Ki extends Combinator
     }
 
     /**
-     * @psalm-return BType
+     * @return BType
      */
     public function __invoke()
     {
@@ -58,16 +49,16 @@ final class Ki extends Combinator
      * @template NewAType
      * @template NewBType
      *
-     * @psalm-param NewAType $x
-     *
-     * @param mixed $x
+     * @param NewAType $x
      *
      * @return Closure(NewBType): NewBType
      */
     public static function on($x): Closure
     {
         return
-            /** @param NewBType $y */
+            /**
+             * @param NewBType $y
+             */
             static function ($y) use ($x) {
                 return (new self($x, $y))();
             };

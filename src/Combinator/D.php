@@ -10,70 +10,55 @@ use loophp\combinator\Combinator;
 /**
  * Class D.
  *
- * @psalm-template AType
- * @psalm-template BType
- * @psalm-template CType
- * @psalm-template DType
- *
- * @psalm-immutable
+ * @template AType
+ * @template BType
+ * @template CType
+ * @template DType
  */
 final class D extends Combinator
 {
     /**
-     * @psalm-var callable(AType): callable(CType): DType
-     *
-     * @var callable
+     * @var callable(AType): callable(CType): DType
      */
-    private $a;
+    private $f;
 
     /**
-     * @psalm-var AType
-     *
-     * @var mixed
+     * @var callable(BType): CType
      */
-    private $b;
+    private $g;
 
     /**
-     * @psalm-var callable(BType): CType
-     *
-     * @var callable
+     * @var AType
      */
-    private $c;
+    private $x;
 
     /**
-     * @psalm-var BType
-     *
-     * @var mixed
+     * @var BType
      */
-    private $d;
+    private $y;
 
     /**
      * D constructor.
      *
-     * @psalm-param callable(AType): callable(CType): DType $a
-     * @psalm-param AType $b
-     * @psalm-param callable(BType): CType $c
-     * @psalm-param BType $d
-     *
-     * @param callable $a
-     * @param mixed $b
-     * @param callable $c
-     * @param mixed $d
+     * @param callable(AType): (callable(CType): (DType)) $f
+     * @param AType $x
+     * @param callable(BType): CType $g
+     * @param BType $y
      */
-    public function __construct(callable $a, $b, callable $c, $d)
+    public function __construct(callable $f, $x, callable $g, $y)
     {
-        $this->a = $a;
-        $this->b = $b;
-        $this->c = $c;
-        $this->d = $d;
+        $this->f = $f;
+        $this->x = $x;
+        $this->g = $g;
+        $this->y = $y;
     }
 
     /**
-     * @psalm-return DType
+     * @return DType
      */
     public function __invoke()
     {
-        return (($this->a)($this->b))(($this->c)($this->d));
+        return (($this->f)($this->x))(($this->g)($this->y));
     }
 
     /**
@@ -82,22 +67,30 @@ final class D extends Combinator
      * @template NewCType
      * @template NewDType
      *
-     * @psalm-param callable(NewAType): callable(NewCType): NewDType $f
-     *
-     * @param callable(NewCType): NewDType $f
-     *
-     * @return Closure(NewAType): Closure(Closure(NewBType): NewCType): Closure(NewBType): NewDType
+     * @param callable(NewAType): (Closure(NewCType): (NewDType)) $f
      */
     public static function on(callable $f): Closure
     {
         return
-            /** @param NewAType $x */
+            /**
+             * @param NewAType $x
+             *
+             * @return Closure(callable(NewBType): (NewCType)): (Closure(NewBType): (NewDType))
+             */
             static function ($x) use ($f): Closure {
                 return
-                    /** @param callable(NewBType): NewCType $g */
+                    /**
+                     * @param callable(NewBType): (NewCType) $g
+                     *
+                     * @return Closure(NewBType): (NewDType)
+                     */
                     static function (callable $g) use ($f, $x): Closure {
                         return
-                            /** @param NewBType $y */
+                            /**
+                             * @param NewBType $y
+                             *
+                             * @return NewDType
+                             */
                             static function ($y) use ($f, $x, $g) {
                                 return (new self($f, $x, $g, $y))();
                             };

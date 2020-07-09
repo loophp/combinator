@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace loophp\combinator\Combinator;
 
-use Closure;
 use loophp\combinator\Combinator;
 
 /**
  * Class Omega.
- *
- * @psalm-immutable
  */
 final class Omega extends Combinator
 {
@@ -21,8 +18,6 @@ final class Omega extends Combinator
 
     /**
      * Omega constructor.
-     *
-     * @param callable $f
      */
     public function __construct(callable $f)
     {
@@ -42,8 +37,6 @@ final class Omega extends Combinator
     }
 
     /**
-     * @param callable $f
-     *
      * @return mixed
      */
     public static function on(callable $f)

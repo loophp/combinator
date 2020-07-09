@@ -10,35 +10,26 @@ use loophp\combinator\Combinator;
 /**
  * Class A.
  *
- * @psalm-template AType
- * @psalm-template BType
- *
- * @psalm-immutable
+ * @template AType
+ * @template BType
  */
 final class A extends Combinator
 {
     /**
-     * @psalm-var callable(AType): BType
-     *
-     * @var callable
+     * @var callable(AType): BType
      */
     private $f;
 
     /**
-     * @psalm-var AType
-     *
-     * @var mixed
+     * @var AType
      */
     private $x;
 
     /**
      * A constructor.
      *
-     * @psalm-param callable(AType): BType $f
-     * @psalm-param AType $x
-     *
-     * @param callable $f
-     * @param mixed $x
+     * @param callable(AType): BType $f
+     * @param AType $x
      */
     public function __construct(callable $f, $x)
     {
@@ -47,7 +38,7 @@ final class A extends Combinator
     }
 
     /**
-     * @psalm-return BType
+     * @return BType
      */
     public function __invoke()
     {

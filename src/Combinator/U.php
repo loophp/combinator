@@ -9,15 +9,11 @@ use loophp\combinator\Combinator;
 
 /**
  * Class U.
- *
- * @psalm-immutable
  */
 final class U extends Combinator
 {
     /**
-     * @psalm-var callable(callable): callable
-     *
-     * @var callable
+     * @var callable(callable): callable
      */
     private $f;
 
@@ -29,10 +25,7 @@ final class U extends Combinator
     /**
      * U constructor.
      *
-     * @psalm-param callable(callable): callable $f
-     *
-     * @param callable $f
-     * @param callable $g
+     * @param callable(callable): callable $f
      */
     public function __construct(callable $f, callable $g)
     {
@@ -52,18 +45,20 @@ final class U extends Combinator
     }
 
     /**
-     * @psalm-suppress MissingClosureReturnType
-     * @psalm-suppress MissingClosureParamType
-     * @psalm-suppress MixedArgumentTypeCoercion
+     * @suppress MissingClosureReturnType
+     * @suppress MissingClosureParamType
+     * @suppress MixedArgumentTypeCoercion
      *
-     * @param callable $a
-     *
-     * @return Closure
+     * @param callable(callable): callable $f
      */
-    public static function on(callable $a): Closure
+    public static function on(callable $f): Closure
     {
-        return static function (callable $b) use ($a) {
-            return (new self($a, $b))();
-        };
+        return
+            /**
+             * @return mixed
+             */
+            static function (callable $g) use ($f) {
+                return (new self($f, $g))();
+            };
     }
 }
