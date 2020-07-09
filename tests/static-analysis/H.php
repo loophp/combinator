@@ -7,7 +7,7 @@ namespace loophp\combinator\Tests\StaticAnalysis;
 use loophp\combinator\Combinator\H as Combinator;
 
 /**
- * @param callable(array): callable(bool): callable(array): string $f
+ * @param callable(array): (Closure(bool): (Closure(array): (string))) $f
  * @param array $x
  * @param bool $y
  *

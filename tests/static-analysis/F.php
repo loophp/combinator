@@ -9,7 +9,7 @@ use loophp\combinator\Combinator\F as Combinator;
 /**
  * @param string $x
  * @param int $y
- * @param callable(int): callable(string): bool $f
+ * @param callable(int): (Closure(string): (bool)) $f
  *
  * @return bool
  */
