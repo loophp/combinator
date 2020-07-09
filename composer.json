@@ -18,14 +18,13 @@
         "php": ">= 7.1.3"
     },
     "require-dev": {
-        "drupol/php-conventions": "^1.6.14",
+        "drupol/php-conventions": "^1.7.1",
         "friends-of-phpspec/phpspec-code-coverage": "^4.3.2",
         "infection/infection": "^0.13.6",
-        "phpspec/phpspec": "^5.1.2 || ^6.1.1",
-        "phpstan/phpstan": "^0.12.8",
+        "phpspec/phpspec": "^5.1.2 || ^6.2.1",
+        "phpstan/phpstan": "^0.12.32",
         "phpstan/phpstan-strict-rules": "^0.12",
-        "scrutinizer/ocular": "^1.6",
-        "vimeo/psalm": "^3.8.3"
+        "vimeo/psalm": "^3.12.2"
     },
     "config": {
         "sort-packages": true
