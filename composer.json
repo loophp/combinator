@@ -21,7 +21,7 @@
         "drupol/php-conventions": "^1.7.1 || ^1.8.5",
         "friends-of-phpspec/phpspec-code-coverage": "^4.3.2",
         "infection/infection": "^0.13.6 || ^0.15.3",
-        "phpspec/phpspec": "^6.2.1",
+        "phpspec/phpspec": "^5.1.2 || ^6.2.1",
         "phpstan/phpstan": "^0.12.33",
         "phpstan/phpstan-strict-rules": "^0.12",
         "vimeo/psalm": "^3.12.2"
