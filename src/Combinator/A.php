@@ -8,57 +8,33 @@ use Closure;
 use loophp\combinator\Combinator;
 
 /**
- * Class A.
- *
- * @template AType
- * @template BType
+ * @template NewAType
+ * @template NewBType
  */
 final class A extends Combinator
 {
     /**
-     * @var callable(AType): BType
+     * @return Closure(callable(NewAType): NewBType): Closure(NewAType): NewBType
      */
-    private $f;
-
-    /**
-     * @var AType
-     */
-    private $x;
-
-    /**
-     * A constructor.
-     *
-     * @param callable(AType): BType $f
-     * @param AType $x
-     */
-    public function __construct(callable $f, $x)
-    {
-        $this->f = $f;
-        $this->x = $x;
-    }
-
-    /**
-     * @return BType
-     */
-    public function __invoke()
-    {
-        return ($this->f)($this->x);
-    }
-
-    /**
-     * @template NewAType
-     * @template NewBType
-     *
-     * @param callable(NewAType): NewBType $f
-     *
-     * @return Closure(NewAType): NewBType
-     */
-    public static function on(callable $f): Closure
+    public function __invoke(): Closure
     {
         return
-            /** @param NewAType $x */
-            static function ($x) use ($f) {
-                return (new self($f, $x))();
+            /**
+             * @psalm-param callable(NewAType): NewBType $f
+             *
+             * @psalm-return Closure(NewAType): NewBType
+             */
+            static function (callable $f): Closure {
+                return
+                    /**
+                     * @param mixed $x
+                     * @psalm-param NewAType $x
+                     *
+                     * @psalm-return NewBType
+                     */
+                    static function ($x) use ($f) {
+                        return ($f)($x);
+                    };
             };
     }
 }

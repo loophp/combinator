@@ -10,75 +10,42 @@ use loophp\combinator\Combinator;
 /**
  * Class B.
  *
- * @template AType
- * @template BType
- * @template CType
+ * @template NewAType
+ * @template NewBType
+ * @template NewCType
+ *
+ * phpcs:disable Generic.Files.LineLength.TooLong
  */
 final class B extends Combinator
 {
     /**
-     * @var callable(AType): BType
+     * @return Closure(callable(NewAType): NewBType): Closure(callable(NewCType): NewAType): Closure(NewCType): NewBType
      */
-    private $f;
-
-    /**
-     * @var callable(CType): AType
-     */
-    private $g;
-
-    /**
-     * @var CType
-     */
-    private $x;
-
-    /**
-     * B constructor.
-     *
-     * @param callable(AType): BType $f
-     * @param callable(CType): AType $g
-     * @param CType $x
-     */
-    public function __construct(callable $f, callable $g, $x)
-    {
-        $this->f = $f;
-        $this->g = $g;
-        $this->x = $x;
-    }
-
-    /**
-     * @return BType
-     */
-    public function __invoke()
-    {
-        return ($this->f)(($this->g)($this->x));
-    }
-
-    /**
-     * @template NewAType
-     * @template NewBType
-     * @template NewCType
-     *
-     * @param callable(NewAType): (NewBType) $f
-     *
-     * @return Closure(Closure(NewCType):(NewAType)):(Closure(NewCType):(NewBType))
-     */
-    public static function on(callable $f): Closure
+    public function __invoke(): Closure
     {
         return
             /**
-             * @param callable(NewCType):(NewAType) $g
+             * @param callable(NewAType): NewBType $f
              *
-             * @return Closure(NewCType):(NewBType)
+             * @return Closure(callable(NewCType): NewAType): Closure(NewCType): NewBType
              */
-            static function (callable $g) use ($f): Closure {
+            static function (callable $f): Closure {
                 return
                     /**
-                     * @param NewCType $x
+                     * @param callable(NewCType): NewAType $g
                      *
-                     * @return NewBType
+                     * @return Closure(NewCType): NewBType
                      */
-                    static function ($x) use ($f, $g) {
-                        return (new self($f, $g, $x))();
+                    static function (callable $g) use ($f): Closure {
+                        return
+                            /**
+                             * @param NewCType $x
+                             *
+                             * @return NewBType
+                             */
+                            static function ($x) use ($f, $g) {
+                                return ($f)(($g)($x));
+                            };
                     };
             };
     }

@@ -8,59 +8,32 @@ use Closure;
 use loophp\combinator\Combinator;
 
 /**
- * Class W.
- *
- * @template AType
- * @template BType
+ * @template NewAType
+ * @template NewBType
  */
 final class W extends Combinator
 {
     /**
-     * @var callable(AType): callable(AType): BType
+     * @return Closure(callable(NewAType): callable(NewAType): NewBType): Closure(NewAType): NewBType
      */
-    private $f;
-
-    /**
-     * @var AType
-     */
-    private $x;
-
-    /**
-     * W constructor.
-     *
-     * @param callable(AType): (callable(AType): (BType)) $f
-     * @param AType $x
-     */
-    public function __construct(callable $f, $x)
-    {
-        $this->f = $f;
-        $this->x = $x;
-    }
-
-    /**
-     * @return BType
-     */
-    public function __invoke()
-    {
-        return ($this->f)($this->x)($this->x);
-    }
-
-    /**
-     * @template NewAType
-     * @template NewBType
-     *
-     * @param callable(NewAType):(callable(NewAType):(NewBType)) $f
-     */
-    public static function on(callable $f): Closure
+    public function __invoke(): Closure
     {
         return
             /**
-             * @param NewAType $x
+             * @param callable(NewAType): callable(NewAType): NewBType $f
              *
-             * @return NewBType
+             * @return Closure(NewAType): NewBType
              */
-            static function ($x) use ($f) {
-                return (new self($f, $x))();
+            static function (callable $f): Closure {
+                return
+                    /**
+                     * @param NewAType $x
+                     *
+                     * @return NewBType
+                     */
+                    static function ($x) use ($f) {
+                        return ($f)($x)($x);
+                    };
             };
     }
 }

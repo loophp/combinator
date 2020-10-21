@@ -42,136 +42,136 @@ final class Combinators
 {
     public static function A(): Closure
     {
-        return A::with();
+        return A::of();
     }
 
     public static function B(): Closure
     {
-        return B::with();
+        return B::of();
     }
 
     public static function C(): Closure
     {
-        return C::with();
+        return C::of();
     }
 
     public static function D(): Closure
     {
-        return D::with();
+        return D::of();
     }
 
     public static function E(): Closure
     {
-        return E::with();
+        return E::of();
     }
 
     public static function F(): Closure
     {
-        return F::with();
+        return F::of();
     }
 
     public static function G(): Closure
     {
-        return G::with();
+        return G::of();
     }
 
     public static function H(): Closure
     {
-        return H::with();
+        return H::of();
     }
 
     public static function I(): Closure
     {
-        return I::with();
+        return I::of();
     }
 
     public static function J(): Closure
     {
-        return J::with();
+        return J::of();
     }
 
     public static function K(): Closure
     {
-        return K::with();
+        return K::of();
     }
 
     public static function Ki(): Closure
     {
-        return Ki::with();
+        return Ki::of();
     }
 
     public static function L(): Closure
     {
-        return L::with();
+        return L::of();
     }
 
     public static function M(): Closure
     {
-        return M::with();
+        return M::of();
     }
 
     public static function O(): Closure
     {
-        return O::with();
+        return O::of();
     }
 
     public static function Omega(): Closure
     {
-        return Omega::with();
+        return Omega::of();
     }
 
     public static function Phoenix(): Closure
     {
-        return Phoenix::with();
+        return Phoenix::of();
     }
 
     public static function Psi(): Closure
     {
-        return Psi::with();
+        return Psi::of();
     }
 
     public static function Q(): Closure
     {
-        return Q::with();
+        return Q::of();
     }
 
     public static function R(): Closure
     {
-        return R::with();
+        return R::of();
     }
 
     public static function S(): Closure
     {
-        return S::with();
+        return S::of();
     }
 
     public static function T(): Closure
     {
-        return T::with();
+        return T::of();
     }
 
     public static function U(): Closure
     {
-        return U::with();
+        return U::of();
     }
 
     public static function V(): Closure
     {
-        return V::with();
+        return V::of();
     }
 
     public static function W(): Closure
     {
-        return W::with();
+        return W::of();
     }
 
     public static function Y(): Closure
     {
-        return Y::with();
+        return Y::of();
     }
 
     public static function Z(): Closure
     {
-        return Z::with();
+        return Z::of();
     }
 }

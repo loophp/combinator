@@ -10,59 +10,35 @@ use loophp\combinator\Combinator;
 /**
  * Class O.
  *
- * @template AType
- * @template BType
+ * @template NewAType
+ * @template NewBType
+ *
+ * phpcs:disable Generic.Files.LineLength.TooLong
+ * phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
  */
 final class O extends Combinator
 {
     /**
-     * @var callable(callable(AType): BType): AType
+     * @return Closure(callable(callable(NewAType): NewBType): NewAType): Closure(callable(NewAType): (NewBType)): (NewBType)
      */
-    private $f;
-
-    /**
-     * @var callable(AType): BType
-     */
-    private $g;
-
-    /**
-     * O constructor.
-     *
-     * @param callable(callable(AType): (BType)): (AType) $f
-     * @param callable(AType): (BType) $g
-     */
-    public function __construct(callable $f, callable $g)
-    {
-        $this->f = $f;
-        $this->g = $g;
-    }
-
-    /**
-     * @return BType
-     */
-    public function __invoke()
-    {
-        return ($this->g)((($this->f)($this->g)));
-    }
-
-    /**
-     * @template NewAType
-     * @template NewBType
-     *
-     * @param callable(callable(NewAType): (NewBType)): (NewAType) $f
-     *
-     * @return Closure(callable(NewAType): (NewBType)): (NewBType)
-     */
-    public static function on(callable $f): Closure
+    public function __invoke(): Closure
     {
         return
             /**
-             * @param callable(NewAType): (NewBType) $g
+             * @param callable(callable(NewAType): NewBType): NewAType $f
              *
-             * @return NewBType
+             * @return Closure(callable(NewAType): NewBType): NewBType
              */
-            static function (callable $g) use ($f) {
-                return (new self($f, $g))();
+            static function (callable $f): Closure {
+                return
+                    /**
+                     * @param callable(NewAType): NewBType $g
+                     *
+                     * @return NewBType
+                     */
+                    static function (callable $g) use ($f) {
+                        return ($g)((($f)($g)));
+                    };
             };
     }
 }

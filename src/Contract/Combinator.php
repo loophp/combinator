@@ -8,5 +8,5 @@ use Closure;
 
 interface Combinator
 {
-    public static function with(): Closure;
+    public static function of(): Closure;
 }

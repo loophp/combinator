@@ -8,59 +8,32 @@ use Closure;
 use loophp\combinator\Combinator;
 
 /**
- * Class Ki.
- *
- * @template AType
- * @template BType
+ * @template NewAType
+ * @template NewBType
  */
 final class Ki extends Combinator
 {
     /**
-     * @var AType
+     * @return Closure(NewAType): Closure(NewBType): NewBType
      */
-    private $x;
-
-    /**
-     * @var BType
-     */
-    private $y;
-
-    /**
-     * Ki constructor.
-     *
-     * @param AType $x
-     * @param BType $y
-     */
-    public function __construct($x, $y)
-    {
-        $this->x = $x;
-        $this->y = $y;
-    }
-
-    /**
-     * @return BType
-     */
-    public function __invoke()
-    {
-        return $this->y;
-    }
-
-    /**
-     * @template NewAType
-     * @template NewBType
-     *
-     * @param NewAType $x
-     *
-     * @return Closure(NewBType): NewBType
-     */
-    public static function on($x): Closure
+    public function __invoke(): Closure
     {
         return
             /**
-             * @param NewBType $y
+             * @param NewAType $x
+             *
+             * @return Closure(NewBType): NewBType
              */
-            static function ($y) use ($x) {
-                return (new self($x, $y))();
+            static function ($x): Closure {
+                return
+                    /**
+                     * @param NewBType $y
+                     *
+                     * @return NewBType
+                     */
+                    static function ($y) use ($x) {
+                        return $y;
+                    };
             };
     }
 }

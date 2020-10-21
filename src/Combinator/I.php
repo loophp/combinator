@@ -4,47 +4,27 @@ declare(strict_types=1);
 
 namespace loophp\combinator\Combinator;
 
+use Closure;
 use loophp\combinator\Combinator;
 
 /**
- * Class I.
- *
- * @template AType
+ * @template NewAType
  */
 final class I extends Combinator
 {
     /**
-     * @var AType
+     * @psalm-return Closure(NewAType): NewAType
      */
-    private $x;
-
-    /**
-     * I constructor.
-     *
-     * @param AType $x
-     */
-    public function __construct($x)
+    public function __invoke(): Closure
     {
-        $this->x = $x;
-    }
-
-    /**
-     * @return AType
-     */
-    public function __invoke()
-    {
-        return $this->x;
-    }
-
-    /**
-     * @template NewAType
-     *
-     * @param NewAType $x
-     *
-     * @return NewAType
-     */
-    public static function on($x)
-    {
-        return (new self($x))();
+        return
+            /**
+             * @param NewAType $x
+             *
+             * @return NewAType
+             */
+            static function ($x) {
+                return $x;
+            };
     }
 }

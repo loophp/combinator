@@ -10,88 +10,50 @@ use loophp\combinator\Combinator;
 /**
  * Class Psi.
  *
- * @psalm-template AType
- * @psalm-template BType
- * @psalm-template CType
+ * @template NewAType
+ * @template NewBType
+ * @template NewCType
+ *
+ * phpcs:disable Generic.Files.LineLength.TooLong
+ * phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
  */
 final class Psi extends Combinator
 {
     /**
-     * @var callable(AType):(callable(AType):(BType))
+     * @return Closure(callable(NewAType): callable(NewAType): NewBType): Closure(callable(NewCType): NewAType): Closure(NewCType): Closure(NewCType): NewBType
      */
-    private $f;
-
-    /**
-     * @var callable(CType):(AType)
-     */
-    private $g;
-
-    /**
-     * @var CType
-     */
-    private $x;
-
-    /**
-     * @var CType
-     */
-    private $y;
-
-    /**
-     * Psi constructor.
-     *
-     * @psalm-param callable(AType): (callable(AType): (BType)) $f
-     * @psalm-param callable(CType): (AType) $g
-     * @psalm-param CType $x
-     * @psalm-param CType $y
-     *
-     * @param mixed $x
-     * @param mixed $y
-     */
-    public function __construct(callable $f, callable $g, $x, $y)
-    {
-        $this->f = $f;
-        $this->g = $g;
-        $this->x = $x;
-        $this->y = $y;
-    }
-
-    /**
-     * @return BType
-     */
-    public function __invoke()
-    {
-        return ($this->f)(($this->g)($this->x))(($this->g)($this->y));
-    }
-
-    /**
-     * @template NewAType
-     * @template NewBType
-     * @template NewCType
-     *
-     * @param callable(NewAType): (callable(NewAType): (NewBType)) $f
-     */
-    public static function on(callable $f): Closure
+    public function __invoke(): Closure
     {
         return
             /**
-             * @psalm-param callable(NewCType): NewAType $g
+             * @param callable(NewAType): callable(NewAType): NewBType $f
+             *
+             * @return Closure(callable(NewCType): NewAType): Closure(NewCType): Closure(NewCType): NewBType
              */
-            static function (callable $g) use ($f): Closure {
+            static function (callable $f): Closure {
                 return
                     /**
-                     * @psalm-param NewCType $x
+                     * @param callable(NewCType): NewAType $g
                      *
-                     * @param mixed $x
+                     * @return Closure(NewCType): Closure(NewCType): NewBType
                      */
-                    static function ($x) use ($f, $g): Closure {
+                    static function (callable $g) use ($f): Closure {
                         return
                             /**
-                             * @psalm-param NewCType $y
+                             * @param NewCType $x
                              *
-                             * @param mixed $y
+                             * @return Closure(NewCType): NewBType
                              */
-                            static function ($y) use ($f, $g, $x) {
-                                return (new self($f, $g, $x, $y))();
+                            static function ($x) use ($f, $g): Closure {
+                                return
+                                    /**
+                                     * @param NewCType $y
+                                     *
+                                     * @return NewBType
+                                     */
+                                    static function ($y) use ($f, $g, $x) {
+                                        return ($f)(($g)($x))(($g)($y));
+                                    };
                             };
                     };
             };
