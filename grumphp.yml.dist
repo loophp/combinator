@@ -6,14 +6,10 @@ parameters:
         psalm: ~
         phpspec:
             verbose: true
-            metadata:
-                priority: 3000
         infection:
             threads: 10
             test_framework: phpspec
             configuration: infection.json.dist
             min_msi: 50
             min_covered_msi: 50
-            metadata:
-                priority: 2000
 
