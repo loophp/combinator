@@ -18,18 +18,7 @@ class HSpec extends ObjectBehavior
             };
         };
 
-        $arguments = [$f3, 'b', 'c'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(b)(c)(b)');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(b)(c)(b)');
-
-        $this::on($f3)('b')('c')
+        $this::of()($f3)('b')('c')
             ->shouldReturn('a(b)(c)(b)');
     }
 }

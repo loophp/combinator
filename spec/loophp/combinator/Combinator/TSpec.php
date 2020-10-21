@@ -14,18 +14,7 @@ class TSpec extends ObjectBehavior
             return sprintf('%s(%s)', 'b', $x);
         };
 
-        $arguments = ['a', $f];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('b(a)');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('b(a)');
-
-        $this::on('a')($f)
+        $this::of()('a')($f)
             ->shouldReturn('b(a)');
     }
 }

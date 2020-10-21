@@ -24,18 +24,7 @@ class PhoenixSpec extends ObjectBehavior
             return sprintf('%s(%s)', 'c', $x);
         };
 
-        $arguments = [$f2, $g, $h, 'd'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(b(d))(c(d))');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(b(d))(c(d))');
-
-        $this::on($f2)($g)($h)('d')
+        $this::of()($f2)($g)($h)('d')
             ->shouldReturn('a(b(d))(c(d))');
     }
 }

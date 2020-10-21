@@ -16,18 +16,7 @@ class WSpec extends ObjectBehavior
             };
         };
 
-        $arguments = [$f, 'b'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(b)(b)');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(b)(b)');
-
-        $this::on($f)('b')
+        $this::of()($f)('b')
             ->shouldReturn('a(b)(b)');
     }
 }

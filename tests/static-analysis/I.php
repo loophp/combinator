@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace loophp\combinator\Tests\StaticAnalysis;
 
-use loophp\combinator\Combinator\I as Combinator;
+use loophp\combinator\Combinator\I;
 
 /**
+ * @param I<int> $combinator
  * @param int $x
- *
- * @return int
  */
-function test($x)
+function test(I $combinator, $x): int
 {
-    return (new Combinator($x))();
+    return $combinator->__invoke()($x);
 }

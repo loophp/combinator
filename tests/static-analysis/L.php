@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace loophp\combinator\Tests\StaticAnalysis;
 
-use loophp\combinator\Combinator\L as Combinator;
+use loophp\combinator\Combinator\L;
 
 /**
- * @param callable(int): mixed $f
- * @param callable(int): mixed $g
+ * @param L $combinator
  *
  * @return mixed
+ * @psalm-suppress MixedFunctionCall
  */
-function test(callable $f, callable $g)
+function test(L $combinator, callable $f, callable $g)
 {
-    return (new Combinator($f, $g))();
+    return $combinator->__invoke()($f)($g);
 }

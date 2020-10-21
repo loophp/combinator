@@ -43,7 +43,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::A()($a)('b')
-            ->shouldBeEqualTo(A::with()($a)('b'));
+            ->shouldBeEqualTo(A::of()($a)('b'));
 
         $this::A()($a)('b')
             ->shouldReturn(Combinators::S()(Combinators::K())((Combinators::S())(Combinators::K()))($a)('b'));
@@ -60,7 +60,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::B()($a)($b)('c')
-            ->shouldBeEqualTo(B::with()($a)($b)('c'));
+            ->shouldBeEqualTo(B::of()($a)($b)('c'));
 
         $this::B()($a)($b)('c')
             ->shouldReturn(
@@ -83,7 +83,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::C()($f)('b')('c')
-            ->shouldBeEqualTo(C::with()($f)('b')('c'));
+            ->shouldBeEqualTo(C::of()($f)('b')('c'));
 
         $this::C()($f)('b')('c')
             ->shouldReturn(
@@ -114,7 +114,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::D()($f2)('b')($g2)('d')
-            ->shouldBeEqualTo(D::with()($f2)('b')($g2)('d'));
+            ->shouldBeEqualTo(D::of()($f2)('b')($g2)('d'));
 
         $this::D()($f2)('b')($g2)('d')
             ->shouldReturn(
@@ -139,7 +139,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::E()($f2)('b')($g2)('d')('e')
-            ->shouldBeEqualTo(E::with()($f2)('b')($g2)('d')('e'));
+            ->shouldBeEqualTo(E::of()($f2)('b')($g2)('d')('e'));
 
         $this::E()($f2)('b')($g2)('d')('e')
             ->shouldReturn(
@@ -161,7 +161,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::F()('a')('b')($f2)
-            ->shouldBeEqualTo(F::with()('a')('b')($f2));
+            ->shouldBeEqualTo(F::of()('a')('b')($f2));
 
         $this::F()('a')('b')($f2)
             ->shouldReturn(
@@ -187,7 +187,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::G()($f2)($g)('c')('d')
-            ->shouldBeEqualTo(G::with()($f2)($g)('c')('d'));
+            ->shouldBeEqualTo(G::of()($f2)($g)('c')('d'));
 
         $this::G()($f2)($g)('c')('d')
             ->shouldReturn(
@@ -209,13 +209,13 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::H()($f3)('b')('c')
-            ->shouldBeEqualTo(H::with()($f3)('b')('c'));
+            ->shouldBeEqualTo(H::of()($f3)('b')('c'));
     }
 
     public function it_can_test_the_I_combinator()
     {
         $this::I()('a')
-            ->shouldBeEqualTo(I::with()('a'));
+            ->shouldBeEqualTo(I::of()('a'));
 
         $this::I()('a')
             ->shouldReturn((Combinators::S()(Combinators::K())(Combinators::K()))('a'));
@@ -230,19 +230,19 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::J()($f2)('b')('c')('d')
-            ->shouldBeEqualTo(J::with()($f2)('b')('c')('d'));
+            ->shouldBeEqualTo(J::of()($f2)('b')('c')('d'));
     }
 
     public function it_can_test_the_K_combinator()
     {
         $this::K()('a')('b')
-            ->shouldBeEqualTo(K::with()('a')('b'));
+            ->shouldBeEqualTo(K::of()('a')('b'));
     }
 
     public function it_can_test_the_Ki_combinator()
     {
         $this::Ki()('a')('b')
-            ->shouldBeEqualTo(Ki::with()('a')('b'));
+            ->shouldBeEqualTo(Ki::of()('a')('b'));
     }
 
     public function it_can_test_the_L_combinator()
@@ -262,7 +262,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::L()($f)($g)
-            ->shouldBeEqualTo(L::with()($f)($g));
+            ->shouldBeEqualTo(L::of()($f)($g));
 
         $this::L()($f)($g)
             ->shouldReturn(
@@ -284,7 +284,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::M()($f)
-            ->shouldBeEqualTo(M::with()($f));
+            ->shouldBeEqualTo(M::of()($f));
 
         $this::M()($f)
             ->shouldReturn(
@@ -310,7 +310,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::O()($f)($g)
-            ->shouldBeEqualTo(O::with()($f)($g));
+            ->shouldBeEqualTo(O::of()($f)($g));
 
         $this::O()($f)($g)
             ->shouldReturn(
@@ -353,7 +353,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::Phoenix()($f2)($g)($h)('d')
-            ->shouldBeEqualTo(Phoenix::with()($f2)($g)($h)('d'));
+            ->shouldBeEqualTo(Phoenix::of()($f2)($g)($h)('d'));
     }
 
     public function it_can_test_the_Psi_combinator()
@@ -369,7 +369,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::Psi()($f2)($g)('c')('d')
-            ->shouldBeEqualTo(Psi::with()($f2)($g)('c')('d'));
+            ->shouldBeEqualTo(Psi::of()($f2)($g)('c')('d'));
     }
 
     // CB
@@ -384,7 +384,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::Q()($f)($g)('c')
-            ->shouldBeEqualTo(Q::with()($f)($g)('c'));
+            ->shouldBeEqualTo(Q::of()($f)($g)('c'));
 
         $this::Q()($f)($g)('c')
             ->shouldReturn(
@@ -403,7 +403,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::R()('a')($f)('c')
-            ->shouldBeEqualTo(R::with()('a')($f)('c'));
+            ->shouldBeEqualTo(R::of()('a')($f)('c'));
 
         $this::R()('a')($f)('c')
             ->shouldReturn(
@@ -427,7 +427,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::S()($f2)($g)('c')
-            ->shouldBeEqualTo(S::with()($f2)($g)('c'));
+            ->shouldBeEqualTo(S::of()($f2)($g)('c'));
     }
 
     public function it_can_test_the_T_combinator()
@@ -437,7 +437,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::T()('a')($f)
-            ->shouldBeEqualTo(T::with()('a')($f));
+            ->shouldBeEqualTo(T::of()('a')($f));
 
         $this::T()('a')($f)
             ->shouldReturn(
@@ -470,7 +470,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::U()($f2)($g)
-            ->shouldBeEqualTo(U::with()($f2)($g));
+            ->shouldBeEqualTo(U::of()($f2)($g));
 
         $this::U()($f2)($g)
             ->shouldReturn(
@@ -489,7 +489,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::V()('a')('b')($f)
-            ->shouldBeEqualTo(V::with()('a')('b')($f));
+            ->shouldBeEqualTo(V::of()('a')('b')($f));
 
         $this::V()('a')('b')($f)
             ->shouldReturn(
@@ -509,7 +509,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::W()($f)('b')
-            ->shouldBeEqualTo(W::with()($f)('b'));
+            ->shouldBeEqualTo(W::of()($f)('b'));
 
         $this::W()($f)('b')
             ->shouldReturn(
@@ -531,7 +531,7 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::Y()($f)(6)
-            ->shouldBeEqualTo(Y::with()($f)(6));
+            ->shouldBeEqualTo(Y::of()($f)(6));
     }
 
     public function it_can_test_the_Z_combinator()
@@ -545,6 +545,6 @@ class CombinatorsSpec extends ObjectBehavior
         };
 
         $this::Z()($f)()(6)
-            ->shouldBeEqualTo(Z::with()($f)()(6));
+            ->shouldBeEqualTo(Z::of()($f)()(6));
     }
 }

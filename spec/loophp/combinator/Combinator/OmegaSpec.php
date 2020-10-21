@@ -20,18 +20,7 @@ class OmegaSpec extends ObjectBehavior
             };
         };
 
-        $arguments = [$f];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(a)(a(a))');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(a)(a(a))');
-
-        $this::on($f)
+        $this::of()($f)
             ->shouldReturn('a(a)(a(a))');
     }
 }

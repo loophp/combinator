@@ -16,18 +16,7 @@ class FSpec extends ObjectBehavior
             };
         };
 
-        $arguments = ['a', 'b', $f2];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('c(b)(a)');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('c(b)(a)');
-
-        $this::on('a')('b')($f2)
+        $this::of()('a')('b')($f2)
             ->shouldReturn('c(b)(a)');
     }
 }

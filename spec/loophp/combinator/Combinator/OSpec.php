@@ -22,18 +22,7 @@ class OSpec extends ObjectBehavior
             return sprintf('%s(%s)', 'b', $x);
         };
 
-        $arguments = [$f, $g];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('b(a(b()))');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('b(a(b()))');
-
-        $this::on($f)($g)
+        $this::of()($f)($g)
             ->shouldReturn('b(a(b()))');
     }
 }

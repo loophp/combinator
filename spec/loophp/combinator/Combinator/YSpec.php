@@ -17,18 +17,7 @@ class YSpec extends ObjectBehavior
             };
         };
 
-        $arguments = [$f];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()(6)
-            ->shouldReturn(720);
-
-        $this
-            ->__invoke()(6)
-            ->shouldReturn(720);
-
-        $this::on($f)(6)
+        $this::of()($f)(6)
             ->shouldReturn(720);
     }
 }

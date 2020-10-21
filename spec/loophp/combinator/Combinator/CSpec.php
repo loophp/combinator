@@ -16,18 +16,7 @@ class CSpec extends ObjectBehavior
             };
         };
 
-        $arguments = [$f, 'b', 'c'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(c)(b)');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(c)(b)');
-
-        $this::on($f)('b')('c')
+        $this::of()($f)('b')('c')
             ->shouldReturn('a(c)(b)');
     }
 }

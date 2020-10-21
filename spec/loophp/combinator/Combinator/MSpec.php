@@ -18,18 +18,7 @@ class MSpec extends ObjectBehavior
             return sprintf('%s(%s)', 'a', $x());
         };
 
-        $arguments = [$f];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(a)');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(a)');
-
-        $this::on($f)
+        $this::of()($f)
             ->shouldReturn('a(a)');
     }
 }

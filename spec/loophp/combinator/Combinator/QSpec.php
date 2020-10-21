@@ -18,18 +18,7 @@ class QSpec extends ObjectBehavior
             return sprintf('%s(%s)', 'b', $x);
         };
 
-        $arguments = [$f, $g, 'c'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('b(a(c))');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('b(a(c))');
-
-        $this::on($f)($g)('c')
+        $this::of()($f)($g)('c')
             ->shouldReturn('b(a(c))');
     }
 }

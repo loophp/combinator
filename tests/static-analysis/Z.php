@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace loophp\combinator\Tests\StaticAnalysis;
 
 use Closure;
-use loophp\combinator\Combinator\Z as Combinator;
+use loophp\combinator\Combinator\Z;
 
 /**
  * @param callable(callable): Closure $f
+ *
+ * @psalm-suppress MixedInferredReturnType
+ * @psalm-suppress MixedReturnStatement
  */
-function test(callable $f): Closure
+function test(Z $combinator, callable $f): Closure
 {
-    return (new Combinator($f))();
+    return $combinator->__invoke()($f);
 }

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace loophp\combinator\Tests\StaticAnalysis;
 
-use loophp\combinator\Combinator\Phoenix as Combinator;
+use loophp\combinator\Combinator\Phoenix;
 
 /**
+ * @param Phoenix<array,int,string,bool> $combinator
  * @param callable(array): callable(int): string $f
  * @param callable(bool): array $g
  * @param callable(bool): int $h
@@ -14,7 +15,7 @@ use loophp\combinator\Combinator\Phoenix as Combinator;
  *
  * @return string
  */
-function test(callable $f, callable $g, callable $h, $x)
+function test(Phoenix $combinator, callable $f, callable $g, callable $h, $x)
 {
-    return (new Combinator($f, $g, $h, $x))();
+    return $combinator->__invoke()($f)($g)($h)($x);
 }

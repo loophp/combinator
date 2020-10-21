@@ -20,18 +20,7 @@ class SSpec extends ObjectBehavior
             return sprintf('%s(%s)', 'b', $x);
         };
 
-        $arguments = [$f2, $g, 'c'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(c)(b(c))');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(c)(b(c))');
-
-        $this::on($f2)($g)('c')
+        $this::of()($f2)($g)('c')
             ->shouldReturn('a(c)(b(c))');
     }
 }

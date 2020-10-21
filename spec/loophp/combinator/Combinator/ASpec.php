@@ -14,18 +14,7 @@ class ASpec extends ObjectBehavior
             return sprintf('%s(%s)', 'a', $x);
         };
 
-        $arguments = [$a, 'b'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(b)');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(b)');
-
-        $this::on($a)('b')
+        $this::of()($a)('b')
             ->shouldReturn('a(b)');
     }
 }

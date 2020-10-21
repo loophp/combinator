@@ -16,18 +16,7 @@ class RSpec extends ObjectBehavior
             };
         };
 
-        $arguments = ['a', $f, 'c'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('b(c)(a)');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('b(c)(a)');
-
-        $this::on('a')($f)('c')
+        $this::of()('a')($f)('c')
             ->shouldReturn('b(c)(a)');
     }
 }

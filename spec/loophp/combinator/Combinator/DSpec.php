@@ -22,18 +22,7 @@ class DSpec extends ObjectBehavior
             };
         };
 
-        $arguments = [$f2, 'b', $g2, 'd'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(b)(c(d))');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(b)(c(d))');
-
-        $this::on($f2)('b')($g2)('d')
+        $this::of()($f2)('b')($g2)('d')
             ->shouldReturn('a(b)(c(d))');
     }
 }

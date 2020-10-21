@@ -16,18 +16,7 @@ class JSpec extends ObjectBehavior
             };
         };
 
-        $arguments = [$f2, 'b', 'c', 'd'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(b)(a(d)(c))');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(b)(a(d)(c))');
-
-        $this::on($f2)('b')('c')('d')
+        $this::of()($f2)('b')('c')('d')
             ->shouldReturn('a(b)(a(d)(c))');
     }
 }

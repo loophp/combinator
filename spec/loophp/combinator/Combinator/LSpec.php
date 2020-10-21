@@ -24,18 +24,7 @@ class LSpec extends ObjectBehavior
             };
         };
 
-        $arguments = [$f, $g];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(b(b))');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(b(b))');
-
-        $this::on($f)($g)
+        $this::of()($f)($g)
             ->shouldReturn('a(b(b))');
     }
 }

@@ -16,18 +16,7 @@ class VSpec extends ObjectBehavior
             };
         };
 
-        $arguments = ['a', 'b', $f];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('c(a)(b)');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('c(a)(b)');
-
-        $this::on('a')('b')($f)
+        $this::of()('a')('b')($f)
             ->shouldReturn('c(a)(b)');
     }
 }

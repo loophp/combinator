@@ -18,18 +18,7 @@ class BSpec extends ObjectBehavior
             return sprintf('%s(%s)', 'b', $x);
         };
 
-        $arguments = [$a, $b, 'c'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(b(c))');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(b(c))');
-
-        $this::on($a)($b)('c')
+        $this::of()($a)($b)('c')
             ->shouldReturn('a(b(c))');
     }
 }

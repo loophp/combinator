@@ -30,18 +30,7 @@ class USpec extends ObjectBehavior
             return sprintf('%s(%s)', 'b', $x);
         };
 
-        $arguments = [$f2, $g];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('b(a(a)(b))');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('b(a(a)(b))');
-
-        $this::on($f2)($g)
+        $this::of()($f2)($g)
             ->shouldReturn('b(a(a)(b))');
     }
 }

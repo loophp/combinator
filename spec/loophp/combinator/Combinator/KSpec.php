@@ -10,18 +10,7 @@ class KSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $arguments = ['a', 'b'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a');
-
-        $this::on('a')('b')
+        $this::of()('a')('b')
             ->shouldReturn('a');
     }
 }

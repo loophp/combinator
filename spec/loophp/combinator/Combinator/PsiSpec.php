@@ -20,18 +20,7 @@ class PsiSpec extends ObjectBehavior
             return sprintf('%s(%s)', 'b', $x);
         };
 
-        $arguments = [$f2, $g, 'c', 'd'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(b(c))(b(d))');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(b(c))(b(d))');
-
-        $this::on($f2)($g)('c')('d')
+        $this::of()($f2)($g)('c')('d')
             ->shouldReturn('a(b(c))(b(d))');
     }
 }

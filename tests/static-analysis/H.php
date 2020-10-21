@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace loophp\combinator\Tests\StaticAnalysis;
 
-use loophp\combinator\Combinator\H as Combinator;
+use loophp\combinator\Combinator\H;
 
 /**
+ * @param H<array, bool,string> $combinator
  * @param callable(array): (Closure(bool): (Closure(array): (string))) $f
  * @param array $x
  * @param bool $y
- *
- * @return string
  */
-function test(callable $f, $x, $y)
+function test(H $combinator, callable $f, $x, $y): string
 {
-    return (new Combinator($f, $x, $y))();
+    return $combinator->__invoke()($f)($x)($y);
 }

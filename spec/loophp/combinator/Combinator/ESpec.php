@@ -22,18 +22,7 @@ class ESpec extends ObjectBehavior
             };
         };
 
-        $arguments = [$f2, 'b', $g2, 'd', 'e'];
-
-        $this->beConstructedWith(...$arguments);
-
-        $this()
-            ->shouldReturn('a(b)(c(d)(e))');
-
-        $this
-            ->__invoke()
-            ->shouldReturn('a(b)(c(d)(e))');
-
-        $this::on($f2)('b')($g2)('d')('e')
+        $this::of()($f2)('b')($g2)('d')('e')
             ->shouldReturn('a(b)(c(d)(e))');
     }
 }
