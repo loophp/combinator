@@ -25,7 +25,7 @@ repository:
     allow_squash_merge: false
     default_branch: master
     description: "A curated list of combinators"
-    topics: combinator,combinatory-logic,functional-programming
+    topics: combinator,combinatory-logic,functional-programming,educational
     has_downloads: true
     has_issues: true
     has_pages: false
