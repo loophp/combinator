@@ -6,3 +6,5 @@
 /.idea/
 /test.php
 /phpspec.yml
+/node_modules/
+package-lock.json
