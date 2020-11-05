@@ -414,20 +414,56 @@ class CombinatorsSpec extends ObjectBehavior
             );
     }
 
-    public function it_can_test_the_S_combinator()
+    public function it_can_test_the_S2_combinator()
     {
-        $f2 = static function (string $x) {
+        $f = static function (string $x) {
             return static function (string $y) use ($x): string {
-                return sprintf('%s(%s)(%s)', 'a', $x, $y);
+                return sprintf('%s(%s)(%s)', 'f', $x, $y);
             };
         };
 
         $g = static function (string $x): string {
-            return sprintf('%s(%s)', 'b', $x);
+            return sprintf('%s(%s)', 'g', $x);
         };
 
-        $this::S()($f2)($g)('c')
-            ->shouldBeEqualTo(S::of()($f2)($g)('c'));
+        $h = static function (string $x): string {
+            return sprintf('%s(%s)', 'h', $x);
+        };
+
+        $this::S2()($f)($g)($h)('x')
+            ->shouldBeEqualTo('f(g(x))(h(x))');
+    }
+
+    public function it_can_test_the_S_combinator()
+    {
+        $f = static function (string $x) {
+            return static function (string $y) use ($x): string {
+                return sprintf('%s(%s)(%s)', 'f', $x, $y);
+            };
+        };
+
+        $g = static function (string $x): string {
+            return sprintf('%s(%s)', 'g', $x);
+        };
+
+        $this::S()($f)($g)('x')
+            ->shouldBeEqualTo('f(x)(g(x))');
+    }
+
+    public function it_can_test_the_S_underscore_combinator()
+    {
+        $f = static function (string $x) {
+            return static function (string $y) use ($x): string {
+                return sprintf('%s(%s)(%s)', 'f', $x, $y);
+            };
+        };
+
+        $g = static function (string $x): string {
+            return sprintf('%s(%s)', 'g', $x);
+        };
+
+        $this::S_()($f)($g)('x')
+            ->shouldBeEqualTo('f(g(x))(x)');
     }
 
     public function it_can_test_the_T_combinator()

@@ -26,6 +26,8 @@ use loophp\combinator\Combinator\Psi;
 use loophp\combinator\Combinator\Q;
 use loophp\combinator\Combinator\R;
 use loophp\combinator\Combinator\S;
+use loophp\combinator\Combinator\S2;
+use loophp\combinator\Combinator\S_;
 use loophp\combinator\Combinator\T;
 use loophp\combinator\Combinator\U;
 use loophp\combinator\Combinator\V;
@@ -143,6 +145,16 @@ final class Combinators
     public static function S(): Closure
     {
         return S::of();
+    }
+
+    public static function S2(): Closure
+    {
+        return S2::of();
+    }
+
+    public static function S_(): Closure
+    {
+        return S_::of();
     }
 
     public static function T(): Closure
