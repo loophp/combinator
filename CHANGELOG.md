@@ -5,10 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.0](https://github.com/loophp/combinator/compare/1.2.0...2.0.0)
+## [2.0.1](https://github.com/loophp/combinator/compare/2.0.0...2.0.1)
 
 ### Commits
 
+- ci: Tests on PHP 7.4 only. [`2e7d84b`](https://github.com/loophp/combinator/commit/2e7d84b5239ccc6bd404a4965871856119d6ae6c)
+- feat: Add new combinators. [`0ac01ac`](https://github.com/loophp/combinator/commit/0ac01ac602f07a2124bd528fd6a039be87f62f76)
+
+## [2.0.0](https://github.com/loophp/combinator/compare/1.2.0...2.0.0) - 2020-10-21
+
+### Commits
+
+- docs: Add Changelog. [`cd7a942`](https://github.com/loophp/combinator/commit/cd7a942f08f319027b6ef697cc1667c7ba37895a)
 - ci: Update Github actions. [`72670ff`](https://github.com/loophp/combinator/commit/72670ffeea53c8598170b839833e912a040e76f7)
 - chore: Add .gitignore and .gitattributes. [`35ff3bb`](https://github.com/loophp/combinator/commit/35ff3bbcad711541f0014212c1d235da02265654)
 - test: Update tests accordingly. [`8b7338d`](https://github.com/loophp/combinator/commit/8b7338ddec1d9939e4dbf50615910116e341663e)
