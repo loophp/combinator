@@ -31,7 +31,7 @@ final class Ki extends Combinator
                      *
                      * @return NewBType
                      */
-                    static function ($y) use ($x) {
+                    static function ($y) {
                         return $y;
                     };
             };
