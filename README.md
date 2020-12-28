@@ -98,19 +98,28 @@ Combinators::Ki()('a')('b'); // b
 
 declare(strict_types=1);
 
-include 'vendor/autoload.php';
+namespace Test;
 
+include __DIR__ . '/vendor/autoload.php';
+
+use Closure;
 use loophp\combinator\Combinators;
 
-$fibonacci = Combinators::Y()(
-    static function ($f) {
-        return static function ($n) use ($f) {
-            return (1 >= $n) ? $n : ($f($n - 1) + $f($n - 2));
-        };
-    }
-);
+// Example 1
+$factorialGenerator = static fn (Closure $fact): Closure =>
+static fn (int $n): int  => (0 === $n) ? 1 : ($n * $fact($n - 1));
 
-$result = $fibonacci(10); // 55
+$factorial = Combinators::Y()($factorialGenerator);
+
+var_dump($factorial(6)); // 720
+
+// Example 2
+$fibonacciGenerator = static fn (Closure $fibo): Closure =>
+static fn (int $number): int => (1 >= $number) ? $number : $fibo($number - 1) + $fibo($number - 2);
+
+$fibonacci = Combinators::Y()($fibonacciGenerator);
+
+var_dump($fibonacci(10)); // 55
 ```
 
 More on [the wikipedia page](https://en.wikipedia.org/wiki/Fixed-point_combinator).
