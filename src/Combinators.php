@@ -7,6 +7,7 @@ namespace loophp\combinator;
 use Closure;
 use loophp\combinator\Combinator\A;
 use loophp\combinator\Combinator\B;
+use loophp\combinator\Combinator\Blackbird;
 use loophp\combinator\Combinator\C;
 use loophp\combinator\Combinator\D;
 use loophp\combinator\Combinator\E;
@@ -50,6 +51,11 @@ final class Combinators
     public static function B(): Closure
     {
         return B::of();
+    }
+
+    public static function Blackbird(): Closure
+    {
+        return Blackbird::of();
     }
 
     public static function C(): Closure

@@ -74,6 +74,43 @@ class CombinatorsSpec extends ObjectBehavior
             );
     }
 
+    public function it_can_test_the_Blackbird_combinator()
+    {
+        $a = 'array_sum';
+
+        $b = static fn (callable $c): Closure => static fn (array $v): array => array_map($c, $v);
+
+        $c = 'count';
+
+        $d = [['a', 'b', 'c'], ['a', 'b']];
+
+        $this::Blackbird()($a)($b)($c)($d)
+            ->shouldReturn(5);
+
+        // (S(K(S(KS)K)))(S(KS)K)
+        $this::Blackbird()($a)($b)($c)($d)
+            ->shouldReturn(
+                Combinators::S()(
+                    Combinators::K()
+                    (
+                        Combinators::S()
+                        (
+                            Combinators::K()(Combinators::S())
+                        )
+                        (Combinators::K())
+                    )
+                )
+                (
+                    Combinators::S()
+                    (
+                        Combinators::K()(Combinators::S())
+                    )
+                    (Combinators::K())
+                )
+                ($a)($b)($c)($d)
+            );
+    }
+
     public function it_can_test_the_C_combinator()
     {
         $f = static function ($x) {
