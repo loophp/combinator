@@ -16,16 +16,16 @@
         }
     ],
     "require": {
-        "php": ">= 7.1.3"
+        "php": ">= 8"
     },
     "require-dev": {
-        "drupol/php-conventions": "^1.7.1 || ^1.8.19 || ^2.0",
-        "friends-of-phpspec/phpspec-code-coverage": "^4.3.2",
-        "infection/infection": ">= 0.13.6",
-        "phpspec/phpspec": "^5.1.2 || ^6.2.1",
-        "phpstan/phpstan": "^0.12.50",
-        "phpstan/phpstan-strict-rules": "^0.12",
-        "vimeo/psalm": "^3.18.2 || ^4"
+        "drupol/php-conventions": "^5.0.3",
+        "friends-of-phpspec/phpspec-code-coverage": "^5",
+        "infection/infection": ">= 0.21",
+        "infection/phpspec-adapter": "^0.1.2",
+        "phpspec/phpspec": "^7.1",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-strict-rules": "^0.12"
     },
     "config": {
         "sort-packages": true
@@ -41,11 +41,24 @@
         }
     },
     "scripts": {
-        "bench": "./vendor/bin/phpbench run --report='generator: \"table\", cols: [ \"suite\", \"subject\", \"mean\", \"diff\", \"mem_peak\", \"mem_real\"], break: [\"benchmark\"]'",
+        "changelog-unreleased": "docker-compose run auto_changelog -c .auto-changelog -u",
+        "changelog-version": "docker-compose run auto_changelog -c .auto-changelog -v",
         "grumphp": "./vendor/bin/grumphp run",
-        "infection": "./vendor/bin/infection run -j 10",
-        "phpcbf": "./vendor/bin/phpcbf --ignore=vendor .",
-        "phpcs": "./vendor/bin/phpcs --ignore=vendor .",
-        "phpspec": "./vendor/bin/phpspec run"
-    }
+        "infection": "vendor/bin/infection run -j 2",
+        "phpspec": "vendor/bin/phpspec run -vvv --stop-on-failure"
+    },
+    "support": {
+        "issues": "https://github.com/loophp/combinator/issues",
+        "source": "https://github.com/loophp/combinator"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/drupol"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.me/drupol"
+        }
+    ]
 }

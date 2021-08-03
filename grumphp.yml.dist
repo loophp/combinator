@@ -1,9 +1,10 @@
 imports:
-    - { resource: vendor/drupol/php-conventions/config/php71/grumphp.yml }
+    - { resource: vendor/drupol/php-conventions/config/php73/grumphp.yml }
 
 parameters:
+    tasks.license.holder: Pol Dellaiera
+    tasks.license.date_from: 2020
     extra_tasks:
-        psalm: ~
         phpspec:
             verbose: true
         infection:
@@ -12,4 +13,3 @@ parameters:
             configuration: infection.json.dist
             min_msi: 50
             min_covered_msi: 50
-
