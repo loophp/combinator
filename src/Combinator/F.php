@@ -20,7 +20,7 @@ use loophp\combinator\Combinator;
 final class F extends Combinator
 {
     /**
-     * @psalm-return Closure(NewAType): Closure(NewBType): Closure(callable(NewBType): Closure(NewAType): NewCType): NewCType
+     * @return Closure(NewAType): Closure(NewBType): Closure(callable(NewBType): Closure(NewAType): NewCType): NewCType
      */
     public function __invoke(): Closure
     {
@@ -30,24 +30,18 @@ final class F extends Combinator
              *
              * @return Closure(NewBType): Closure(callable(NewBType): Closure(NewAType): NewCType): NewCType
              */
-            static function ($x): Closure {
-                return
+            static fn (mixed $x): Closure =>
+                /**
+                 * @param NewBType $y
+                 *
+                 * @return Closure(callable(NewBType): Closure(NewAType): NewCType): NewCType
+                 */
+                static fn (mixed $y): Closure =>
                     /**
-                     * @param NewBType $y
+                     * @param callable(NewBType): (Closure(NewAType): NewCType) $f
                      *
-                     * @return Closure(callable(NewBType): Closure(NewAType): NewCType): NewCType
+                     * @return NewCType
                      */
-                    static function ($y) use ($x): Closure {
-                        return
-                            /**
-                             * @param callable(NewBType): Closure(NewAType): NewCType $f
-                             *
-                             * @return NewCType
-                             */
-                            static function (callable $f) use ($x, $y) {
-                                return ($f)($y)($x);
-                            };
-                    };
-            };
+                    static fn (callable $f): mixed => ($f)($y)($x);
     }
 }

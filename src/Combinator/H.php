@@ -26,28 +26,22 @@ final class H extends Combinator
     {
         return
             /**
-             * @param callable(NewAType): Closure(NewBType): Closure(NewAType): NewCType $f
+             * @param callable(NewAType): (Closure(NewBType): (Closure(NewAType): NewCType)) $f
              *
              * @return Closure(NewAType): Closure(NewBType): NewCType
              */
-            static function (callable $f): Closure {
-                return
+            static fn (callable $f): Closure =>
+                /**
+                 * @param NewAType $x
+                 *
+                 * @return Closure(NewBType): NewCType
+                 */
+                static fn (mixed $x): Closure =>
                     /**
-                     * @param NewAType $x
+                     * @param NewBType $y
                      *
-                     * @return Closure(NewBType): NewCType
+                     * @return NewCType
                      */
-                    static function ($x) use ($f): Closure {
-                        return
-                            /**
-                             * @param NewBType $y
-                             *
-                             * @return NewCType
-                             */
-                            static function ($y) use ($f, $x) {
-                                return ((($f)($x))($y))($x);
-                            };
-                    };
-            };
+                    static fn (mixed $y): mixed => ((($f)($x))($y))($x);
     }
 }

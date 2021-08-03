@@ -21,44 +21,34 @@ use loophp\combinator\Combinator;
 final class S2 extends Combinator
 {
     /**
-     * @psalm-return Closure(callable(NewBType): Closure(NewCType): NewDType): Closure(callable(NewAType): NewBType): Closure(callable(NewAType): NewCType): Closure(NewAType): NewDType
+     * @return Closure(callable(NewBType): Closure(NewCType): NewDType): Closure(callable(NewAType): NewBType): Closure(callable(NewAType): NewCType): Closure(NewAType): NewDType
      */
     public function __invoke(): Closure
     {
         return
             /**
-             * @psalm-param callable(NewBType): Closure(NewCType): NewDType $f
+             * @param callable(NewBType): (Closure(NewCType): NewDType) $f
              *
-             * @psalm-return Closure(callable(NewAType): NewBType): Closure(callable(NewAType): NewCType): Closure(NewAType): NewDType
+             * @return Closure(callable(NewAType): NewBType): Closure(callable(NewAType): NewCType): Closure(NewAType): NewDType
              */
-            static function (callable $f): Closure {
-                return
+            static fn (callable $f): Closure =>
+                /**
+                 * @param callable(NewAType): NewBType $g
+                 *
+                 * @return Closure(callable(NewAType): NewCType): Closure(NewAType): NewDType
+                 */
+                static fn (callable $g): Closure =>
                     /**
-                     * @psalm-param callable(NewAType): NewBType $g
+                     * @param callable(NewAType): NewCType $h
                      *
-                     * @psalm-return Closure(callable(NewAType): NewCType): Closure(NewAType): NewDType
+                     * @return Closure(NewAType): NewDType
                      */
-                    static function (callable $g) use ($f): Closure {
-                        return
-                            /**
-                             * @psalm-param callable(NewAType): NewCType $h
-                             *
-                             * @psalm-return Closure(NewAType): NewDType
-                             */
-                            static function (callable $h) use ($f, $g): Closure {
-                                return
-                                    /**
-                                     * @psalm-param NewAType $x
-                                     *
-                                     * @psalm-return NewDType
-                                     *
-                                     * @param mixed $x
-                                     */
-                                    static function ($x) use ($f, $g, $h) {
-                                        return $f($g($x))($h($x));
-                                    };
-                            };
-                    };
-            };
+                    static fn (callable $h): Closure =>
+                        /**
+                         * @param NewAType $x
+                         *
+                         * @return NewDType
+                         */
+                        static fn (mixed $x): mixed => $f($g($x))($h($x));
     }
 }

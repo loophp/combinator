@@ -20,34 +20,28 @@ use loophp\combinator\Combinator;
 final class S extends Combinator
 {
     /**
-     * @psalm-return Closure(callable(NewAType): Closure(NewBType): NewCType): Closure(callable(NewAType): NewBType): Closure(NewAType): NewCType
+     * @return Closure(callable(NewAType): Closure(NewBType): NewCType): Closure(callable(NewAType): NewBType): Closure(NewAType): NewCType
      */
     public function __invoke(): Closure
     {
         return
             /**
-             * @psalm-param callable(NewAType): Closure(NewBType): NewCType $f
+             * @param callable(NewAType): (Closure(NewBType): NewCType) $f
              *
-             * @psalm-return Closure(callable(NewAType): NewBType): Closure(NewAType): NewCType
+             * @return Closure(callable(NewAType): NewBType): Closure(NewAType): NewCType
              */
-            static function (callable $f): Closure {
-                return
+            static fn (callable $f): Closure =>
+                /**
+                 * @param callable(NewAType): NewBType $g
+                 *
+                 * @return Closure(NewAType): NewCType
+                 */
+                static fn (callable $g): Closure =>
                     /**
-                     * @param callable(NewAType): NewBType $g
+                     * @param NewAType $x
                      *
-                     * @return Closure(NewAType): NewCType
+                     * @return NewCType
                      */
-                    static function (callable $g) use ($f): Closure {
-                        return
-                            /**
-                             * @param NewAType $x
-                             *
-                             * @return NewCType
-                             */
-                            static function ($x) use ($f, $g) {
-                                return $f($x)($g($x));
-                            };
-                    };
-            };
+                    static fn (mixed $x): mixed => $f($x)($g($x));
     }
 }

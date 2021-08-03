@@ -14,7 +14,7 @@ use loophp\combinator\Combinator;
 final class T extends Combinator
 {
     /**
-     * @psalm-return Closure(NewAType): Closure(callable(NewAType): NewBType): NewBType
+     * @return Closure(NewAType): Closure(callable(NewAType): NewBType): NewBType
      */
     public function __invoke(): Closure
     {
@@ -22,18 +22,14 @@ final class T extends Combinator
             /**
              * @param NewAType $x
              *
-             * @psalm-return Closure(callable(NewAType): NewBType): NewBType
+             * @return Closure(callable(NewAType): NewBType): NewBType
              */
-            static function ($x): Closure {
-                return
-                    /**
-                     * @param callable(NewAType): NewBType $f
-                     *
-                     * @psalm-return NewBType
-                     */
-                    static function (callable $f) use ($x) {
-                        return ($f)($x);
-                    };
-            };
+            static fn (mixed $x): Closure =>
+                /**
+                 * @param callable(NewAType): NewBType $f
+                 *
+                 * @return NewBType
+                 */
+                static fn (callable $f): mixed => ($f)($x);
     }
 }

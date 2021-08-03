@@ -21,36 +21,28 @@ use loophp\combinator\Combinator;
 final class S_ extends Combinator
 {
     /**
-     * @psalm-return Closure(callable(NewAType): Closure(NewBType): NewCType): Closure(callable(NewBType): NewAType): Closure(NewBType): NewCType
+     * @return Closure(callable(NewAType): Closure(NewBType): NewCType): Closure(callable(NewBType): NewAType): Closure(NewBType): NewCType
      */
     public function __invoke(): Closure
     {
         return
             /**
-             * @psalm-param callable(NewAType): Closure(NewBType): NewCType $f
+             * @param callable(NewAType): (Closure(NewBType): NewCType) $f
              *
-             * @psalm-return Closure(callable(NewBType): NewAType): Closure(NewBType): NewCType
+             * @return Closure(callable(NewBType): NewAType): Closure(NewBType): NewCType
              */
-            static function (callable $f): Closure {
-                return
+            static fn (callable $f): Closure =>
+                /**
+                 * @param callable(NewBType): NewAType $g
+                 *
+                 * @return Closure(NewBType): NewCType
+                 */
+                static fn (callable $g): Closure =>
                     /**
-                     * @psalm-param callable(NewBType): NewAType $g
+                     * @param NewBType $x
                      *
-                     * @psalm-return Closure(NewBType): NewCType
+                     * @return NewCType
                      */
-                    static function (callable $g) use ($f): Closure {
-                        return
-                            /**
-                             * @psalm-param NewBType $x
-                             *
-                             * @psalm-return NewCType
-                             *
-                             * @param mixed $x
-                             */
-                            static function ($x) use ($f, $g) {
-                                return $f($g($x))($x);
-                            };
-                    };
-            };
+                    static fn (mixed $x): mixed => $f($g($x))($x);
     }
 }

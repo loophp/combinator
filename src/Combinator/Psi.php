@@ -26,36 +26,28 @@ final class Psi extends Combinator
     {
         return
             /**
-             * @param callable(NewAType): callable(NewAType): NewBType $f
+             * @param callable(NewAType): (callable(NewAType): NewBType) $f
              *
              * @return Closure(callable(NewCType): NewAType): Closure(NewCType): Closure(NewCType): NewBType
              */
-            static function (callable $f): Closure {
-                return
+            static fn (callable $f): Closure =>
+                /**
+                 * @param callable(NewCType): NewAType $g
+                 *
+                 * @return Closure(NewCType): Closure(NewCType): NewBType
+                 */
+                static fn (callable $g): Closure =>
                     /**
-                     * @param callable(NewCType): NewAType $g
+                     * @param NewCType $x
                      *
-                     * @return Closure(NewCType): Closure(NewCType): NewBType
+                     * @return Closure(NewCType): NewBType
                      */
-                    static function (callable $g) use ($f): Closure {
-                        return
-                            /**
-                             * @param NewCType $x
-                             *
-                             * @return Closure(NewCType): NewBType
-                             */
-                            static function ($x) use ($f, $g): Closure {
-                                return
-                                    /**
-                                     * @param NewCType $y
-                                     *
-                                     * @return NewBType
-                                     */
-                                    static function ($y) use ($f, $g, $x) {
-                                        return ($f)(($g)($x))(($g)($y));
-                                    };
-                            };
-                    };
-            };
+                    static fn (mixed $x): Closure =>
+                        /**
+                         * @param NewCType $y
+                         *
+                         * @return NewBType
+                         */
+                        static fn (mixed $y): mixed => ($f)(($g)($x))(($g)($y));
     }
 }

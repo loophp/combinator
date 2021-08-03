@@ -24,16 +24,12 @@ final class Ki extends Combinator
              *
              * @return Closure(NewBType): NewBType
              */
-            static function ($x): Closure {
-                return
-                    /**
-                     * @param NewBType $y
-                     *
-                     * @return NewBType
-                     */
-                    static function ($y) {
-                        return $y;
-                    };
-            };
+            static fn (mixed $x): Closure =>
+                /**
+                 * @param NewBType $y
+                 *
+                 * @return NewBType
+                 */
+                static fn (mixed $y) => $y;
     }
 }

@@ -25,24 +25,18 @@ final class R extends Combinator
              *
              * @return Closure(callable(NewBType): Closure(NewAType): NewCType): Closure(NewBType): NewCType
              */
-            static function ($x): Closure {
-                return
+            static fn (mixed $x): Closure =>
+                /**
+                 * @param callable(NewBType): (Closure(NewAType): NewCType) $f
+                 *
+                 * @return Closure(NewBType): NewCType
+                 */
+                static fn (callable $f): Closure =>
                     /**
-                     * @psalm-param callable(NewBType): Closure(NewAType): NewCType $f
+                     * @param NewBType $y
                      *
-                     * @return Closure(NewBType): NewCType
+                     * @return NewCType
                      */
-                    static function (callable $f) use ($x): Closure {
-                        return
-                            /**
-                             * @param NewBType $y
-                             *
-                             * @return NewCType
-                             */
-                            static function ($y) use ($x, $f) {
-                                return (($f)($y))($x);
-                            };
-                    };
-            };
+                    static fn (mixed $y): mixed => (($f)($y))($x);
     }
 }

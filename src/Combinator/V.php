@@ -23,26 +23,20 @@ final class V extends Combinator
             /**
              * @param NewAType $x
              *
-             * @psalm-return Closure(NewBType): Closure(callable(NewAType): callable(NewBType): NewCType): NewCType
+             * @return Closure(NewBType): Closure(callable(NewAType): callable(NewBType): NewCType): NewCType
              */
-            static function ($x): Closure {
-                return
+            static fn (mixed $x): Closure =>
+                /**
+                 * @param NewBType $y
+                 *
+                 * @return Closure(callable(NewAType): callable(NewBType): NewCType): NewCType
+                 */
+                static fn (mixed $y): Closure =>
                     /**
-                     * @param NewBType $y
+                     * @param callable(NewAType): (callable(NewBType): NewCType) $f
                      *
-                     * @psalm-return Closure(callable(NewAType): callable(NewBType): NewCType): NewCType
+                     * @return NewCType
                      */
-                    static function ($y) use ($x): Closure {
-                        return
-                            /**
-                             * @psalm-param callable(NewAType): callable(NewBType): NewCType $f
-                             *
-                             * @psalm-return NewCType
-                             */
-                            static function (callable $f) use ($x, $y) {
-                                return (($f)($x))($y);
-                            };
-                    };
-            };
+                    static fn (callable $f): mixed => (($f)($x))($y);
     }
 }

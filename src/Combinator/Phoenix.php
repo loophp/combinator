@@ -21,42 +21,34 @@ use loophp\combinator\Combinator;
 final class Phoenix extends Combinator
 {
     /**
-     * @psalm-return Closure(callable(NewAType): callable(NewBType): NewCType): Closure(callable(NewDType): NewAType): Closure(callable(NewDType): NewBType): Closure(NewDType): NewCType
+     * @return Closure(callable(NewAType): callable(NewBType): NewCType): Closure(callable(NewDType): NewAType): Closure(callable(NewDType): NewBType): Closure(NewDType): NewCType
      */
     public function __invoke(): Closure
     {
         return
             /**
-             * @param callable(NewAType): callable(NewBType): NewCType $f
+             * @param callable(NewAType): (callable(NewBType): NewCType) $f
              *
              * @return Closure(callable(NewDType): NewAType): Closure(callable(NewDType): NewBType): Closure(NewDType): NewCType
              */
-            static function (callable $f): Closure {
-                return
+            static fn (callable $f): Closure =>
+                /**
+                 * @param callable(NewDType): NewAType $g
+                 *
+                 * @return Closure(callable(NewDType): NewBType): Closure(NewDType): NewCType
+                 */
+                static fn (callable $g): Closure =>
                     /**
-                     * @param callable(NewDType): NewAType $g
+                     * @param callable(NewDType): NewBType $h
                      *
-                     * @return Closure(callable(NewDType): NewBType): Closure(NewDType): NewCType
+                     * @return Closure(NewDType): NewCType
                      */
-                    static function (callable $g) use ($f): Closure {
-                        return
-                            /**
-                             * @param callable(NewDType): NewBType $h
-                             *
-                             * @return Closure(NewDType): NewCType
-                             */
-                            static function (callable $h) use ($f, $g): Closure {
-                                return
-                                    /**
-                                     * @param NewDType $x
-                                     *
-                                     * @return NewCType
-                                     */
-                                    static function ($x) use ($f, $g, $h) {
-                                        return ($f)(($g)($x))(($h)($x));
-                                    };
-                            };
-                    };
-            };
+                    static fn (callable $h): Closure =>
+                        /**
+                         * @param NewDType $x
+                         *
+                         * @return NewCType
+                         */
+                        static fn (mixed $x): mixed => ($f)(($g)($x))(($h)($x));
     }
 }

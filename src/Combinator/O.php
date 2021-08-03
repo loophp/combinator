@@ -29,16 +29,12 @@ final class O extends Combinator
              *
              * @return Closure(callable(NewAType): NewBType): NewBType
              */
-            static function (callable $f): Closure {
-                return
-                    /**
-                     * @param callable(NewAType): NewBType $g
-                     *
-                     * @return NewBType
-                     */
-                    static function (callable $g) use ($f) {
-                        return ($g)((($f)($g)));
-                    };
-            };
+            static fn (callable $f): Closure =>
+                /**
+                 * @param callable(NewAType): NewBType $g
+                 *
+                 * @return NewBType
+                 */
+                static fn (callable $g): mixed => ($g)((($f)($g)));
     }
 }

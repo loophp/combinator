@@ -21,42 +21,34 @@ use loophp\combinator\Combinator;
 final class G extends Combinator
 {
     /**
-     * @psalm-return Closure(callable(NewAType): callable(NewBType): NewCType): Closure(callable(NewDType): NewBType): Closure(NewDType): Closure(NewAType): NewCType
+     * @return Closure(callable(NewAType): callable(NewBType): NewCType): Closure(callable(NewDType): NewBType): Closure(NewDType): Closure(NewAType): NewCType
      */
     public function __invoke(): Closure
     {
         return
             /**
-             * @param callable(NewAType): callable(NewBType): NewCType $f
+             * @param callable(NewAType): (callable(NewBType): NewCType) $f
              *
              * @return Closure(callable(NewDType): NewBType): Closure(NewDType): Closure(NewAType): NewCType
              */
-            static function (callable $f): Closure {
-                return
+            static fn (callable $f): Closure =>
+                /**
+                 * @param callable(NewDType): NewBType $g
+                 *
+                 * @return Closure(NewDType): Closure(NewAType): NewCType
+                 */
+                static fn (callable $g): Closure =>
                     /**
-                     * @param callable(NewDType): NewBType $g
+                     * @param NewDType $x
                      *
-                     * @return Closure(NewDType): Closure(NewAType): NewCType
+                     * @return Closure(NewAType): NewCType
                      */
-                    static function (callable $g) use ($f): Closure {
-                        return
-                            /**
-                             * @param NewDType $x
-                             *
-                             * @return Closure(NewAType): NewCType
-                             */
-                            static function ($x) use ($f, $g): Closure {
-                                return
-                                    /**
-                                     * @param NewAType $y
-                                     *
-                                     * @return NewCType
-                                     */
-                                    static function ($y) use ($f, $g, $x) {
-                                        return (($f)($y))(($g)($x));
-                                    };
-                            };
-                    };
-            };
+                    static fn (mixed $x): Closure =>
+                        /**
+                         * @param NewAType $y
+                         *
+                         * @return NewCType
+                         */
+                        static fn (mixed $y): mixed => (($f)($y))(($g)($x));
     }
 }

@@ -20,20 +20,16 @@ final class W extends Combinator
     {
         return
             /**
-             * @param callable(NewAType): callable(NewAType): NewBType $f
+             * @param callable(NewAType): (callable(NewAType): NewBType) $f
              *
              * @return Closure(NewAType): NewBType
              */
-            static function (callable $f): Closure {
-                return
-                    /**
-                     * @param NewAType $x
-                     *
-                     * @return NewBType
-                     */
-                    static function ($x) use ($f) {
-                        return ($f)($x)($x);
-                    };
-            };
+            static fn (callable $f): Closure =>
+                /**
+                 * @param NewAType $x
+                 *
+                 * @return NewBType
+                 */
+                static fn (mixed $x): mixed => ($f)($x)($x);
     }
 }

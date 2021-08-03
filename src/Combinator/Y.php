@@ -22,18 +22,14 @@ final class Y extends Combinator
              * @psalm-suppress ImpureMethodCall
              * @psalm-suppress MixedFunctionCall
              * @psalm-suppress MixedReturnStatement
+             * @psalm-suppress UnusedClosureParam
              */
-            static function (callable $f): Closure {
-                return
-                    M::of()(
-                        static function (callable $loop) use ($f): Closure {
-                            return $f(
-                                static function (...$arguments) use ($loop) {
-                                    return M::of()($loop)(...$arguments);
-                                }
-                            );
-                        }
-                    );
-            };
+            static fn (callable $f): Closure =>
+                M::of()(
+                    static fn (callable $loop): Closure =>
+                        $f(
+                            static fn (...$arguments): mixed => M::of()($loop)(...$arguments)
+                        )
+                );
     }
 }

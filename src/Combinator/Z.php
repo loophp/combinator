@@ -22,19 +22,14 @@ final class Z extends Combinator
              * @psalm-suppress ImpureMethodCall
              * @psalm-suppress MixedFunctionCall
              * @psalm-suppress MixedReturnStatement
+             * @psalm-suppress UnusedClosureParam
              */
-            static function (callable $callable): Closure {
-                return M::of()(
-                    static function (callable $f) use ($callable): Closure {
-                        return $callable(
-                            static function () use ($f) {
-                                return static function (...$arguments) use ($f) {
-                                    return M::of()($f)(...$arguments);
-                                };
-                            }
-                        );
-                    }
+            static fn (callable $callable): Closure =>
+                M::of()(
+                    static fn (callable $f): Closure =>
+                        $callable(
+                            static fn (): Closure => static fn (...$arguments): Closure => M::of()($f)(...$arguments)
+                        )
                 );
-            };
     }
 }

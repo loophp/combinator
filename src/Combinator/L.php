@@ -14,10 +14,6 @@ final class L extends Combinator
      */
     public function __invoke(): Closure
     {
-        return static function (callable $f): Closure {
-            return static function (callable $g) use ($f) {
-                return ($f)(($g)($g));
-            };
-        };
+        return static fn (callable $f): Closure => static fn (callable $g): mixed => ($f)(($g)($g));
     }
 }

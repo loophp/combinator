@@ -13,12 +13,8 @@ final class Omega extends Combinator
     {
         return
             /**
-             * @param callable(callable): callable(callable): callable $f
-             *
-             * @return mixed
+             * @param callable(callable): (callable(callable): callable) $f
              */
-            static function (callable $f) {
-                return ($f)($f)(($f)($f));
-            };
+            static fn (callable $f): mixed => ($f)($f)(($f)($f));
     }
 }

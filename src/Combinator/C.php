@@ -24,29 +24,23 @@ final class C extends Combinator
     public function __invoke(): Closure
     {
         return
-        /**
-         * @param callable(NewAType): callable(NewBType): NewCType $f
-         *
-         * @return Closure(NewBType): Closure(NewAType): NewCType
-         */
-        static function (callable $f): Closure {
-            return
+            /**
+             * @param callable(NewAType): (callable(NewBType): NewCType) $f
+             *
+             * @return Closure(NewBType): Closure(NewAType): NewCType
+             */
+            static fn (callable $f): Closure =>
                 /**
                  * @param NewBType $x
                  *
-                 * @return Closure(NewAType):(NewCType)
+                 * @return Closure(NewAType): NewCType
                  */
-                static function ($x) use ($f): Closure {
-                    return
-                        /**
-                         * @param NewAType $y
-                         *
-                         * @return NewCType
-                         */
-                        static function ($y) use ($f, $x) {
-                            return ($f)($y)($x);
-                        };
-                };
-        };
+                static fn (mixed $x): Closure =>
+                    /**
+                     * @param NewAType $y
+                     *
+                     * @return NewCType
+                     */
+                    static fn (mixed $y) => ($f)($y)($x);
     }
 }

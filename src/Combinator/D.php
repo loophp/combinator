@@ -27,36 +27,28 @@ final class D extends Combinator
     {
         return
             /**
-             * @param callable(NewAType): Closure(NewCType): NewDType $f
+             * @param callable(NewAType): (Closure(NewCType): NewDType) $f
              *
              * @return Closure(NewAType): Closure(callable(NewBType): NewCType): Closure(NewBType): NewDType
              */
-            static function (callable $f): Closure {
-                return
+            static fn (callable $f): Closure =>
+                /**
+                 * @param NewAType $x
+                 *
+                 * @return Closure(callable(NewBType): NewCType): Closure(NewBType): NewDType
+                 */
+                static fn (mixed $x): Closure =>
                     /**
-                     * @param NewAType $x
+                     * @param callable(NewBType): NewCType $g
                      *
-                     * @return Closure(callable(NewBType): NewCType): Closure(NewBType): NewDType
+                     * @return Closure(NewBType): NewDType
                      */
-                    static function ($x) use ($f): Closure {
-                        return
-                            /**
-                             * @param callable(NewBType): NewCType $g
-                             *
-                             * @return Closure(NewBType): NewDType
-                             */
-                            static function (callable $g) use ($f, $x): Closure {
-                                return
-                                    /**
-                                     * @param NewBType $y
-                                     *
-                                     * @return NewDType
-                                     */
-                                    static function ($y) use ($f, $x, $g) {
-                                        return (($f)($x))(($g)($y));
-                                    };
-                            };
-                    };
-            };
+                    static fn (callable $g): Closure =>
+                        /**
+                         * @param NewBType $y
+                         *
+                         * @return NewDType
+                         */
+                        static fn (mixed $y): mixed => (($f)($x))(($g)($y));
     }
 }

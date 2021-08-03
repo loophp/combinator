@@ -22,14 +22,6 @@ final class U extends Combinator
              *
              * @return Closure(callable): mixed
              */
-            static function (callable $f): Closure {
-                return
-                    /**
-                     * @return mixed
-                     */
-                    static function (callable $g) use ($f) {
-                        return $g(($f($f))($g));
-                    };
-            };
+            static fn (callable $f): Closure => static fn (callable $g): mixed => $g(($f($f))($g));
     }
 }

@@ -13,7 +13,7 @@ use loophp\combinator\Combinator;
 final class I extends Combinator
 {
     /**
-     * @psalm-return Closure(NewAType): NewAType
+     * @return Closure(NewAType): NewAType
      */
     public function __invoke(): Closure
     {
@@ -23,8 +23,6 @@ final class I extends Combinator
              *
              * @return NewAType
              */
-            static function ($x) {
-                return $x;
-            };
+            static fn (mixed $x): mixed => $x;
     }
 }

@@ -25,36 +25,28 @@ final class J extends Combinator
     {
         return
             /**
-             * @param callable(NewAType): Closure(NewBType): NewBType $f
+             * @param callable(NewAType): (Closure(NewBType): NewBType) $f
              *
              * @return Closure(NewAType): Closure(NewBType): Closure(NewAType): NewBType
              */
-            static function (callable $f): Closure {
-                return
+            static fn (callable $f): Closure =>
+                /**
+                 * @param NewAType $x
+                 *
+                 * @return Closure(NewBType): Closure(NewAType): NewBType
+                 */
+                static fn (mixed $x): Closure =>
                     /**
-                     * @param NewAType $x
+                     * @param NewBType $y
                      *
-                     * @return Closure(NewBType): Closure(NewAType): NewBType
+                     * @return Closure(NewAType): NewBType
                      */
-                    static function ($x) use ($f): Closure {
-                        return
-                            /**
-                             * @param NewBType $y
-                             *
-                             * @return Closure(NewAType): NewBType
-                             */
-                            static function ($y) use ($f, $x): Closure {
-                                return
-                                    /**
-                                     * @param NewAType $z
-                                     *
-                                     * @return NewBType
-                                     */
-                                    static function ($z) use ($f, $x, $y) {
-                                        return (($f)($x))((($f)($z))($y));
-                                    };
-                            };
-                    };
-            };
+                    static fn (mixed $y): Closure =>
+                        /**
+                         * @param NewAType $z
+                         *
+                         * @return NewBType
+                         */
+                        static fn (mixed $z): mixed => (($f)($x))((($f)($z))($y));
     }
 }
