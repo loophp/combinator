@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\combinator\Combinator;
@@ -24,12 +29,10 @@ final class Z extends Combinator
              * @psalm-suppress MixedReturnStatement
              * @psalm-suppress UnusedClosureParam
              */
-            static fn (callable $callable): Closure =>
-                M::of()(
-                    static fn (callable $f): Closure =>
-                        $callable(
-                            static fn (): Closure => static fn (...$arguments): Closure => M::of()($f)(...$arguments)
-                        )
-                );
+            static fn (callable $callable): Closure => M::of()(
+                static fn (callable $f): Closure => $callable(
+                    static fn (): Closure => static fn (...$arguments): Closure => M::of()($f)(...$arguments)
+                )
+            );
     }
 }

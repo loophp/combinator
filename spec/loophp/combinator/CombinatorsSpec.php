@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace spec\loophp\combinator;
@@ -91,23 +96,16 @@ class CombinatorsSpec extends ObjectBehavior
         $this::Blackbird()($a)($b)($c)($d)
             ->shouldReturn(
                 Combinators::S()(
-                    Combinators::K()
-                    (
-                        Combinators::S()
-                        (
+                    Combinators::K()(
+                        Combinators::S()(
                             Combinators::K()(Combinators::S())
-                        )
-                        (Combinators::K())
+                        )(Combinators::K())
                     )
-                )
-                (
-                    Combinators::S()
-                    (
+                )(
+                    Combinators::S()(
                         Combinators::K()(Combinators::S())
-                    )
-                    (Combinators::K())
-                )
-                ($a)($b)($c)($d)
+                    )(Combinators::K())
+                )($a)($b)($c)($d)
             );
     }
 
