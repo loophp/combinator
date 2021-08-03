@@ -174,7 +174,7 @@ For more detailed changelogs, please check [the release changelogs][19].
 [latest stable version]: https://img.shields.io/packagist/v/loophp/combinator.svg?style=flat-square
 [github stars]: https://img.shields.io/github/stars/loophp/combinator.svg?style=flat-square
 [total downloads]: https://img.shields.io/packagist/dt/loophp/combinator.svg?style=flat-square
-[github workflow status]: https://img.shields.io/github/workflow/status/loophp/combinator/Unit%20tests?style=flat-square
+[github workflow status]: https://img.shields.io/github/workflow/status/loophp/combinator/Continuous%20Integration?style=flat-square
 [code quality]: https://img.shields.io/scrutinizer/quality/g/loophp/combinator/master.svg?style=flat-square
 [type coverage]: https://img.shields.io/badge/dynamic/json?style=flat-square&color=color&label=Type%20coverage&query=message&url=https%3A%2F%2Fshepherd.dev%2Fgithub%2Floophp%2Fcombinator%2Fcoverage
 [code coverage]: https://img.shields.io/scrutinizer/coverage/g/loophp/combinator/master.svg?style=flat-square
