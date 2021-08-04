@@ -5,10 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.1](https://github.com/loophp/combinator/compare/2.0.0...2.0.1)
+## [2.0.2](https://github.com/loophp/combinator/compare/2.0.1...2.0.2)
 
 ### Commits
 
+- chore: Add .auto-changelog configuration file. [`a0948e4`](https://github.com/loophp/combinator/commit/a0948e47a848b98d88c6d3717eb4c0500f200b26)
+- chore: Update static files. [`0e6e8a3`](https://github.com/loophp/combinator/commit/0e6e8a34afe6987e7321393c1acdcf06b6283468)
+- chore: Update static files. [`f59dec8`](https://github.com/loophp/combinator/commit/f59dec89b4efbe8e3e4d48c734cb41ff44cc357c)
+- refactor: Use short closure and rewrite typing informations. [`1eebd61`](https://github.com/loophp/combinator/commit/1eebd6116c8ed85a12bd3695288eb2a113745d81)
+- ci: Upgrade to PHP 8. [`4090ff1`](https://github.com/loophp/combinator/commit/4090ff1a9c7ada663630406d197c271d35fb7c7f)
+- refactor: Autofix code style. [`ba0a2ad`](https://github.com/loophp/combinator/commit/ba0a2ad6f1832bb187d77b28c2efeb83195e0eb3)
+- tests: Add missing tests. [`56cd17b`](https://github.com/loophp/combinator/commit/56cd17b19a6376ff64b43540c428e80de306b7ea)
+- feat: Add Blackbird combinator. [`6be63bc`](https://github.com/loophp/combinator/commit/6be63bc8d5551f3e1264868eb1f3225d52ffe3f3)
+- chore: Update static files. [`62d213d`](https://github.com/loophp/combinator/commit/62d213d4d008d721ce3ce62400cad4488196338a)
+- refactor: Auto fix CS. [`2be7b1a`](https://github.com/loophp/combinator/commit/2be7b1aca5bbce0ee455eef9ac8c2eeb70c6354e)
+- docs: Update README. [`0fd711d`](https://github.com/loophp/combinator/commit/0fd711d12efcf8dc70433763058b01a8aec8f7ec)
+- docs: Update README. [`1df812f`](https://github.com/loophp/combinator/commit/1df812fa6faf4b8656a2a426f03a7c42444a35a7)
+
+## [2.0.1](https://github.com/loophp/combinator/compare/2.0.0...2.0.1) - 2020-11-08
+
+### Commits
+
+- docs: Update changelog. [`fd711b6`](https://github.com/loophp/combinator/commit/fd711b65f926a5b2218017dda601fd0c702b2c4d)
 - ci: Tests on PHP 7.4 only. [`2e7d84b`](https://github.com/loophp/combinator/commit/2e7d84b5239ccc6bd404a4965871856119d6ae6c)
 - feat: Add new combinators. [`0ac01ac`](https://github.com/loophp/combinator/commit/0ac01ac602f07a2124bd528fd6a039be87f62f76)
 
