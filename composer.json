@@ -1,52 +1,20 @@
 {
     "name": "loophp/combinator",
-    "type": "library",
     "description": "A curated list of combinators",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "combinator",
         "combinatory logic",
         "educational",
         "functional programming"
     ],
-    "license": "MIT",
     "authors": [
         {
             "name": "Pol Dellaiera",
             "email": "pol.dellaiera@protonmail.com"
         }
     ],
-    "require": {
-        "php": ">= 8"
-    },
-    "require-dev": {
-        "drupol/php-conventions": "^5.0.3",
-        "friends-of-phpspec/phpspec-code-coverage": "^5",
-        "infection/infection": ">= 0.21",
-        "infection/phpspec-adapter": "^0.1.2",
-        "phpspec/phpspec": "^7.1",
-        "phpstan/phpstan": "^0.12",
-        "phpstan/phpstan-strict-rules": "^0.12"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "autoload": {
-        "psr-4": {
-            "loophp\\combinator\\": "./src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "tests\\loophp\\combinator\\": "./tests/src/"
-        }
-    },
-    "scripts": {
-        "changelog-unreleased": "docker-compose run auto_changelog -c .auto-changelog -u",
-        "changelog-version": "docker-compose run auto_changelog -c .auto-changelog -v",
-        "grumphp": "./vendor/bin/grumphp run",
-        "infection": "vendor/bin/infection run -j 2",
-        "phpspec": "vendor/bin/phpspec run -vvv --stop-on-failure"
-    },
     "support": {
         "issues": "https://github.com/loophp/combinator/issues",
         "source": "https://github.com/loophp/combinator"
@@ -60,5 +28,44 @@
             "type": "paypal",
             "url": "https://www.paypal.me/drupol"
         }
-    ]
+    ],
+    "require": {
+        "php": ">= 8"
+    },
+    "require-dev": {
+        "drupol/php-conventions": "^5.0.3",
+        "friends-of-phpspec/phpspec-code-coverage": "^5",
+        "infection/infection": ">= 0.21",
+        "infection/phpspec-adapter": "^0.1.2",
+        "phpspec/phpspec": "^7.1",
+        "phpstan/phpstan": "^1.0",
+        "phpstan/phpstan-strict-rules": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "loophp\\combinator\\": "./src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\loophp\\combinator\\": "./tests/src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "phpstan/extension-installer": true,
+            "ergebnis/composer-normalize": true,
+            "phpro/grumphp": true,
+            "infection/extension-installer": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "changelog-unreleased": "docker-compose run auto_changelog -c .auto-changelog -u",
+        "changelog-version": "docker-compose run auto_changelog -c .auto-changelog -v",
+        "grumphp": "./vendor/bin/grumphp run",
+        "infection": "vendor/bin/infection run -j 2",
+        "phpspec": "vendor/bin/phpspec run -vvv --stop-on-failure"
+    }
 }
