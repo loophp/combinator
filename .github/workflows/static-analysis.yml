@@ -33,8 +33,7 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php-versions }}
-                  extensions: mbstring
-                  coverage: none
+                  coverage: pcov
                   tools: cs2pr
 
             - name: Install dependencies
