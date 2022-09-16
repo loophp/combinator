@@ -1,9 +1,7 @@
 This PR
 
-* [x] 
-* [ ] 
-* [ ] 
+- [x]
+- [ ]
+- [ ]
 
-Follows #.
-Related to #.
-Fixes #.
+Follows #. Related to #. Fixes #.

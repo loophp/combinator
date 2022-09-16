@@ -13,6 +13,7 @@ use loophp\combinator\Combinator\L;
 
 /**
  * @return mixed
+ *
  * @psalm-suppress MixedFunctionCall
  */
 function test(L $combinator, callable $f, callable $g)

@@ -13,7 +13,6 @@ use loophp\combinator\Combinator\A;
 
 /**
  * @psalm-param A<int, string> $combinator
- *
  * @psalm-param callable(int): string $f
  *
  * @param int $x

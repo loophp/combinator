@@ -16,6 +16,7 @@ use loophp\combinator\Combinator\U;
  * @param callable(int): mixed $g
  *
  * @return mixed
+ *
  * @psalm-suppress MixedFunctionCall
  */
 function test(U $combinator, callable $f, callable $g)
