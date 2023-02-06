@@ -181,7 +181,7 @@ For more detailed changelogs, please check [the release changelogs][19].
 [total downloads]:
   https://img.shields.io/packagist/dt/loophp/combinator.svg?style=flat-square
 [github workflow status]:
-  https://img.shields.io/github/actions/workflow/status/loophp/combinator/Continuous%20Integration.yml?branch=master&style=flat-square
+  https://img.shields.io/github/actions/workflow/status/loophp/combinator/tests.yml?branch=master&style=flat-square
 [code quality]:
   https://img.shields.io/scrutinizer/quality/g/loophp/combinator/master.svg?style=flat-square
 [type coverage]:
