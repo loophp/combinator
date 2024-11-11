@@ -35,7 +35,7 @@
         "infection/infection": ">= 0.26",
         "infection/phpspec-adapter": "^0.2",
         "phpspec/phpspec": "^7",
-        "phpstan/phpstan-strict-rules": "^1.0"
+        "phpstan/phpstan-strict-rules": "^2.0"
     },
     "autoload": {
         "psr-4": {
