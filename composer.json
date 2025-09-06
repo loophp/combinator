@@ -34,7 +34,7 @@
         "friends-of-phpspec/phpspec-code-coverage": "^6",
         "infection/infection": ">= 0.26",
         "infection/phpspec-adapter": "^0.2",
-        "phpspec/phpspec": "^7",
+        "phpspec/phpspec": "^8",
         "phpstan/phpstan-strict-rules": "^1.0"
     },
     "autoload": {
