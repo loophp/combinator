@@ -31,7 +31,7 @@
     "require-dev": {
         "ext-pcov": "*",
         "drupol/php-conventions": "^6",
-        "friends-of-phpspec/phpspec-code-coverage": "^6",
+        "friends-of-phpspec/phpspec-code-coverage": "^7",
         "infection/infection": ">= 0.26",
         "infection/phpspec-adapter": "^0.2",
         "phpspec/phpspec": "^7",
