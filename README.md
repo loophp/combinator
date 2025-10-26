@@ -156,7 +156,6 @@ contributors][6].
 ### Thanks
 
 - [Marco Pivetta][14]
-- [Danny Willems][15]
 
 ### Authors
 
@@ -202,7 +201,6 @@ For more detailed changelogs, please check [the release changelogs][19].
 [12]: https://en.wikipedia.org/wiki/To_Mock_a_Mockingbird
 [13]: http://dkeenan.com/Lambda/
 [14]: https://github.com/ocramius
-[15]: https://github.com/dannywillems
 [16]: https://not-a-number.io/
 [17]: https://github.com/loophp/combinator/blob/master/CHANGELOG.md
 [18]: https://github.com/loophp/combinator/commits/master
