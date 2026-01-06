@@ -33,7 +33,7 @@
         "drupol/php-conventions": "^6",
         "friends-of-phpspec/phpspec-code-coverage": "^6",
         "infection/infection": ">= 0.26",
-        "infection/phpspec-adapter": "^0.2",
+        "infection/phpspec-adapter": "^0.3",
         "phpspec/phpspec": "^7",
         "phpstan/phpstan-strict-rules": "^1.0"
     },
