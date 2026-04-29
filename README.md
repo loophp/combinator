@@ -98,7 +98,7 @@ are invokable classes, but the easiest way to access them is through the
   the `$` operator. It can help reduce the number of parentheses in complex
   expressions.
 
-````php
+```php
 use loophp\combinator\Combinators;
 
 $a = Combinators::A();
@@ -107,13 +107,17 @@ $string = 'hello world';
 
 // Instead of $strlen($string)
 echo $a($strlen)($string); // Outputs: 11
-```</details>
+```
+
+</details>
 
 <details>
 <summary>B (Bluebird) Combinator</summary>
 
-*   **Lambda:** `λabc.a(bc)`
-*   **Purpose:** Function composition. It takes two functions, `a` and `b`, and a value `c`, and applies `a` to the result of `b` applied to `c`. This is `.` in Haskell.
+- **Lambda:** `λabc.a(bc)`
+- **Purpose:** Function composition. It takes two functions, `a` and `b`, and a
+  value `c`, and applies `a` to the result of `b` applied to `c`. This is `.` in
+  Haskell.
 
 ```php
 use loophp\combinator\Combinators;
@@ -126,7 +130,7 @@ $multiplyByTwo = fn(int $x): int => $x * 2;
 $composed = $b($addOne)($multiplyByTwo);
 
 echo $composed(5); // Outputs: 11 (which is 1 + (2 * 5))
-````
+```
 
 </details>
 
@@ -159,7 +163,7 @@ echo $format('hello'); // Outputs: <p>HELLO!</p>
   and `c`, and applies `a` with `c` as the first argument and `b` as the second.
   This is `flip` in Haskell.
 
-````php
+```php
 use loophp\combinator\Combinators;
 
 $c = Combinators::C();
@@ -168,13 +172,15 @@ $divide = fn(int $x, int $y): float => $x / $y;
 $flippedDivide = $c($divide);
 
 echo $flippedDivide(2)(10); // Outputs: 5 (same as $divide(10, 2))
-```</details>
+```
+
+</details>
 
 <details>
 <summary>D (Dove) Combinator</summary>
 
-*   **Lambda:** `λabcd.ab(cd)`
-*   **Purpose:** Composes two functions and their arguments: `a(b)(c(d))`.
+- **Lambda:** `λabcd.ab(cd)`
+- **Purpose:** Composes two functions and their arguments: `a(b)(c(d))`.
 
 ```php
 use loophp\combinator\Combinators;
@@ -185,7 +191,7 @@ $multiply = fn(int $x): callable => fn(int $y): int => $x * $y;
 
 // Calculates ( (2 + 3) + (4 * 5) ) using curried functions
 echo $d($add)($add(2)(3))($multiply(4))(5); // Outputs: 25
-````
+```
 
 </details>
 
@@ -295,7 +301,7 @@ echo $i(42);            // Outputs: 42
 - **Purpose:** A complex combinator useful for specific recursive or
   state-passing scenarios: `a(b)(a(d)(c))`.
 
-````php
+```php
 use loophp\combinator\Combinators;
 
 $j = Combinators::J();
@@ -303,14 +309,17 @@ $log = fn(string $prefix): callable => fn(string $message): string => "[$prefix]
 
 // Creates a nested log message
 // Equivalent to $log('INFO')($log('USER')('action'))
-echo $j($log)('INFO')('action')('USER'); // Outputs: [INFO] [USER] action```
+echo $j($log)('INFO')('action')('USER'); // Outputs: [INFO] [USER] action
+```
+
 </details>
 
 <details>
 <summary>K (Kestrel) Combinator</summary>
 
-*   **Lambda:** `λab.a`
-*   **Purpose:** The constant function. It takes two arguments and always returns the first. This is `const` in Haskell.
+- **Lambda:** `λab.a`
+- **Purpose:** The constant function. It takes two arguments and always returns
+  the first. This is `const` in Haskell.
 
 ```php
 use loophp\combinator\Combinators;
@@ -320,7 +329,7 @@ $alwaysReturns5 = $k(5);
 
 echo $alwaysReturns5('foo'); // Outputs: 5
 echo $alwaysReturns5(123);   // Outputs: 5
-````
+```
 
 </details>
 
@@ -413,17 +422,20 @@ print_r($result); // Outputs: Array ( [0] => 2 [1] => 1 [2] => 3 )
   (`M`) as `MM`. When applied to _any_ function, it creates an infinitely
   recursive call that will exhaust memory. **Do not run this code.**
 
-````php
+```php
 // This will cause a fatal error due to infinite recursion.
 // $omega = Combinators::Omega();
-// $omega(fn($x) => $x);```
+// $omega(fn($x) => $x);
+```
+
 </details>
 
 <details>
 <summary>Phoenix Combinator</summary>
 
-*   **Lambda:** `λabcd.a(bd)(cd)`
-*   **Purpose:** Distributes an argument `d` across two functions `b` and `c`, then combines the results with function `a`.
+- **Lambda:** `λabcd.a(bd)(cd)`
+- **Purpose:** Distributes an argument `d` across two functions `b` and `c`,
+  then combines the results with function `a`.
 
 ```php
 use loophp\combinator\Combinators;
@@ -437,7 +449,7 @@ $multiplyByThree = fn(int $x): int => $x * 3;
 $calculate = $phoenix($add)($multiplyByTwo)($multiplyByThree);
 
 echo $calculate(10); // Outputs: 50
-````
+```
 
 </details>
 
@@ -584,7 +596,7 @@ echo $s2($format)($multiply)($addOne)($d); // Outputs: Final result is: 30
 - **Purpose:** Reverse application. Applies function `b` to argument `a`. This
   is `(&)` in Haskell and is useful for data-last programming styles.
 
-````php
+```php
 use loophp\combinator\Combinators;
 
 $t = Combinators::T();
@@ -592,13 +604,16 @@ $multiplyByTwo = fn(int $x): int => $x * 2;
 
 // Instead of $multiplyByTwo(5)
 echo $t(5)($multiplyByTwo); // Outputs: 10
-```</details>
+```
+
+</details>
 
 <details>
 <summary>U (Turing) Combinator</summary>
 
-*   **Lambda:** `λab.b(aab)`
-*   **Purpose:** A fixed-point combinator that can hold state. `b` is applied to `a` applied to itself applied to `b`.
+- **Lambda:** `λab.b(aab)`
+- **Purpose:** A fixed-point combinator that can hold state. `b` is applied to
+  `a` applied to itself applied to `b`.
 
 ```php
 use loophp\combinator\Combinators;
@@ -610,7 +625,7 @@ $factorialGenerator = static fn(callable $f): callable =>
 $factorial = $u($factorialGenerator);
 
 echo $factorial(5); // Outputs: 120
-````
+```
 
 </details>
 
