@@ -94,7 +94,7 @@ are invokable classes, but the easiest way to access them is through the
 `loophp\combinator\Combinators` facade, which statically provides each one.
 
 <details>
-<summary>A (Apply) Combinator</summary>
+<summary>A (Applicator) Combinator</summary>
 
 - **Lambda:** `λab.ab`
 - **Purpose:** Applies a function `a` to an argument `b`. In Haskell, this is
@@ -138,7 +138,7 @@ echo $composed(5); // Outputs: 11 (which is 1 + (2 * 5))
 </details>
 
 <details>
-<summary>Blackbird Combinator</summary>
+<summary>B₁ (Blackbird) Combinator</summary>
 
 - **Lambda:** `λabcd.a(bcd)`
 - **Purpose:** Extended function composition for three functions: `a(b(c(d)))`.
@@ -280,7 +280,7 @@ echo $wrapInDiv('Hello'); // Outputs: <div>Hello</div>
 </details>
 
 <details>
-<summary>I (Idiot) Combinator</summary>
+<summary>I (Identity / Idiot) Combinator</summary>
 
 - **Lambda:** `λa.a`
 - **Purpose:** The identity function. It returns whatever argument it receives.
@@ -434,7 +434,7 @@ print_r($result); // Outputs: Array ( [0] => 2 [1] => 1 [2] => 3 )
 </details>
 
 <details>
-<summary>Phoenix Combinator</summary>
+<summary>Φ (Phoenix) Combinator</summary>
 
 - **Lambda:** `λabcd.a(bd)(cd)`
 - **Purpose:** Distributes an argument `d` across two functions `b` and `c`,
@@ -457,7 +457,7 @@ echo $calculate(10); // Outputs: 50
 </details>
 
 <details>
-<summary>Psi (Ψ) Combinator</summary>
+<summary>Ψ (Psi) Combinator</summary>
 
 - **Lambda:** `λabcd.a(bc)(bd)`
 - **Purpose:** Another distribution combinator, but this one distributes a
