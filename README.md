@@ -673,36 +673,42 @@ echo $w($add)(5); // Outputs: 10
 </details>
 
 <details>
-<summary>Y & Z (Fixed-Point) Combinators</summary>
+<summary>Y (Y-Fixed point) Combinator</summary>
 
-- **Purpose:** The Y and Z combinators are used to achieve recursion in
-  languages that do not have built-in recursive syntax. They are "fixed-point"
-  finders for functions. The Z combinator is a variant that works in strict
-  (eagerly evaluated) languages like PHP without causing infinite loops during
-  construction.
+- **Lambda:** `λf.(λx.f(xx))(λx.f(xx))`
+- **Purpose:** Creates a recursive function from a generator function without
+  naming the recursive function directly.
 
 ```php
 use loophp\combinator\Combinators;
 use Closure;
 
-// A "generator" function that describes one step of the factorial calculation.
-// It takes the recursive function ($fact) as an argument.
 $factorialGenerator = static fn (Closure $fact): Closure =>
-    static fn (int $n): int => (0 === $n) ? 1 : ($n * $fact($n - 1));
+    static fn (int $n): int => (1 >= $n) ? 1 : $n * $fact($n - 1);
 
-// The Z combinator creates a recursive factorial function from the generator.
-$factorial = Combinators::Z()($factorialGenerator);
-
+$factorial = Combinators::Y()($factorialGenerator);
 echo $factorial(6); // Outputs: 720
+```
 
-// The Y combinator can also be used, as this library implements it in a way
-// that is safe for eager evaluation.
-$fibonacciGenerator = static fn (Closure $fibo): Closure =>
-    static fn (int $n): int => ($n <= 1) ? $n : $fibo($n - 1) + $fibo($n - 2);
+</details>
 
-$fibonacci = Combinators::Y()($fibonacciGenerator);
+<details>
+<summary>Z (Z-Fixed point) Combinator</summary>
 
-echo $fibonacci(10); // Outputs: 55
+- **Lambda:** `λf.(λx.f(λv.xxv))(λx.f(λv.xxv))`
+- **Purpose:** Creates a recursive function from a generator function using an
+  eta-expanded recursive callback, which is suitable for strict evaluation.
+
+```php
+use loophp\combinator\Combinators;
+use Closure;
+
+$factorialGenerator = static fn (Closure $fact): Closure =>
+    static fn (): Closure =>
+        static fn (int $n): int => (1 >= $n) ? 1 : $n * $fact()()($n - 1);
+
+$factorial = Combinators::Z()($factorialGenerator);
+echo $factorial()(6); // Outputs: 720
 ```
 
 </details>
