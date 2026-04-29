@@ -60,7 +60,7 @@ The following is a list of the combinators available in this package.
 | **D**         | Dove          |         | `λabcd.ab(cd)`                    | `a => b => c => d => a(b)(c(d))`                    | `(b -> c -> d) -> a -> (b -> c) -> a -> d`           |
 | **E**         | Eagle         |         | `λabcde.ab(cde)`                  | `a => b => c => d => e => a(b)(c(d)(e))`            | `(c -> d -> e) -> a -> (b -> c -> d) -> b -> c -> e` |
 | **F**         | Finch         |         | `λabc.cba`                        | `a => b => c => c(b)(a)`                            | `a -> b -> (b -> a -> c) -> c`                       |
-| **G**         | Goldfinch     |         | `λabcd.ad(bc)`                    | `a => b => c => d => a(d)(b(c))`                    | `(c -> b) -> (a -> d -> c) -> a -> d -> b`           |
+| **G**         | Goldfinch     |         | `λabcd.ad(bc)`                    | `a => b => c => d => a(d)(b(c))`                    | `(a -> b -> c) -> (d -> b) -> d -> a -> c`           |
 | **H**         | Hummingbird   |         | `λabc.abcb`                       | `a => b => c => a(b)(c)(b)`                         | `(a -> b -> a -> c) -> a -> b -> c`                  |
 | **I**         | Idiot         | `id`    | `λa.a`                            | `a => a`                                            | `a -> a`                                             |
 | **J**         | Jay           |         | `λabcd.ab(adc)`                   | `a => b => c => d => a(b)(a(d)(c))`                 | `(a -> c -> d) -> a -> b -> (a -> c) -> d`           |
@@ -250,7 +250,7 @@ $mapToUpper = fn(array $a): array => array_map('strtoupper', $a);
 
 // Equivalent to $merge(['d', 'e'])(($mapToUpper(['a', 'b', 'c'])))
 $result = $g($merge)($mapToUpper)(['a', 'b', 'c'])(['d', 'e']);
-print_r($result); // Outputs: Array ( [0] => A [1] => B [2] => C [3] => d [4] => e )
+print_r($result); // Outputs: Array ( [0] => d [1] => e [2] => A [3] => B [4] => C )
 ```
 
 </details>
