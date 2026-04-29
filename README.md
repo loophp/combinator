@@ -51,38 +51,41 @@ composer require loophp/combinator
 
 The following is a list of the combinators available in this package.
 
-| Name          | Alias         | Haskell | Lambda Calculus                   | Term Definition (JS-like)                           | Type                                                 |
-| :------------ | :------------ | :------ | :-------------------------------- | :-------------------------------------------------- | :--------------------------------------------------- |
-| **A**         | Apply         | `$`     | `λab.ab`                          | `a => b => a(b)`                                    | `(a -> b) -> a -> b`                                 |
-| **B**         | Bluebird      | `.`     | `λabc.a(bc)`                      | `a => b => c => a(b(c))`                            | `(b -> c) -> (a -> b) -> a -> c`                     |
-| **Blackbird** |               | `...`   | `λabcd.a(bcd)`                    | `a => b => c => d => a(b(c)(d))`                    | `(c -> d) -> (a -> b -> c) -> a -> b -> d`           |
-| **C**         | Cardinal      | `flip`  | `λabc.acb`                        | `a => b => c => a(c)(b)`                            | `(a -> b -> c) -> b -> a -> c`                       |
-| **D**         | Dove          |         | `λabcd.ab(cd)`                    | `a => b => c => d => a(b)(c(d))`                    | `(b -> c -> d) -> a -> (b -> c) -> a -> d`           |
-| **E**         | Eagle         |         | `λabcde.ab(cde)`                  | `a => b => c => d => e => a(b)(c(d)(e))`            | `(c -> d -> e) -> a -> (b -> c -> d) -> b -> c -> e` |
-| **F**         | Finch         |         | `λabc.cba`                        | `a => b => c => c(b)(a)`                            | `a -> b -> (b -> a -> c) -> c`                       |
-| **G**         | Goldfinch     |         | `λabcd.ad(bc)`                    | `a => b => c => d => a(d)(b(c))`                    | `(a -> b -> c) -> (d -> b) -> d -> a -> c`           |
-| **H**         | Hummingbird   |         | `λabc.abcb`                       | `a => b => c => a(b)(c)(b)`                         | `(a -> b -> a -> c) -> a -> b -> c`                  |
-| **I**         | Idiot         | `id`    | `λa.a`                            | `a => a`                                            | `a -> a`                                             |
-| **J**         | Jay           |         | `λabcd.ab(adc)`                   | `a => b => c => d => a(b)(a(d)(c))`                 | `(a -> c -> d) -> a -> b -> (a -> c) -> d`           |
-| **K**         | Kestrel       | `const` | `λab.a`                           | `a => b => a`                                       | `a -> b -> a`                                        |
-| **Ki**        | Kite          | `konst` | `λab.b`                           | `a => b => b`                                       | `a -> b -> b`                                        |
-| **L**         | Lark          |         | `λab.a(bb)`                       | `a => b => a(b(b))`                                 | `(a -> a -> b) -> (a -> b)`                          |
-| **M**         | Mockingbird   |         | `λa.aa`                           | `a => a(a)`                                         | `(a -> a) -> a`                                      |
-| **O**         | Owl           |         | `λab.b(ab)`                       | `a => b => b(a(b))`                                 | `((a -> b) -> a) -> (a -> b) -> b`                   |
-| **Omega**     | Ω             |         | `λa.(aa)(aa)`                     | `a => (a(a))(a(a))`                                 | `(a -> a) -> b`                                      |
-| **Phoenix**   |               |         | `λabcd.a(bd)(cd)`                 | `a => b => c => d => a(b(d))(c(d))`                 | `(b -> c -> d) -> (a -> b) -> (a -> c) -> a -> d`    |
-| **Psi**       |               | `on`    | `λabcd.a(bc)(bd)`                 | `a => b => c => d => a(b(c))(b(d))`                 | `(b -> b -> c) -> (a -> b) -> a -> a -> c`           |
-| **Q**         | Queer         | `(##)`  | `λabc.b(ac)`                      | `a => b => c => b(a(c))`                            | `(a -> b) -> (b -> c) -> a -> c`                     |
-| **R**         | Robin         |         | `λabc.bca`                        | `a => b => c => b(c)(a)`                            | `a -> (b -> a -> c) -> b -> c`                       |
-| **S**         | Starling      | `<*>`   | `λabc.ac(bc)`                     | `a => b => c => a(c)(b(c))`                         | `(a -> b -> c) -> (a -> b) -> a -> c`                |
-| **S'**        | S Prime       | `<*>`   | `λabc.a(bc)c`                     | `a => b => c => a(b(c))(c)`                         | `(b -> a -> c) -> (a -> b) -> a -> c`                |
-| **S₂**        | S-Two         | `<*>`   | `λabcd.a((bd)(cd))`               | `a => b => c => d => a(b(d)(c(d)))`                 | `(c -> d) -> (a -> b -> c) -> (a -> b) -> a -> d`    |
-| **T**         | Thrush        | `(&)`   | `λab.ba`                          | `a => b => b(a)`                                    | `a -> (a -> b) -> b`                                 |
-| **U**         | Turing        |         | `λab.b(aab)`                      | `a => b => b(a(a)(b))`                              | `((a -> b) -> b) -> (a -> b) -> b`                   |
-| **V**         | Vireo         |         | `λabc.cab`                        | `a => b => c => c(a)(b)`                            | `a -> b -> (a -> b -> c) -> c`                       |
-| **W**         | Warbler       |         | `λab.abb`                         | `a => b => a(b)(b)`                                 | `(a -> a -> b) -> a -> b`                            |
-| **Y**         | Y-Fixed point | `fix`   | `λf.(λx.f(xx))(λx.f(xx))`         | `f => (x => f(x(x)))(x => f(x(x)))`                 | `(a -> a) -> a`                                      |
-| **Z**         | Z-Fixed point | `fix`   | `λf.(λx.f(λv.xxv))(λx.f(λv.xxv))` | `f => (x => f(v => x(x)(v)))(x => f(v => x(x)(v)))` | `(a -> a) -> a`                                      |
+| Name      | Alias            | Haskell      | Lambda Calculus                   | Term Definition (JS-like)                           | Type                                                 |
+| :-------- | :--------------- | :----------- | :-------------------------------- | :-------------------------------------------------- | :--------------------------------------------------- |
+| **A**     | Applicator       | `$`          | `λab.ab`                          | `a => b => a(b)`                                    | `(a -> b) -> a -> b`                                 |
+| **B**     | Bluebird         | `.`          | `λabc.a(bc)`                      | `a => b => c => a(b(c))`                            | `(b -> c) -> (a -> b) -> a -> c`                     |
+| **B₁**    | Blackbird        | `...`        | `λabcd.a(bcd)`                    | `a => b => c => d => a(b(c)(d))`                    | `(c -> d) -> (a -> b -> c) -> a -> b -> d`           |
+| **C**     | Cardinal         | `flip`       | `λabc.acb`                        | `a => b => c => a(c)(b)`                            | `(a -> b -> c) -> b -> a -> c`                       |
+| **D**     | Dove             |              | `λabcd.ab(cd)`                    | `a => b => c => d => a(b)(c(d))`                    | `(b -> c -> d) -> b -> (a -> c) -> a -> d`           |
+| **E**     | Eagle            |              | `λabcde.ab(cde)`                  | `a => b => c => d => e => a(b)(c(d)(e))`            | `(a -> d -> e) -> a -> (b -> c -> d) -> b -> c -> e` |
+| **F**     | Finch            |              | `λabc.cba`                        | `a => b => c => c(b)(a)`                            | `a -> b -> (b -> a -> c) -> c`                       |
+| **G**     | Goldfinch        |              | `λabcd.ad(bc)`                    | `a => b => c => d => a(d)(b(c))`                    | `(a -> b -> c) -> (d -> b) -> d -> a -> c`           |
+| **H**     | Hummingbird      |              | `λabc.abcb`                       | `a => b => c => a(b)(c)(b)`                         | `(a -> b -> a -> c) -> a -> b -> c`                  |
+| **I**     | Identity (Idiot) | `id`         | `λa.a`                            | `a => a`                                            | `a -> a`                                             |
+| **J**     | Jay              |              | `λabcd.ab(adc)`                   | `a => b => c => d => a(b)(a(d)(c))`                 | `(a -> b -> b) -> a -> b -> a -> b`                  |
+| **K**     | Kestrel          | `const`      | `λab.a`                           | `a => b => a`                                       | `a -> b -> a`                                        |
+| **Ki**    | Kite             | `flip const` | `λab.b`                           | `a => b => b`                                       | `a -> b -> b`                                        |
+| **L**     | Lark             |              | `λab.a(bb)`                       | `a => b => a(b(b))`                                 | `*`                                                  |
+| **M**     | Mockingbird      |              | `λa.aa`                           | `a => a(a)`                                         | `*`                                                  |
+| **O**     | Owl              |              | `λab.b(ab)`                       | `a => b => b(a(b))`                                 | `((a -> b) -> a) -> (a -> b) -> b`                   |
+| **Omega** | Ω                |              | `λa.(aa)(aa)`                     | `a => (a(a))(a(a))`                                 | `*`                                                  |
+| **Φ**     | Phoenix          |              | `λabcd.a(bd)(cd)`                 | `a => b => c => d => a(b(d))(c(d))`                 | `(b -> c -> d) -> (a -> b) -> (a -> c) -> a -> d`    |
+| **Ψ**     | Psi              | `on`         | `λabcd.a(bc)(bd)`                 | `a => b => c => d => a(b(c))(b(d))`                 | `(b -> b -> c) -> (a -> b) -> a -> a -> c`           |
+| **Q**     | Queer            | `flip (.)`   | `λabc.b(ac)`                      | `a => b => c => b(a(c))`                            | `(a -> b) -> (b -> c) -> a -> c`                     |
+| **R**     | Robin            |              | `λabc.bca`                        | `a => b => c => b(c)(a)`                            | `a -> (b -> a -> c) -> b -> c`                       |
+| **S**     | Starling         | `<*>`        | `λabc.ac(bc)`                     | `a => b => c => a(c)(b(c))`                         | `(a -> b -> c) -> (a -> b) -> a -> c`                |
+| **S'**    | S Prime          |              | `λabc.a(bc)c`                     | `a => b => c => a(b(c))(c)`                         | `(b -> a -> c) -> (a -> b) -> a -> c`                |
+| **S₂**    | S-Two            | `liftA2`     | `λabcd.a(bd)(cd)`                 | `a => b => c => d => a(b(d))(c(d))`                 | `(b -> c -> d) -> (a -> b) -> (a -> c) -> a -> d`    |
+| **T**     | Thrush           | `(&)`        | `λab.ba`                          | `a => b => b(a)`                                    | `a -> (a -> b) -> b`                                 |
+| **U**     | Turing           |              | `λab.b(aab)`                      | `a => b => b(a(a)(b))`                              | `((a -> b) -> b) -> (a -> b) -> b`                   |
+| **V**     | Vireo            |              | `λabc.cab`                        | `a => b => c => c(a)(b)`                            | `a -> b -> (a -> b -> c) -> c`                       |
+| **W**     | Warbler          |              | `λab.abb`                         | `a => b => a(b)(b)`                                 | `(a -> a -> b) -> a -> b`                            |
+| **Y**     | Y-Fixed point    | `fix`        | `λf.(λx.f(xx))(λx.f(xx))`         | `f => (x => f(x(x)))(x => f(x(x)))`                 | `(a -> a) -> a`                                      |
+| **Z**     | Z-Fixed point    | `fix`        | `λf.(λx.f(λv.xxv))(λx.f(λv.xxv))` | `f => (x => f(v => x(x)(v)))(x => f(v => x(x)(v)))` | `(a -> a) -> a`                                      |
+
+> `*` indicates a combinator that is not simply typed because it relies on
+> self-application.
 
 ## Combinator by Example
 
@@ -562,7 +565,7 @@ echo $logTransformation('hello'); // Outputs: Input 'hello' produced 'HELLO'
 <details>
 <summary>S₂ (S-Two) Combinator</summary>
 
-- **Lambda:** `λabcd.a((bd)(cd))`
+- **Lambda:** `λabcd.a(bd)(cd)`
 - **Purpose:** Applies two different functions `b` and `c` to the same data `d`,
   and then combines their results with a third function `a`. In Haskell, this is
   similar to `liftA2`.
@@ -571,20 +574,14 @@ echo $logTransformation('hello'); // Outputs: Input 'hello' produced 'HELLO'
 use loophp\combinator\Combinators;
 
 $s2 = Combinators::S2();
-$combine = fn(int $product): callable => fn(int $sum): string => "Sum: $sum, Product: $product";
-$sum = fn(int $x): callable => fn(int $y): int => $x + $y;
-$product = fn(int $x): callable => fn(int $y): int => $x * $y;
-$value = 3;
 
-// This is a bit mind-bending. The lambda is a((bd)(cd)).
-// Let's find a better example. `a` must take one argument.
-$format = fn(int $result): string => "Final result is: $result";
+$applyAndFormat = fn(callable $operation): callable => fn(int $value): string => "Final result is: " . $operation($value);
 $multiply = fn(int $x): callable => fn(int $y): int => $x * $y;
 $addOne = fn(int $x): int => $x + 1;
 $d = 5;
 
-// Equivalent to $format($multiply(5)($addOne(5))) -> $format(5 * 6)
-echo $s2($format)($multiply)($addOne)($d); // Outputs: Final result is: 30
+// Equivalent to $applyAndFormat($multiply(5))($addOne(5)) -> 5 * 6
+echo $s2($applyAndFormat)($multiply)($addOne)($d); // Outputs: Final result is: 30
 ```
 
 </details>
@@ -612,17 +609,22 @@ echo $t(5)($multiplyByTwo); // Outputs: 10
 <summary>U (Turing) Combinator</summary>
 
 - **Lambda:** `λab.b(aab)`
-- **Purpose:** A fixed-point combinator that can hold state. `b` is applied to
-  `a` applied to itself applied to `b`.
+- **Purpose:** A fixed-point combinator. `U(f)(g) = g(f(f)(g))`. In strict
+  (eager) PHP, recursion requires the step function to call `$self($self)`
+  explicitly and a seed callable (here: `I`) as the second argument.
 
 ```php
 use loophp\combinator\Combinators;
 
 $u = Combinators::U();
-$factorialGenerator = static fn(callable $f): callable =>
-    static fn(int $n): int => (0 === $n) ? 1 : $n * $f($f)($n - 1);
 
-$factorial = $u($factorialGenerator);
+// The step function threads self-application to enable recursion.
+// $self($self)($g) is evaluated lazily (inside the closure body).
+$factStep = fn(callable $self) => fn(callable $g): callable =>
+    fn(int $n): int => $n === 0 ? 1 : $n * $self($self)($g)($n - 1);
+
+// Pass I (identity) as the seed: U(factStep)(I) = I(factStep(factStep)(I)) = factStep(factStep)(I)
+$factorial = $u($factStep)(Combinators::I());
 
 echo $factorial(5); // Outputs: 120
 ```
